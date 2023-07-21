@@ -48,6 +48,7 @@ label {
 p {
     vertical-align: top;
     margin-left: 30px;
+
 }
 
 .centeredTable {
@@ -60,3 +61,12 @@ div.job-listing {
     width: 80%;
     background-color: #e4e4e4;
 }
+
+body {
+    background-image: url(img/background.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
