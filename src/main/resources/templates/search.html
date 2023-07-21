@@ -13,7 +13,19 @@
 
     <h1>hi</h1>
 
-    <p th:text="${restaurants}"></p>
+    <img th:src="${sampleImage}" alt="sample image">
+
+    <th:block th:each="map : ${fieldMap}">
+        <div>
+            <span th:text="${map.key}"></span>
+            <p></p>
+            <th:block th:each="field : ${map.value}">
+                <span th:text="${field.key}"></span>
+                <span th:text="${field.value}"></span>
+                <p></p>
+            </th:block>
+        </div><br><br><br><br><br>
+    </th:block>
 
 </body>
 </html>
