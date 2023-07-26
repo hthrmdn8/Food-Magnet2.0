@@ -13,6 +13,11 @@
 
     <h1>hi</h1>
 
+    <th:block th:each="photo : ${restaurantDetails}">
+        <img th:src="${photo}" alt="sample images"><br><br><br><br><br>
+    </th:block>
+
+    <!--
     <img th:src="${sampleImage}" alt="sample image">
 
     <th:block th:each="map : ${fieldMap}">
@@ -26,6 +31,6 @@
             </th:block>
         </div><br><br><br><br><br>
     </th:block>
-
+    -->
 </body>
 </html>

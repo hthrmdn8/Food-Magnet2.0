@@ -17,17 +17,21 @@ import java.util.HashMap;
 public class SearchController {
 
     @GetMapping
-    public String displaySearchPage(Model model) throws IOException, InterruptedException {
+    public String displaySearchPage(Model model) throws IOException, InterruptedException, URISyntaxException {
 
+        //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
         HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
 
-        for (Restaurant restaurant : RestaurantData.getRestaurants()) {
+        for (Restaurant restaurant : RestaurantData.getRestaurantList()) {
             fieldMap.put(restaurant.getName(), restaurant.getAllFields());
         }
 
-        model.addAttribute("sampleImage", RestaurantData.getPhoto());
+        Restaurant restaurant = RestaurantData.getRestaurant();
+
+        //model.addAttribute("sampleImage", RestaurantData.getPhoto());
         model.addAttribute("fieldMap", fieldMap);
-        model.addAttribute("restaurants", RestaurantData.getRestaurants());
+        model.addAttribute("restaurants", RestaurantData.getRestaurantList());
+        model.addAttribute("restaurantDetails", restaurant.getPhotoSrcList());
 
         return "search";
     }
