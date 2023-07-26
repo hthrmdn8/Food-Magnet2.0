@@ -1,4 +1,4 @@
-package com.launchcode.foodmagnet.models.data.jsonparsing;
+package com.launchcode.foodmagnet.models.data.jsonData;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
