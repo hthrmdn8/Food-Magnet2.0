@@ -1,6 +1,7 @@
 package com.launchcode.foodmagnet.controllers;
 
 import com.launchcode.foodmagnet.models.data.RestaurantData;
+import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,17 +23,24 @@ public class SearchController {
         //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
         HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
 
-        for (Restaurant restaurant : RestaurantData.getRestaurantList()) {
+        for (Restaurant restaurant : RestaurantData.getRestaurantList("Los Angeles")) {
             fieldMap.put(restaurant.getName(), restaurant.getAllFields());
         }
 
-        Restaurant restaurant = RestaurantData.getRestaurant();
+        Restaurant restaurant = RestaurantData.getRestaurantDetails("ChIJ-SF4shmz2IcROVewwNljeZQ");
 
-        //model.addAttribute("sampleImage", RestaurantData.getPhoto());
-        model.addAttribute("fieldMap", fieldMap);
-        model.addAttribute("restaurants", RestaurantData.getRestaurantList());
-        model.addAttribute("restaurantDetails", restaurant.getPhotoSrcList());
+        Restaurant laRestaurant = RestaurantData.getRestaurantList("Los Angeles").get(2);
+        Restaurant laRestaurantDetails = RestaurantData.getRestaurantDetails(laRestaurant.getPlace_id());
 
+        //model.addAttribute("sampleImage", RestaurantData.getPhoto(restaurant.getPhotoSrcList().get(0)));
+        //model.addAttribute("fieldMap", fieldMap);
+        //model.addAttribute("restaurants", RestaurantData.getRestaurantList("Los Angeles").get(0));
+        model.addAttribute("restaurantDetails", laRestaurantDetails.getPhotoSrcList());
+        //model.addAttribute("geocode", RestaurantData.getCoordinates("St. louis").toString());
+
+
+
+        //ApiRequests.placeGeocodingRequest("St. Louis").body()
         return "search";
     }
 

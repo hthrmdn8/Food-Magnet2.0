@@ -12,10 +12,13 @@
     <div th:replace="home.html :: navbar"></div>
 
     <h1>hi</h1>
-
+<!--
+    <p th:text="${geocode}"></p>
+-->
     <th:block th:each="photo : ${restaurantDetails}">
         <img th:src="${photo}" alt="sample images"><br><br><br><br><br>
     </th:block>
+
 
     <!--
     <img th:src="${sampleImage}" alt="sample image">
