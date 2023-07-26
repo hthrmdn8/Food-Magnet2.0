@@ -1,5 +1,9 @@
 package com.launchcode.foodmagnet.models.restaurant;
 
+import com.launchcode.foodmagnet.models.data.RestaurantData;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +34,7 @@ public class Restaurant {
 
     public Restaurant() {}
 
+    //used to demo displaying restaurant data
     public HashMap<String, Object> getAllFields() {
         HashMap<String, Object> allFields = new HashMap<>();
 
@@ -128,6 +133,30 @@ public class Restaurant {
 
     public ArrayList<Photo> getPhotos() {
         return photos;
+    }
+
+    //gets photo_reference field data from every photo object in photos
+    public ArrayList<String> getPhotoReferenceList() {
+        ArrayList<String> photoReferenceList = new ArrayList<>();
+
+        for (Photo photo : photos) {
+            photoReferenceList.add(photo.getPhoto_reference());
+
+        }
+        return photoReferenceList;
+
+    }
+
+    public ArrayList<String> getPhotoSrcList() throws IOException, URISyntaxException, InterruptedException {
+        ArrayList<String> photoReferenceList = getPhotoReferenceList();
+        ArrayList<String> photoSrcList = new ArrayList<>();
+
+        for (String photoReference : photoReferenceList) {
+            photoSrcList.add(RestaurantData.getPhoto(photoReference));
+
+        }
+        return photoSrcList;
+
     }
 
     public void setPhotos(ArrayList<Photo> photos) {
