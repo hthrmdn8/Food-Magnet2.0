@@ -4,9 +4,19 @@ public class Geometry {
 
     private Location location;
 
+    private Bounds bounds;
+
     private Viewport viewport;
 
     public Geometry() {}
+
+    public Bounds getBounds() {
+        return bounds;
+    }
+
+    public void setBounds(Bounds bounds) {
+        this.bounds = bounds;
+    }
 
     public Location getLocation() {
         return location;
@@ -28,6 +38,7 @@ public class Geometry {
     public String toString() {
         return "Geometry{" +
                 "location=" + location +
+                ", bounds=" + bounds +
                 ", viewport=" + viewport +
                 '}';
     }
