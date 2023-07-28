@@ -28,7 +28,7 @@ public class RestaurantData {
     }
 
     //pareses json response from nearbySearch method into an array of Restaurant pojos
-    public static ArrayList<Restaurant> getRestaurantList(String address) throws IOException, InterruptedException, URISyntaxException {
+    public static ArrayList<Restaurant> getRestaurantsNearby(String address) throws IOException, InterruptedException, URISyntaxException {
 
         HttpResponse<String> response = ApiRequests.placeNearbySearchRequest(address);
 

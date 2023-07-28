@@ -135,7 +135,7 @@ public class Restaurant {
         return photos;
     }
 
-    //gets photo_reference field data from every photo object in photos
+    //returns the photo_reference attribute from every Photo in this.Photos
     public ArrayList<String> getPhotoReferenceList() {
         ArrayList<String> photoReferenceList = new ArrayList<>();
 
@@ -147,15 +147,16 @@ public class Restaurant {
 
     }
 
-    public ArrayList<String> getPhotoSrcList() throws IOException, URISyntaxException, InterruptedException {
+    //Uses photo references to get direct URL link to each photo
+    public ArrayList<String> getAllPhotos() throws IOException, URISyntaxException, InterruptedException {
         ArrayList<String> photoReferenceList = getPhotoReferenceList();
-        ArrayList<String> photoSrcList = new ArrayList<>();
+        ArrayList<String> photoURLs = new ArrayList<>();
 
         for (String photoReference : photoReferenceList) {
-            photoSrcList.add(RestaurantData.getPhoto(photoReference));
+            photoURLs.add(RestaurantData.getPhoto(photoReference));
 
         }
-        return photoSrcList;
+        return photoURLs;
 
     }
 

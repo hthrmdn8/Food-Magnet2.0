@@ -14,12 +14,12 @@ import java.net.http.HttpResponse;
 public class ApiRequests {
 
     private static HttpClient client = HttpClient.newHttpClient();
-    private static String apiKey = "AIzaSyDEZTRZbutBSK8bPHkTv4ion_kPCKGSTIc";
+    private static String apiKey = "AIzaSyCSb9vBrI7wmfBFufMJb84PQdDgWy4I9s4";
 
     //builds Place Details request with place_id argument and returns an HttpResponse<String>
     public static HttpResponse<String> placeDetailsRequest(String place_id) throws URISyntaxException, IOException, InterruptedException {
 
-        final String demoId = "ChIJ-SF4shmz2IcROVewwNljeZQ";
+        //final String demoId = "ChIJ-SF4shmz2IcROVewwNljeZQ";
 
         URI build = new URIBuilder()
                 .setScheme("https")
@@ -44,7 +44,7 @@ public class ApiRequests {
     //sends get request to google's place search for restaurants within a specified area, returns json with details about each restaurant
     public static HttpResponse<String> placeNearbySearchRequest(String address) throws IOException, InterruptedException, URISyntaxException {
 
-        final String POSTS_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.627003%2C-90.199402&radius=500&type=restaurant&fields=name%2Cplace_id&key=AIzaSyDEZTRZbutBSK8bPHkTv4ion_kPCKGSTIc";
+        //final String POSTS_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.627003%2C-90.199402&radius=500&type=restaurant&fields=name%2Cplace_id&key=AIzaSyDEZTRZbutBSK8bPHkTv4ion_kPCKGSTIc";
 
         Location coordinates = RestaurantData.getCoordinates(address);
         final String location = coordinates.getLatString() + "," + coordinates.getLngString();

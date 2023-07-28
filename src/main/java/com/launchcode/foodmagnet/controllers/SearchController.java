@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("search")
@@ -23,21 +25,20 @@ public class SearchController {
         //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
         HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
 
-        for (Restaurant restaurant : RestaurantData.getRestaurantList("Los Angeles")) {
+        for (Restaurant restaurant : RestaurantData.getRestaurantsNearby("Los Angeles")) {
             fieldMap.put(restaurant.getName(), restaurant.getAllFields());
         }
 
         Restaurant restaurant = RestaurantData.getRestaurantDetails("ChIJ-SF4shmz2IcROVewwNljeZQ");
 
-        Restaurant laRestaurant = RestaurantData.getRestaurantList("Los Angeles").get(2);
+        Restaurant laRestaurant = RestaurantData.getRestaurantsNearby("Los Angeles").get(2);
         Restaurant laRestaurantDetails = RestaurantData.getRestaurantDetails(laRestaurant.getPlace_id());
 
         //model.addAttribute("sampleImage", RestaurantData.getPhoto(restaurant.getPhotoSrcList().get(0)));
         //model.addAttribute("fieldMap", fieldMap);
-        //model.addAttribute("restaurants", RestaurantData.getRestaurantList("Los Angeles").get(0));
-        model.addAttribute("restaurantDetails", laRestaurantDetails.getPhotoSrcList());
+        //model.addAttribute("restaurants", );
+        model.addAttribute("restaurantDetails", laRestaurantDetails.getAllPhotos());
         //model.addAttribute("geocode", RestaurantData.getCoordinates("St. louis").toString());
-
 
 
         //ApiRequests.placeGeocodingRequest("St. Louis").body()
