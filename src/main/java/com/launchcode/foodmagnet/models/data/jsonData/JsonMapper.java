@@ -15,14 +15,24 @@ public class JsonMapper {
         return defaultObjectMapper;
     }
 
-    public static JsonNode parse(String src) throws JsonProcessingException {
+    //parses raw json file into a JsonNode
+    public static JsonNode parse(String src)  {
 
-        return objectMapper.readTree(src);
+        try {
+            return objectMapper.readTree(src);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static <A> A fromJson(JsonNode node, Class<A> aclass) throws JsonProcessingException {
+    //used to map json restaurant objects into pojos
+    public static <A> A fromJson(JsonNode node, Class<A> aclass) {
 
-        return objectMapper.treeToValue(node, aclass);
+        try {
+            return objectMapper.treeToValue(node, aclass);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

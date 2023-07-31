@@ -51,7 +51,7 @@ public class Restaurant {
         allFields.put("icon: ", icon);
         allFields.put("icon_background_color: ", icon_background_color);
         allFields.put("icon_mask_base_uri: ", icon_mask_base_uri);
-        allFields.put("photos: ", photos);
+        allFields.put("photos: ", getAllPhotos());
         allFields.put("plus_code: ", plus_code);
         allFields.put("reference: ", reference);
         allFields.put("scope: ", scope);
@@ -139,16 +139,18 @@ public class Restaurant {
     public ArrayList<String> getPhotoReferenceList() {
         ArrayList<String> photoReferenceList = new ArrayList<>();
 
-        for (Photo photo : photos) {
-            photoReferenceList.add(photo.getPhoto_reference());
-
+        if (photos != null) {
+            for (Photo photo : photos) {
+                photoReferenceList.add(photo.getPhoto_reference());
+            }
         }
+
         return photoReferenceList;
 
     }
 
     //Uses photo references to get direct URL link to each photo
-    public ArrayList<String> getAllPhotos() throws IOException, URISyntaxException, InterruptedException {
+    public ArrayList<String> getAllPhotos() {
         ArrayList<String> photoReferenceList = getPhotoReferenceList();
         ArrayList<String> photoURLs = new ArrayList<>();
 

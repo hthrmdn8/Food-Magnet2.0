@@ -16,9 +16,14 @@ import java.util.ArrayList;
 public class RestaurantData {
 
     //Takes in place_id argument, returns usable restaurant pojo with photos and information about the restaurant
-    public static Restaurant getRestaurantDetails(String place_id) throws URISyntaxException, IOException, InterruptedException {
+    public static Restaurant getRestaurantDetails(String place_id)  {
 
-        HttpResponse<String> response = ApiRequests.placeDetailsRequest(place_id);
+        HttpResponse<String> response = null;
+        try {
+            ApiRequests.placeDetailsRequest(place_id);
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
 
         JsonNode node = JsonMapper.parse(response.body());
         JsonNode result = node.get("result");
@@ -28,9 +33,14 @@ public class RestaurantData {
     }
 
     //pareses json response from nearbySearch method into an array of Restaurant pojos
-    public static ArrayList<Restaurant> getRestaurantsNearby(String address) throws IOException, InterruptedException, URISyntaxException {
+    public static ArrayList<Restaurant> getRestaurantsNearby(String address) {
 
-        HttpResponse<String> response = ApiRequests.placeNearbySearchRequest(address);
+        HttpResponse<String> response = null;
+        try {
+            ApiRequests.placeNearbySearchRequest(address);
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException (e);
+        }
 
         JsonNode node = JsonMapper.parse(response.body());
         JsonNode results = node.get("results");
@@ -46,9 +56,15 @@ public class RestaurantData {
     }
 
     //parses response from placePhotoRequest into url linking a jpeg image
-    public static String getPhoto(String photoReference) throws IOException, InterruptedException, URISyntaxException {
+    public static String getPhoto(String photoReference) {
 
-        HttpResponse<String> photoResponse = ApiRequests.placePhotoRequest(photoReference);
+        HttpResponse<String> photoResponse = null;
+        try {
+            photoResponse = ApiRequests.placePhotoRequest(photoReference);
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+
         Document doc = Jsoup.parse(photoResponse.body());
         String htmlAttachment = String.valueOf(doc.getElementsByTag("A").unwrap());
         String imageUrl = htmlAttachment.substring(9, htmlAttachment.length() - 6);
@@ -56,9 +72,14 @@ public class RestaurantData {
         return imageUrl;
     }
 
-    public static Location getCoordinates(String address) throws URISyntaxException, IOException, InterruptedException {
+    public static Location getCoordinates(String address)  {
 
-        HttpResponse<String> jsonResponse = ApiRequests.placeGeocodingRequest(address);
+        HttpResponse<String> jsonResponse = null;
+        try {
+            ApiRequests.placeGeocodingRequest(address);
+        } catch (IOException | URISyntaxException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         JsonNode node = JsonMapper.parse(jsonResponse.body());
         JsonNode locationNode = node.get("results").get(0).get("geometry").get("location");
