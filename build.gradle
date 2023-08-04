@@ -26,6 +26,8 @@ dependencies {
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.mysql:mysql-connector-j'
 
 }
 
