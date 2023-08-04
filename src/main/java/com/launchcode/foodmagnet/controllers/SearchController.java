@@ -25,12 +25,12 @@ public class SearchController {
         //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
         HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
 
-        for (Restaurant restaurant : RestaurantData.getRestaurantsNearby("Los Angeles")) {
-            fieldMap.put(restaurant.getName(), restaurant.getAllFields());
-        }
-
-        Restaurant restaurant = RestaurantData.getRestaurantDetails("ChIJ-SF4shmz2IcROVewwNljeZQ");
-
+//        for (Restaurant restaurant : RestaurantData.getRestaurantsNearby("Los Angeles")) {
+//            fieldMap.put(restaurant.getName(), restaurant.getAllFields());
+//        }
+//
+//        Restaurant restaurant = RestaurantData.getRestaurantDetails("ChIJ-SF4shmz2IcROVewwNljeZQ");
+//
         Restaurant laRestaurant = RestaurantData.getRestaurantsNearby("Los Angeles").get(2);
         Restaurant laRestaurantDetails = RestaurantData.getRestaurantDetails(laRestaurant.getPlace_id());
 
