@@ -20,7 +20,7 @@ public class RestaurantData {
 
         HttpResponse<String> response = null;
         try {
-            ApiRequests.placeDetailsRequest(place_id);
+            response = ApiRequests.placeDetailsRequest(place_id);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +37,7 @@ public class RestaurantData {
 
         HttpResponse<String> response = null;
         try {
-            ApiRequests.placeNearbySearchRequest(address);
+            response = ApiRequests.placeNearbySearchRequest(address);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException (e);
         }
@@ -58,14 +58,14 @@ public class RestaurantData {
     //parses response from placePhotoRequest into url linking a jpeg image
     public static String getPhoto(String photoReference) {
 
-        HttpResponse<String> photoResponse = null;
+        HttpResponse<String> response = null;
         try {
-            photoResponse = ApiRequests.placePhotoRequest(photoReference);
+            response = ApiRequests.placePhotoRequest(photoReference);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
 
-        Document doc = Jsoup.parse(photoResponse.body());
+        Document doc = Jsoup.parse(response.body());
         String htmlAttachment = String.valueOf(doc.getElementsByTag("A").unwrap());
         String imageUrl = htmlAttachment.substring(9, htmlAttachment.length() - 6);
 
@@ -74,14 +74,14 @@ public class RestaurantData {
 
     public static Location getCoordinates(String address)  {
 
-        HttpResponse<String> jsonResponse = null;
+        HttpResponse<String> response = null;
         try {
-            ApiRequests.placeGeocodingRequest(address);
+            response = ApiRequests.placeGeocodingRequest(address);
         } catch (IOException | URISyntaxException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        JsonNode node = JsonMapper.parse(jsonResponse.body());
+        JsonNode node = JsonMapper.parse(response.body());
         JsonNode locationNode = node.get("results").get(0).get("geometry").get("location");
 
         Location coordinates = JsonMapper.fromJson(locationNode, Location.class);
