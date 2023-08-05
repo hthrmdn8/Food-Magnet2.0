@@ -158,6 +158,7 @@ public class Restaurant {
             photoURLs.add(RestaurantData.getPhoto(photoReference));
 
         }
+        if (photoURLs.isEmpty()) photoURLs.add("No photos available");
         return photoURLs;
 
     }

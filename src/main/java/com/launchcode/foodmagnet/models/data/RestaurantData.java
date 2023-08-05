@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RestaurantData {
 
@@ -40,7 +41,7 @@ public class RestaurantData {
             response = ApiRequests.placeNearbySearchRequest(address);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException (e);
-        }
+        } if (response == null) return null;
 
         JsonNode node = JsonMapper.parse(response.body());
         JsonNode results = node.get("results");
@@ -82,11 +83,16 @@ public class RestaurantData {
         }
 
         JsonNode node = JsonMapper.parse(response.body());
-        JsonNode locationNode = node.get("results").get(0).get("geometry").get("location");
 
-        Location coordinates = JsonMapper.fromJson(locationNode, Location.class);
+        if (Objects.equals(node.get("status").asText(), "OK")) {
 
-        return coordinates;
+            JsonNode locationNode = node.get("results").get(0).get("geometry").get("location");
+            Location coordinates = JsonMapper.fromJson(locationNode, Location.class);
+
+            return coordinates;
+
+        } else return null;
+
     }
 
 }

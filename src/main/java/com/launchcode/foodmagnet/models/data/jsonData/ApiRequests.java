@@ -46,7 +46,7 @@ public class ApiRequests {
 
         //final String POSTS_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.627003%2C-90.199402&radius=500&type=restaurant&fields=name%2Cplace_id&key=AIzaSyDEZTRZbutBSK8bPHkTv4ion_kPCKGSTIc";
 
-        Location coordinates = RestaurantData.getCoordinates(address);
+        Location coordinates = RestaurantData.getCoordinates(address); if (coordinates == null) return null;
         final String location = coordinates.getLatString() + "," + coordinates.getLngString();
 
         URI build = new URIBuilder()
