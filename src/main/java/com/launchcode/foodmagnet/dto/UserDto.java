@@ -1,8 +1,10 @@
 package com.launchcode.foodmagnet.dto;
 
+import jakarta.validation.constraints.Email;
+
 public class UserDto {
 
-
+    @Email
     private String username;
     private String password;
     private String fullname;

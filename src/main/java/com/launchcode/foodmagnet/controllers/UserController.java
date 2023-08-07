@@ -3,10 +3,12 @@ package com.launchcode.foodmagnet.controllers;
 import com.launchcode.foodmagnet.dto.UserDto;
 import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +38,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerSave(@ModelAttribute("user") UserDto userDto, Model model) {
+    public String registerSave(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
         User user = userService.findByUsername(userDto.getUsername());
         if (user != null) {
             model.addAttribute("userexist", user);
