@@ -6,7 +6,9 @@ import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -42,6 +44,11 @@ public class SearchController {
 
 
         //ApiRequests.placeGeocodingRequest("St. Louis").body()
+        return "search";
+    }
+    @PostMapping("results")
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
+        Iterable<Restaurant> restaurants;
         return "search";
     }
 

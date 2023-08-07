@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Welcome to a restaurant page!</h1>
+<p>Click <a th:href="@{/RestaurantController}">here</a> to see a greeting.</p>
 </body>
 <iframe
         width="600"
@@ -14,6 +15,6 @@
         loading="lazy"
         allowfullscreen
         referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=Space+Needle,Seattle+WA">
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=@{Location}">
 </iframe>
 </html>
