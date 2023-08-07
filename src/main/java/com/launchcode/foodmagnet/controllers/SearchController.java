@@ -1,18 +1,18 @@
 package com.launchcode.foodmagnet.controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
-import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
-import com.launchcode.foodmagnet.models.data.jsonData.JsonMapper;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("search")
@@ -22,11 +22,11 @@ public class SearchController {
     public String displaySearchPage(Model model) throws URISyntaxException, IOException, InterruptedException {
 
         //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
-//        HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
-//
-//        for (Restaurant restaurant : RestaurantData.getRestaurantsNearby("Los Angeles")) {
-//            fieldMap.put(restaurant.getName(), restaurant.getAllFields());
-//        }
+        HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
+
+        for (Restaurant restaurant : RestaurantData.getRestaurantsNearby("Los Angeles")) {
+            fieldMap.put(restaurant.getName(), restaurant.getAllFields());
+        }
 
 
         return "search";
