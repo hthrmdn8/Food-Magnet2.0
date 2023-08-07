@@ -7,8 +7,34 @@
 
 .carousel {
     height: 800px;
-    width: 100%px;
+    width: 100%;
     margin: auto;
+}
+
+.welcome {
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -50%);
+
+    color: white;
+    font-size: 150px;
+    font-weight: bolder;
+    text-shadow: -3px -3px 3px #000, 3px -3px 3px #000, -3px 3px 3px #000, 3px 3px 3px #000;
+    width: 1000PX;
+    text-align: center;
+}
+
+#eat {
+     color: #ff6347;
+     margin-left: 35px;
+}
+
+#eat:hover {
+    animation: glowing 1s infinite;
 }
 
 .carousel-container {
@@ -22,7 +48,7 @@
 
 .carousel-wrapper {
   display: flex;
-  transition: transform 0.65s ease;
+  transition: transform 1s ease;
   width: 100%;
 }
 
@@ -58,7 +84,7 @@
 
 .restaurant-listing {
     height: 300px;
-    margin: 10px auto;
+    margin: 20px auto;
     display: flex;
 
     background-color: #29292F;

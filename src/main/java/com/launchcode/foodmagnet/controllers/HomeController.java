@@ -43,7 +43,7 @@ public class HomeController {
         //loads restaurants from la
         HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
 
-        for (Restaurant restaurantb : RestaurantData.getRestaurantsNearby("Kansas City")) {
+        for (Restaurant restaurantb : RestaurantData.getRestaurantsNearby("Seattle")) {
             fieldMap.put(restaurantb.getName(), restaurantb.getAllFields());
         }
 
