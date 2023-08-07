@@ -1,0 +1,98 @@
+.page-content{
+    position: static;
+    width: 100%;
+    margin: auto;
+    background-color: #29292F;
+}
+
+.carousel {
+    height: 800px;
+    width: 100%px;
+    margin: auto;
+}
+
+.carousel-container {
+  width: 100%;
+  height: 800px;
+  margin: auto;
+  overflow: hidden;
+
+  position: absolute
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.65s ease;
+  width: 100%;
+}
+
+.image-container {
+    flex: 0 0 100%;
+    height: 800px;
+
+    display: flex;
+    object-fit: cover;
+    justify-content: center;
+}
+
+.carousel-image {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+}
+
+.featured-container{
+    width: 100%;
+    margin: auto;
+
+    background-image: url("img/152951-abstract-black-background-vector-illustration.jpg");
+    background-position: center top;
+    border: 10px outset #0c0c0e;
+    background-size: cover;
+}
+
+.featured {
+    width: 1350px;
+    margin: auto;
+}
+
+.restaurant-listing {
+    height: 300px;
+    margin: 10px auto;
+    display: flex;
+
+    background-color: #29292F;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.img-container {
+    width: 500px;
+    height: 300px;
+
+    display: flex;
+    object-fit: cover;
+    justify-content: left;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.listing-image {
+    height: 280px;
+    width: auto;
+    margin: 10px;
+    object-fit: cover;
+}
+
+.listing-info {
+    display: block;
+    font-size: 30px;
+    color: white;
+}
+
+.info-container {
+    margin-left: 10px;
+}
+
+a {
+    text-decoration: none;
+}
