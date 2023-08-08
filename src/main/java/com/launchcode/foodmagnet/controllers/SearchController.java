@@ -19,7 +19,7 @@ import java.util.Set;
 @RequestMapping("search")
 public class SearchController {
 
-    @GetMapping
+    @GetMapping()
     public String displaySearchPage(Model model) throws IOException, InterruptedException, URISyntaxException {
 
         //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
