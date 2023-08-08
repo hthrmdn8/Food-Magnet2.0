@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
-@RequestMapping("home")
+@RequestMapping("")
 public class HomeController {
     @GetMapping("")
     public String index(Model model){
