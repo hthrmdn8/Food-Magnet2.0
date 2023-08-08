@@ -47,6 +47,7 @@
     <div class="featured-container">
         <div class="featured">
             <th:block th:each="restaurant : ${restaurants}">
+
                 <a th:href="@{/restaurant(placeId=${restaurant.value.get('place_id: ')})}" style="display: block;">
                     <span class="restaurant-listing">
                         <div class="img-container">
