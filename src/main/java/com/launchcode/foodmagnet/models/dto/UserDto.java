@@ -1,6 +1,8 @@
 package com.launchcode.foodmagnet.models.dto;
 
 
+import jakarta.validation.constraints.Email;
+
 public class UserDto {
 
     @Email
