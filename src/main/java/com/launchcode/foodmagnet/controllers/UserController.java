@@ -5,6 +5,7 @@ import com.launchcode.foodmagnet.models.dto.UserDto;
 import com.launchcode.foodmagnet.models.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -23,7 +27,19 @@ public class UserController {
 
         this.userService = userService;
     }
+    @GetMapping("/profile")
+    public String home(Model model, Principal principal) {
+        String loggedInUsername = principal.getName();
+        UserDetails userDetails = userDetailsService.loadUserByUsername(loggedInUsername);
+        model.addAttribute("userDetails" , userDetails);
 
+        // Retrieve the reviews associated with the logged-in user
+//        List<Review> userReviews = reviewRepository.findByCreatedByUser(loggedInUsername);
+//
+//        // Add the user's reviews to the model
+//        model.addAttribute("userReviews", userReviews);
+        return "profile";
+    }
     @GetMapping("/login")
     public String login(Model model, UserDto userDto) {
         model.addAttribute("user", userDto);
