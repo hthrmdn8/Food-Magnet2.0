@@ -1,76 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Home</title>
+    <div th:replace="fragments :: navbar"></div>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <style>
- body {
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-}
-
-.dashboard {
-    background-color: #5e057e;
-    color: #fff;
-    padding: 40px;
-    text-align: center;
-}
-
-.dashboard__title {
-    font-size: 24px;
-    margin-top: 0;
-}
-
-.dashboard__user {
-    margin-top: 20px;
-}
-
-.dashboard__user-name {
-    font-size: 50px;
-    color: #c299d0;
-}
-
-
- </style>
     <link rel="stylesheet" th:href="@{css/home.css}"/>
 </head>
 <body>
-<div th:replace="fragments :: navbar"></div>
-<div class="dashboard">
+
+<div class="dashboard bg-info text-white p-5 text-center">
     <h1 class="dashboard__title">Welcome to FoodMagnet!</h1>
     <div class="dashboard__user">
         <h2 th:text="${userDetails.fullname}" class="dashboard__user-name">User's Name</h2>
     </div>
 </div>
-<span sec:authorize="isAuthenticated"><a th:href="@{/logout}">Logout</a></span>
 
-<!--&lt;!&ndash; Display user's reviews &ndash;&gt;-->
-<!--<div th:if="${#lists.size(userReviews) > 0}">-->
-<!--    <h2>User's Reviews:</h2>-->
-<!--    <ul>-->
+<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="btn btn-danger">Logout</a></span>
 
-<!--        <li th:each="review : ${userReviews}">-->
-<!--            <div class="container p-3 my-3 bg-secondary text-white">-->
-<!--                <p th:text="${review.hotel.hotelName}"></p>-->
-<!--                <p th:text="${review.rating}"></p>-->
-<!--                <p th:text="${review.comments}"></p>-->
-<!--                &lt;!&ndash; Add Delete Review button &ndash;&gt;-->
-<!--            </div>-->
-<!--            <form th:action="@{/reviews/{reviewId}/delete(reviewId=${review.reviewId})}" method="post">-->
-<!--                <input type="hidden" name="_method" value="delete" />-->
-<!--                <button type="submit" class="btn btn-danger">Delete Review</button>-->
-<!--            </form>-->
+<div class="my-3"><a th:href="@{/reviews/add}" class="btn btn-primary">Add Review</a></div>
 
-<!--            <form th:action="@{/reviews/{reviewId}/update(reviewId=${review.reviewId})}" method="post">-->
-<!--                <input type="hidden" name="_method" value="update" />-->
-<!--                <button type="submit" class="btn btn-danger">Update Review</button>-->
-<!--            </form>-->
+<div th:if="${#lists.size(userReviews) > 0}">
+    <h2>User's Reviews:</h2>
+    <ul class="list-unstyled">
+        <li th:each="review : ${userReviews}" class="container p-3 my-3 bg-secondary text-white position-relative">
+            <p th:text="${review.restaurantEntity.name}"></p>
+            <p th:text="${review.ratings}"></p>
+            <p th:text="${review.comments}"></p>
+            <span class="position-absolute top-0 end-0 p-2" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
+            <div class="d-flex justify-content-end">
 
-<!--            <hr />-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</div>-->
-</body></html>
+                <form th:action="@{/reviews/{reviewId}/delete(reviewId=${review.reviewId})}" method="post">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger">Delete Review</button>
+                </form>
+                <a th:href="@{/reviews/{reviewId}/update(reviewId=${review.reviewId})}" class="btn btn-warning ml-2">Update Review</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
