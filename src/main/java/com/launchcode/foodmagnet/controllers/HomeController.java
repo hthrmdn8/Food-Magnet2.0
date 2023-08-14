@@ -1,10 +1,15 @@
 package com.launchcode.foodmagnet.controllers;
 
+import com.launchcode.foodmagnet.models.RestaurantEntity;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
+import com.launchcode.foodmagnet.repositories.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -13,12 +18,20 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("")
 public class HomeController {
+
+    @Autowired
+    RestaurantRepository restaurantRepository;
+
+
+
     @GetMapping("")
-    public String index(Model model){
+    public String index(Model model) {
 
         //loads photo array with restaurants from seattle
         ArrayList<Restaurant> restaurantArrayList = RestaurantData.getRestaurantsNearby("Brooklyn");
         Restaurant restaurant = RestaurantData.getRestaurantDetails(restaurantArrayList.get(2).getPlace_id());
+
+
 
         ArrayList<String> photos = new ArrayList<>();
 
@@ -42,14 +55,48 @@ public class HomeController {
         photos.add("https://lh3.googleusercontent.com/places/ANJU3DsBRpfOb0a7FJ9r2RcYJI34hhEtFHwlzgz136c-HyzSZAPin7wnkl7HgGkO7WT1OKREMGQLZaGTtKvuL8DwCX5oGI9oqW3lAZY=s1600-w1600");
         //loads restaurants from la
         HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
-
+        //This is working but repeatedly adding to database
         for (Restaurant restaurantb : RestaurantData.getRestaurantsNearby("Seattle")) {
             fieldMap.put(restaurantb.getName(), restaurantb.getAllFields());
+//            RestaurantEntity restaurantEntity=new RestaurantEntity();
+//            restaurantEntity.setName(restaurantb.getName());
+//            restaurantRepository.save(restaurantEntity);
+
+
         }
+//        for (Restaurant restaurantb : RestaurantData.getRestaurantsNearby("Seattle")) {
+//            String name = restaurantb.getName();
+//            RestaurantEntity restaurantEntity = new RestaurantEntity();
+//            restaurantEntity.setName(name);
+//            restaurantRepository.save(new RestaurantEntity());
+//
+//        }
+
 
         model.addAttribute("photos", photos);
         model.addAttribute("restaurants", fieldMap);
 
         return "home";
     }
+
+//    @PostMapping("")
+//    public String saveRestaurant(@ModelAttribute RestaurantEntity restaurantEntity) {
+//
+//        HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
+//
+//        for (Restaurant restaurantb : RestaurantData.getRestaurantsNearby("Seattle")) {
+//            fieldMap.put(restaurantb.getName(), restaurantb.getAllFields());
+//
+//
+//        }
+//        for (Restaurant restaurantb : RestaurantData.getRestaurantsNearby("Seattle")) {
+//            String name = restaurantb.getName();
+//
+//            restaurantEntity.setName(name);
+//            restaurantRepository.save(new RestaurantEntity());
+//
+//        }
+//
+//        return "direct:";
+//    }
 }
