@@ -1,8 +1,11 @@
 package com.launchcode.foodmagnet.models;
 
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -15,15 +18,20 @@ public class User {
     private String username;
     private String password;
     private String fullname;
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews;
+
+
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String fullname) {
+    public User(Long id, String username, String password, String fullname, List<Review> reviews) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
+        this.reviews = reviews;
     }
 
     public User(String username, String password, String fullname) {
@@ -62,5 +70,13 @@ public class User {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
