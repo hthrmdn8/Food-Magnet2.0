@@ -7,8 +7,8 @@
 
 
 
-    <div th:replace="fragments :: navbar"></div>
-    <div style="padding-top:100px;">
+<div th:replace="fragments :: navbar"></div>
+<div style="padding-top:100px;">
     <h1>Welcome to a restaurant page!</h1>
 
 
@@ -30,24 +30,24 @@
                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=Space+Needle,Seattle+WA">
         </iframe>
     </div>
-<div><a th:href="@{/reviews/add}">Add Review</a></div>
+    <div><a th:href="@{/reviews/add}">Add Review</a></div>
 
-<h2>Reviews</h2>
-<div  th:each="review : ${reviews}">
-    <div class="container p-3 my-3 bg-secondary text-white">
-        User:<span th:text="${review.user.fullname}"></span><br>
-        Rating: <span th:text="${review.ratings}"></span><br>
-        Comment: <span th:text="${review.comments}"></span>
+    <h2>Reviews</h2>
+    <div  th:each="review : ${reviews}">
+        <div class="container p-3 my-3 bg-secondary text-white">
+            User:<span th:text="${review.user.fullname}"></span><br>
+            Rating: <span th:text="${review.ratings}"></span><br>
+            Comment: <span th:text="${review.comments}"></span>
 
 
-        <div style="padding-left:1000px;">
-            <span  th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
+            <div style="padding-left:1000px;">
+                <span  th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
+            </div>
+
         </div>
 
+
     </div>
-
-
-</div>
 </div>
 </body>
 
