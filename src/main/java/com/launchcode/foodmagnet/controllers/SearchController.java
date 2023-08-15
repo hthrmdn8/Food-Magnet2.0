@@ -28,23 +28,19 @@ public class SearchController {
             fieldMap.put(restaurant.getName(), restaurant.getAllFields());
         }
 
-
+        //model.addAttribute("restaurants", RestaurantData.getRestaurantsNearby("St. Louis"));
         return "search";
     }
 
     @PostMapping
     public String processSearchInput(@RequestParam String searchInput, Model model) {
 
-        HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
         ArrayList<Restaurant> restaurants = RestaurantData.getRestaurantsNearby(searchInput);
 
 
         if (restaurants != null) {
-            for (Restaurant restaurant : restaurants) {
-                fieldMap.put(restaurant.getName(), restaurant.getAllFields());
+            model.addAttribute("restaurants", restaurants);
 
-            }
-            model.addAttribute("restaurants", fieldMap);
 
         } else {
             model.addAttribute("validation", "Please enter a valid city name.");

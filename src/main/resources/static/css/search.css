@@ -1,15 +1,21 @@
 body {
-    background-color: #29292F;
+    background-color: #0B0B0C;
+    opacity: 1;
+    background-image:  linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377);
+    background-size: 30px 53px;
+    background-position: 0 0, 0 0, 15px 26px, 15px 26px, 0 0, 15px 26px;
 }
 
 .page-content {
-    position: static;
+    position: absolute;
     width: 100%;
     margin: auto;
 }
 
 #place-search {
-    margin-top: 80px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
 }
 
 .search-container {
@@ -31,4 +37,57 @@ body {
   border-color: #ff6347;
 }
 
+.results-container {
+    width: 100%;
+    padding: 100px;
+}
 
+.results {
+    width: 1400px;
+    margin: auto;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.restaurant-listing {
+    height: 300px;
+    width: 650px;
+    margin: 10px 25px 10px;
+
+    display: flex;
+    background-color: black;
+}
+
+
+.img-container {
+    width: 500px;
+    height: 300px;
+
+    display: flex;
+    object-fit: cover;
+    justify-content: left;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.listing-image {
+    height: 280px;
+    width: auto;
+    margin: 10px;
+    object-fit: cover;
+}
+
+.listing-info {
+    display: block;
+    font-size: 30px;
+    color: white;
+}
+
+.info-container {
+    margin-left: 10px;
+}
+
+a {
+    text-decoration: none;
+}
