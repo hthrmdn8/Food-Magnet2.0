@@ -28,6 +28,7 @@ private ReviewRepository reviewRepository;
     private RestaurantEntity restaurantEntity;
     @GetMapping("/restaurant")
     public String showRestaurantDetails(@RequestParam("placeId") String placeId, Model model) {
+
         // Here, you can fetch the restaurant details using the placeId
         // and pass the details to the view template using the Model
 
@@ -36,13 +37,15 @@ private ReviewRepository reviewRepository;
 
 //        restaurantEntity.setName(restaurant.getName());
 //        restaurantRepository.save(restaurantEntity);
-        RestaurantEntity restaurantEntity =  restaurantRepository.findByName(restaurant.getName());
-if(restaurantEntity!=null){
+        // RestaurantEntity restaurantEntity=  restaurantRepository.findByName(restaurant.getName());
+//if(restaurantEntity!=null){
 
-        //restaurantRepository.findByName(restaurant.getName())
+        //RestaurantEntity restaurantEntity=  restaurantRepository.findByName(restaurant.getName());
 //model.addAttribute("restaurantName",restaurantEntity.getName());
-        List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
-        model.addAttribute("reviews", reviews);}
+      //  List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
+      //  model.addAttribute("reviews", reviews);
+
+        model.addAttribute("placeId", placeId);
         return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
 
-}}
+    }}

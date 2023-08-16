@@ -10,19 +10,29 @@ public class UserDto {
     private String password;
     private String fullname;
 
+    private String location;
+
 
     public UserDto() {
 
     }
 
 
-    public UserDto(String username, String password, String fullname) {
+    public UserDto(String username, String password, String fullname, String location) {
 
         this.username = username;
         this.password = password;
         this.fullname = fullname;
+        this.location = location;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getUsername() {
         return username;

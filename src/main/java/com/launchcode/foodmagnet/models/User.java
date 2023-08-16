@@ -21,23 +21,33 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
 
-
+    private String location;
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String fullname, List<Review> reviews) {
+    public User(Long id, String username, String password, String fullname, List<Review> reviews, String location) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
         this.reviews = reviews;
+        this.location = location;
     }
 
-    public User(String username, String password, String fullname) {
+    public User(String username, String password, String fullname, String location) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Long getId() {

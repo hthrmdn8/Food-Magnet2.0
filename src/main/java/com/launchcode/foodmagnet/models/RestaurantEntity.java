@@ -8,27 +8,33 @@ import java.util.List;
 @Entity
 public class RestaurantEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int restaurantId;
+    @Column(name = "place_id")
+    private String placeId;
     private String name;
+
     @OneToMany(mappedBy = "restaurantEntity")
     private List<Review> reviews;
 
     public RestaurantEntity() {
     }
 
-    public RestaurantEntity(int restaurantId, String name, List<Review> reviews) {
-        this.restaurantId = restaurantId;
+    public RestaurantEntity(String placeId, String name, List<Review> reviews) {
+        this.placeId = placeId;
         this.name = name;
         this.reviews = reviews;
     }
 
-    public int getRestaurantId() {
-        return restaurantId;
+    public RestaurantEntity(String placeId, String name) {
+        this.placeId = placeId;
+        this.name = name;
     }
 
-    public void setRestaurantId(int restaurantId) {
-        this.restaurantId = restaurantId;
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String restaurantId) {
+        this.placeId = restaurantId;
     }
 
     public String getName() {
@@ -45,5 +51,14 @@ public class RestaurantEntity {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    @Override
+    public String toString() {
+        return "RestaurantEntity{" +
+                ", name='" + name + '\'' +
+                ", placeId='" + placeId + '\'' +
+                ", reviews=" + reviews +
+                '}';
     }
 }

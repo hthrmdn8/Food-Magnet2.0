@@ -30,7 +30,8 @@ public class CustomUserDetailsService  implements UserDetailsService {
                 user.getUsername(),
                 user.getPassword(),
                 authorities(),
-                user.getFullname());
+                user.getFullname(),
+                user.getLocation());
     }
 
     public Collection<? extends GrantedAuthority> authorities () {

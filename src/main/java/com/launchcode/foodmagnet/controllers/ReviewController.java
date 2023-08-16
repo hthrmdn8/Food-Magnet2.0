@@ -53,60 +53,91 @@ public class ReviewController {
 //        return "reviews/add";
 //    }
 //this is working for add review
-    @GetMapping("/reviews/add")
-    public String displayReviewForm( Model model){
-
-        model.addAttribute("review",new Review());
-        model.addAttribute("restaurants",restaurantRepository.findAll());
-
-        LocalDate currentDate = LocalDate.now();
-        model.addAttribute("currentDate", currentDate);
-        return "reviews/add";
-    }
-//@GetMapping("/reviews/add")
-//    public String displayReviewForm( Model model,@RequestParam String name){
+//    @GetMapping("/reviews/add")
+//    public String displayReviewForm( Model model){
 //
 //        model.addAttribute("review",new Review());
-//        model.addAttribute("name",restaurantRepository.findByName(name));
+//        model.addAttribute("restaurants",restaurantRepository.findAll());
+//
 //        LocalDate currentDate = LocalDate.now();
 //        model.addAttribute("currentDate", currentDate);
 //        return "reviews/add";
 //    }
 
-    @PostMapping("/reviews/add")
-    public String addReview(Review review, Principal principal,@RequestParam("placeId") String placeId ,@RequestParam("restaurantId") Integer restaurantId) {
-        {
-            if (principal != null) {
-                // Get the currently logged-in user's username+------------------------------------------------------------------
-                String username = principal.getName();
+    @GetMapping("/reviews/add")
+        public String displayReviewForm( Model model,@RequestParam("placeId") String placeId){
 
-                review.setCreatedByUser(username);
-                // Get the User object from the UserDetailsService
-                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-                User user = userRepository.findByUsername(userDetails.getUsername());
+        model.addAttribute("review",new Review());
+        Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
+        model.addAttribute("restaurant", restaurant);
+        //model.addAttribute("name",restaurant.getName());
+        LocalDate currentDate = LocalDate.now();
+        model.addAttribute("currentDate", currentDate);
+        model.addAttribute("test", RestaurantData.getRestaurantDetails(placeId).getName());
+        model.addAttribute("placeId", placeId);
 
-                // Set the User object on the review
-                review.setUser(user);
+        return "reviews/add";
 
-                Optional<RestaurantEntity> result =  restaurantRepository.findById(restaurantId);
-                if(result.isPresent()){
-                    RestaurantEntity restaurantEntity=result.get();
-                    review.setRestaurantEntity(restaurantEntity);
-                }
-
-
-                reviewRepository.save(review);
-
-                // Redirect to a success page or the restaurant details page
-                //return "redirect:/view/{id}";
-                return "redirect:/profile" ;
-
-            }
-            // Redirect to a login page or display an error message
-            return "redirect:/login";
         }
 
+    @PostMapping("/reviews/add")
+    public String addReview(Review review, Principal principal, @RequestParam("placeId") String placeId,Model model) {
+
+            if (principal != null) {
+
+                String username = principal.getName();
+                review.setCreatedByUser(username);
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+                User user = userRepository.findByUsername(userDetails.getUsername());
+                review.setUser(user);
+            }
+        Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
+
+
+                    RestaurantEntity restaurantEntity =new RestaurantEntity(placeId, restaurant.getName());
+//                    restaurantEntity.setName( restaurant.getName());
+                    //restaurantEntity.setPlaceId (restaurant.getPlace_id());
+       // restaurantEntity.setPlaceId ("ChIJcQ0R1rBqkFQR8kvZfk8COTE");
+                if(restaurantRepository.findByPlaceId(placeId) == null) {
+                        restaurantRepository.save(restaurantEntity);
+                }
+                    review.setRestaurantEntity(restaurantEntity);
+                    reviewRepository.save(review);
+        model.addAttribute(" restaurantEntity", restaurantEntity);
+
+        return "redirect:/restaurant?placeId=" + placeId;
+
     }
+
+
+//    @PostMapping("/reviews/add")
+//    public String addReview(Review review, Principal principal, Restaurant restaurant) {
+//
+//        if (principal != null) {
+//
+//            String username = principal.getName();
+//            review.setCreatedByUser(username);
+//            UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+//            User user = userRepository.findByUsername(userDetails.getUsername());
+//            review.setUser(user);
+//        }
+//
+//
+//
+//            RestaurantEntity restaurantEntity =new RestaurantEntity();
+//            restaurantEntity.setName( restaurant.getName());
+//            restaurantEntity.setPlaceId (restaurant.getPlace_id());
+//            if(restaurantRepository.findByPlaceId(restaurant.getPlace_id()) == null) {
+//                restaurantRepository.save(restaurantEntity);
+//            }
+//            review.setRestaurantEntity(restaurantEntity);
+//            reviewRepository.save(review);
+//
+//
+//        return "redirect:/profile";
+//
+//    }
+//
 
     @GetMapping("/reviews/{reviewId}/update")
     public String displayUpdateReviewForm(@PathVariable Integer reviewId, Model model) {

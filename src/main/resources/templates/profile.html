@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head">
     <meta charset="UTF-8">
     <title>Home</title>
     <div th:replace="fragments :: navbar"></div>
@@ -8,19 +8,75 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" th:href="@{css/home.css}"/>
+    <style>
+        body {
+            background: url('/css/img/backgroung.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .dashboard {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .dashboard__title {
+            font-size: 2.5rem;
+        }
+
+        .dashboard__user-name {
+            font-size: 2rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .dashboard__title {
+        font-size: 2.5rem;
+        font-family: 'Font1', Money Penny; /* Use the actual font name */
+    }
+
+    /* Font styles for username */
+    .dashboard__user-name {
+        font-size: 2rem;
+        margin-top: 1rem;
+        font-family: 'Font2', Honest Script; /* Use the actual font name */
+    }
+.custom-button {
+            background-color: #ff6347; /* Change to your desired color */
+            color: white; /* Adjust text color for contrast */
+            /* Add other styling as needed */
+        }
+        /* Add any other necessary styles here */
+    </style>
 </head>
 <body>
-
-<div class="dashboard bg-info text-white p-5 text-center">
-    <h1 class="dashboard__title">Welcome to FoodMagnet!</h1>
+<div class="dashboard" >
+    <h1 class="dashboard__title"style="color: #ff6347;">Welcome to FoodMagnet!</h1>
     <div class="dashboard__user">
-        <h2 th:text="${userDetails.fullname}" class="dashboard__user-name">User's Name</h2>
+        <h2 th:text="${userDetails.location}" class="dashboard__user-name"style="color: #ff6347;">User's Name</h2>
     </div>
 </div>
 
-<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="btn btn-danger">Logout</a></span>
+<span sec:authorize="isAuthenticated"><Button class="custom-button"><a th:href="@{/logout}" >Logout</a></Button></span>
 
-<div class="my-3"><a th:href="@{/reviews/add}" class="btn btn-primary">Add Review</a></div>
+<div class="my-3"><Button class="custom-button"><a th:href="@{/reviews/add(placeId=${placeId})}"  >Add Review</a></Button></div>
+
+<div th:text="${test}"></div>
+
+<!--<div class="dashboard bg-info text-white p-5 text-center">-->
+<!--    <h1 class="dashboard__title">Welcome to FoodMagnet!</h1>-->
+<!--    <div class="dashboard__user">-->
+<!--        <h2 th:text="${userDetails.fullname}" class="dashboard__user-name">User's Name</h2>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="btn btn-danger">Logout</a></span>-->
+
+<!--<div class="my-3"><a th:href="@{/reviews/add(placeId=${place_id})}" class="btn btn-primary">Add Review</a></div>-->
 
 <div th:if="${#lists.size(userReviews) > 0}">
     <h2>User's Reviews:</h2>
@@ -34,9 +90,9 @@
 
                 <form th:action="@{/reviews/{reviewId}/delete(reviewId=${review.reviewId})}" method="post">
                     <input type="hidden" name="_method" value="delete" />
-                    <button type="submit" class="btn btn-danger">Delete Review</button>
+                    <button type="submit" class="custom-button">Delete Review</button>
                 </form>
-                <a th:href="@{/reviews/{reviewId}/update(reviewId=${review.reviewId})}" class="btn btn-warning ml-2">Update Review</a>
+                <Button class="custom-button"><a th:href="@{/reviews/{reviewId}/update(reviewId=${review.reviewId})}">Update Review</a></Button>
             </div>
         </li>
     </ul>

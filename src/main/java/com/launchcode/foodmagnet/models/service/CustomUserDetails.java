@@ -12,18 +12,26 @@ public class CustomUserDetails implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
     private String fullname;
 
-
+    private String location;
 
 
     public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                             String fullname) {
+                             String fullname, String location) {
 
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.fullname = fullname;
+        this.location = location;
 
+    }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getFullname() {
