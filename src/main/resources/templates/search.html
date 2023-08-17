@@ -21,6 +21,24 @@
 
                 <input type="submit" value="submit"/>
                 <p th:if="${validation}" th:text="${validation}"></p>
+                <p class="filters">
+                    <span class="radioSpace">
+                        <input type="radio" name="searchType" id="all" value="all" checked="checked">
+                        <label for="all">All</label>
+                    </span>
+                    <span class="radioSpace">
+                        <input type="radio" name="searchType" id="serves_breakfast" value="serves_breakfast" checked="checked">
+                        <label for="serves_breakfast">Serves Breakfast</label>
+                    </span>
+                    <span class="radioSpace">
+                        <input type="radio" name="searchType" id="serves_lunch" value="serves_lunch" checked="checked">
+                        <label for="serves_lunch">Serves Lunch</label>
+                    </span>
+                    <span class="radioSpace">
+                        <input type="radio" name="searchType" id="serves_dinner" value="serves_dinner" checked="checked">
+                        <label for="serves_dinner">Serves Dinner</label>
+                    </span>
+                </p>
 
             </form>
 

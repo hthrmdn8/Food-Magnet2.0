@@ -31,4 +31,13 @@ body {
   border-color: #ff6347;
 }
 
+p.filters {
+  color: white;
+  font-size: 16px;
+  margin: 20px;
+}
+.radioSpace {
+margin-left: 20px;
+}
+
 
