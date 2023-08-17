@@ -13,7 +13,7 @@
               style="display: inline-block;">
 
             <div class="search-container">
-                <input type="text" name="searchInput" id="searchInput"/>
+                <input type="text" name="searchInput" id="searchInput" placeholder="Search by location"/>
 
                 <button class="search-icon" type="submit">
                     <i class="fa fa-search w3-xxxlarge"></i>
@@ -24,6 +24,41 @@
         </form>
 
     </div>
+
+    <div class="filters-container">
+        <button type="button" class="collapsible">Search Filters!</button>
+        <div class="content">
+            <ul class="filter-list">
+                <li class="filter" id="search-type">Search by:
+                    <span class="search-cuisine">Cuisine</span>
+                    <span class="search-location">Location</span>
+                </li>
+                <li class="filter">Serves Breakfast</li>
+                <li class="filter">Serves Lunch</li>
+                <li class="filter">Serves Dinner</li>
+                <li class="filter">Wheelchair Accessible</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+    </script>
+
+    <div th:text="${test}" style="color: white;"></div>
 
 
     <div class="results-container">
@@ -61,8 +96,6 @@
                 </a>
 
             </th:block>
-
-            0
 
         </div>
 

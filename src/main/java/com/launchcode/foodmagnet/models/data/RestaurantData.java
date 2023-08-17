@@ -56,6 +56,28 @@ public class RestaurantData {
         return restaurantList;
     }
 
+    public static ArrayList<Restaurant> getSpecificRestaurantsNearby(String address, String cuisine) {
+
+        HttpResponse<String> response = null;
+        try {
+            response = ApiRequests.placeKeywordRequest(address, cuisine);
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException (e);
+        } if (response == null) return null;
+
+        JsonNode node = JsonMapper.parse(response.body());
+        JsonNode results = node.get("results");
+
+        ArrayList<Restaurant> restaurantList = new ArrayList<>();
+
+        for (JsonNode result : results) {
+            Restaurant restaurant = JsonMapper.fromJson(result, Restaurant.class);
+            restaurantList.add(restaurant);
+        }
+
+        return restaurantList;
+    }
+
     //parses response from placePhotoRequest into url linking a jpeg image
     public static String getPhoto(String photoReference) {
 

@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 public class ApiRequests {
 
@@ -41,6 +42,8 @@ public class ApiRequests {
         return response;
     }
 
+
+
     //sends get request to google's place search for restaurants within a specified area, returns json with details about each restaurant
     public static HttpResponse<String> placeNearbySearchRequest(String address) throws IOException, InterruptedException, URISyntaxException {
 
@@ -55,6 +58,36 @@ public class ApiRequests {
                 .setPath("maps/api/place/nearbysearch/json")
                 .addParameter("location", location)
                 .addParameter("radius", "500")
+                .addParameter("type", "restaurant")
+                .addParameter("fields", "name,place_id")
+                .addParameter("key", apiKey)
+                .build();
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .header("accept", "application/json")
+                .uri(build)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response;
+    }
+
+    //sends a nearby search request with a keyword parameter intended to specify cuisine
+    public static HttpResponse<String> placeKeywordRequest(String address, String keyword) throws URISyntaxException, IOException, InterruptedException {
+
+        Location coordinates = RestaurantData.getCoordinates(address); if (coordinates == null) return null;
+        final String location = coordinates.getLatString() + "," + coordinates.getLngString();
+
+        URI build = new URIBuilder()
+                .setScheme("https")
+                .setHost("maps.googleapis.com")
+                .setPath("maps/api/place/nearbysearch/json")
+                .addParameter("keyword", keyword)
+                .addParameter("location", location)
+                .addParameter("radius", "2000")
                 .addParameter("type", "restaurant")
                 .addParameter("fields", "name,place_id")
                 .addParameter("key", apiKey)

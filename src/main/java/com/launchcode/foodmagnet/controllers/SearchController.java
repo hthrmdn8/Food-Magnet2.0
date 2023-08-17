@@ -1,6 +1,7 @@
 package com.launchcode.foodmagnet.controllers;
 
 import com.launchcode.foodmagnet.models.data.RestaurantData;
+import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ public class SearchController {
 
         model.addAttribute("title", "Search Restaurants");
         //model.addAttribute("restaurants", RestaurantData.getRestaurantsNearby("St. Louis"));
+        model.addAttribute("restaurants", RestaurantData.getSpecificRestaurantsNearby("Los Angeles", "Chinese"));
         return "search";
     }
 
