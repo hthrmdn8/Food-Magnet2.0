@@ -42,10 +42,6 @@ body {
      color: #ff6347;
 }
 
-#eat:hover {
-    animation: glowing 1s infinite;
-}
-
 .search-bar {
     height: 100px;
 }
@@ -113,6 +109,7 @@ body {
     display: flex;
     object-fit: cover;
     justify-content: center;
+    margin-right: 20.5px;
 }
 
 .carousel-image {
@@ -181,7 +178,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 
-.img-container {
+.featured-img-container {
     width: 500px;
     height: 300px;
 
