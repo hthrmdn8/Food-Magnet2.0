@@ -14,9 +14,9 @@ import java.net.http.HttpResponse;
 public class ApiRequests {
 
     private static HttpClient client = HttpClient.newHttpClient();
-    private static String apiKey = "AIzaSyCSb9vBrI7wmfBFufMJb84PQdDgWy4I9s4";
+    private static String apiKey = "AIzaSyAZ10B93TjaoEypVHLNZAPw1StgacgEpN0";
 
-    //builds Place Details request with place_id argument and returns an HttpResponse<String>
+    //builds Place Details request with place_id argument and returns a HttpResponse<String>
     public static HttpResponse<String> placeDetailsRequest(String place_id) throws URISyntaxException, IOException, InterruptedException {
 
         //final String demoId = "ChIJ-SF4shmz2IcROVewwNljeZQ";
