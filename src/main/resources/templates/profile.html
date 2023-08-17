@@ -63,7 +63,7 @@
 
 <span sec:authorize="isAuthenticated"><Button class="custom-button"><a th:href="@{/logout}" >Logout</a></Button></span>
 
-<div class="my-3"><Button class="custom-button"><a th:href="@{/reviews/add(placeId=${placeId})}"  >Add Review</a></Button></div>
+<div class="my-3"><Button class="custom-button"><a th:href="@{/}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>
 
 <div th:text="${test}"></div>
 

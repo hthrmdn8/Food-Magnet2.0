@@ -73,7 +73,7 @@ public class ReviewController {
         //model.addAttribute("name",restaurant.getName());
         LocalDate currentDate = LocalDate.now();
         model.addAttribute("currentDate", currentDate);
-        model.addAttribute("test", RestaurantData.getRestaurantDetails(placeId).getName());
+       // model.addAttribute("test", RestaurantData.getRestaurantDetails(placeId).getName());
         model.addAttribute("placeId", placeId);
 
         return "reviews/add";
@@ -140,7 +140,7 @@ public class ReviewController {
 //
 
     @GetMapping("/reviews/{reviewId}/update")
-    public String displayUpdateReviewForm(@PathVariable Integer reviewId, Model model) {
+    public String displayUpdateReviewForm(@PathVariable Integer reviewId/*,@RequestParam String placeId*/, Model model) {
         // Retrieve the review from the database using the reviewId
         Review review = reviewRepository.findById(reviewId).orElse(null);
 
@@ -156,7 +156,7 @@ public class ReviewController {
         updateReview.setComments(review.getComments());
 
         model.addAttribute("updateReview", updateReview);
-        model.addAttribute("restaurants",restaurantRepository.findAll());
+        //model.addAttribute("placeId",placeId);
 
         return "reviews/update"; // Adjust the template path based on your project structure
     }

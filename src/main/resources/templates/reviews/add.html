@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h1 class="mb-4">Add Review</h1>
 
-    <form method="post" action="/reviews/add" style="max-width: 600px;">
+    <form method="post" action="/reviews/add"  th:object="${placeId}" style="max-width: 600px;">
         <div class="form-group">
             <label th:for="comments">Add Comment</label>
             <input th:field="${review.comments}" class="form-control" />

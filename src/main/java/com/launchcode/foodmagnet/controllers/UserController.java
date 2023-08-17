@@ -43,7 +43,7 @@ public class UserController {
         this.reviewRepository = reviewRepository;
     }
     @GetMapping("/profile")
-    public String home(Model model, Principal principal/*, @RequestParam String placeId*/) {
+    public String home(Model model, Principal principal) {
         String loggedInUsername = principal.getName();
         UserDetails userDetails = userDetailsService.loadUserByUsername(loggedInUsername);
         model.addAttribute("userDetails" , userDetails);
@@ -72,7 +72,8 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model, UserDto userDto) {
         model.addAttribute("user", userDto);
-        //model.addAttribute("placeId", placeId);
+
+
         return "login";
     }
 

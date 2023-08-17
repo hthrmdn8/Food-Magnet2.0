@@ -40,10 +40,10 @@ private ReviewRepository reviewRepository;
         // RestaurantEntity restaurantEntity=  restaurantRepository.findByName(restaurant.getName());
 //if(restaurantEntity!=null){
 
-        //RestaurantEntity restaurantEntity=  restaurantRepository.findByName(restaurant.getName());
+        RestaurantEntity restaurantEntity=  restaurantRepository.findByPlaceId(placeId);
 //model.addAttribute("restaurantName",restaurantEntity.getName());
-      //  List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
-      //  model.addAttribute("reviews", reviews);
+        List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
+       model.addAttribute("reviews", reviews);
 
         model.addAttribute("placeId", placeId);
         return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
