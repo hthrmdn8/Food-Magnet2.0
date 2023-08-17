@@ -1,0 +1,211 @@
+body {
+    background-color: #0B0B0C;
+    opacity: 1;
+    background-image:  linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377);
+    background-size: 30px 53px;
+    background-position: 0 0, 0 0, 15px 26px, 15px 26px, 0 0, 15px 26px;
+}
+
+.page-content{
+    position: absolute;
+    width: 100%;
+    margin: auto;
+}
+
+.carousel {
+    height: 800px;
+    width: 100%;
+    margin: auto;
+}
+
+.welcome {
+    position: absolute;
+    z-index: 2;
+    margin: auto;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000PX;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 150px;
+    font-weight: bolder;
+    text-shadow: -3px -3px 3px #000, 3px -3px 3px #000, -3px 3px 3px #000, 3px 3px 3px #000;
+    white-space: nowrap;
+    text-align: center;
+}
+
+#eat {
+     display: inline;
+     color: #ff6347;
+}
+
+.search-bar {
+    height: 100px;
+}
+
+
+#place-search {
+    /* margin-top: 100px; */
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+}
+
+#searchInput {
+	padding: 8px 16px;
+	border: 2px solid #ccc;
+	border-radius: 20px;
+	outline: none;
+	font-size: 16px;
+	transition: border-color 0.3s ease;
+	width: 800px;
+	box-shadow: -2px -2px 3px #000, 2px -2px 3px #000, -1px 1px 3px #000, 1px 1px 3px #000;
+}
+
+#searchInput:focus {
+  border-color: black;
+}
+
+.search-icon {
+    display: inline-block;
+    margin-left: 10px;
+
+    border: none;
+    background-color: transparent;
+    opacity: 1;
+    padding: 0;
+}
+
+.search-icon i {
+    text-shadow: -2px -2px 3px #000, 2px -2px 3px #000, -1px 1px 3px #000, 2px 1px 3px #000
+}
+
+.carousel-container {
+  width: 100%;
+  height: 800px;
+  margin: auto;
+  overflow: hidden;
+
+  position: absolute
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 1s ease;
+  width: 100%;
+}
+
+.image-container {
+    flex: 0 0 100%;
+    height: 800px;
+
+    display: flex;
+    object-fit: cover;
+    justify-content: center;
+    margin-right: 20.5px;
+}
+
+.carousel-image {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+}
+
+.featured-container{
+    width: 100%;
+    margin: auto;
+}
+
+.featured-header {
+    width: 1350px;
+    margin: auto;
+    text-align: center;
+}
+
+.separator {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(0,0,0,0.4);
+    box-shadow: 0 0 10px black;
+}
+
+.underline {
+    width: 100%;
+    height: 10px;
+    margin: 25px auto 45px;
+    background: white;
+    box-shadow: 0 0 10px black;
+}
+
+.featured-banner {
+    width: 100%;
+    height: 100px;
+    margin: 100px auto 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: white;
+    font-family: "Anton",var(--bs-font-sans-serif);
+    text-shadow: 0 0 10px black;
+}
+
+.featured-login {
+    margin: 100px auto 300px;
+    color: white;
+    font-size: 50px;
+}
+
+.featured {
+    width: 1350px;
+    margin: auto;
+}
+
+.restaurant-listing {
+    height: 300px;
+    margin: 20px auto;
+    display: flex;
+
+    background-color: #29292F;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.featured-img-container {
+    width: 500px;
+    height: 300px;
+
+    display: flex;
+    object-fit: cover;
+    justify-content: left;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.listing-image {
+    height: 280px;
+    width: auto;
+    margin: 10px;
+    object-fit: cover;
+}
+
+.listing-info {
+    display: block;
+    font-size: 30px;
+    color: white;
+}
+
+.info-container {
+    margin-left: 10px;
+}
+
+a {
+    text-decoration: none;
+}

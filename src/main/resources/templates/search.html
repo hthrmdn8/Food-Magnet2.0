@@ -1,41 +1,153 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.tymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Search Page</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<link rel="stylesheet" href="css/search.css"/>
 <body>
-    <div th:replace="home.html :: navbar"></div>
-
-    <h1>hi</h1>
-<!--
-    <p th:text="${geocode}"></p>
--->
-<!--    <th:block th:each="photo : ${restaurantDetails}">-->
-<!--        <img th:src="${photo}" alt="sample images"><br><br><br><br><br>-->
-<!--    </th:block>-->
-<!--
-    <p th:text="${restaurants}"></p>
+<div class="page-content">
+    <div th:replace="fragments :: navbar"></div>
 
 
+    <div id="place-search">
 
-    <img th:src="${sampleImage}" alt="sample image">
+        <form action="/search" method="POST"
+              style="display: inline-block;">
 
-    <th:block th:each="map : ${fieldMap}">
-        <div>
-            <span th:text="${map.key}"></span>
-            <p></p>
-            <th:block th:each="field : ${map.value}">
-                <span th:text="${field.key}"></span>
-                <span th:text="${field.value}"></span>
-                <p></p>
+            <div class="search-container">
+                <input type="text" name="searchInput" id="searchInput" placeholder="Search by location"/>
+
+                <button class="search-icon" type="submit">
+                    <i class="fa fa-search w3-xxxlarge"></i>
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="filters-container">
+        <button type="button" class="collapsible">Search Filters!</button>
+        <div class="content">
+            <ul class="filter-list">
+                <li class="filter" id="search-type">Search by:
+                    <span class="search-cuisine">Cuisine</span>
+                    <span class="search-location">Location</span>
+                </li>
+                <li class="filter">Serves Breakfast</li>
+                <li class="filter">Serves Lunch</li>
+                <li class="filter">Serves Dinner</li>
+                <li class="filter">Wheelchair Accessible</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+    </script>
+
+    <div th:text="${test}" style="color: white;"></div>
+
+
+    <div class="results-container">
+        <div class="validation-header" th:if="${validation}" >
+            <div class="validation-banner">Location not found.</div>
+        </div>
+        <div class="results-header" th:if="${restaurants}">
+            <div class="results-banner">
+                <span th:text="${cuisine}">&nbsp;</span> Restaurants in&nbsp;<span th:text="${location}"></span>!
+            </div>
+            <div class="underline"></div>
+        </div>
+
+        <div th:if="${restaurants}" class="results">
+
+            <th:block th:each="restaurant : ${restaurants}">
+                <a th:href="@{/restaurant(place_id=${restaurant.getPlace_id()})}"
+                   style="display: inline-block">
+                    <div class="restaurant-listing">
+
+                        <div class="img-container">
+                            <img class="listing-image"
+                                 th:if="${restaurant.getAllPhotos().get(0) != 'No photos available'}"
+                                 th:src="${restaurant.getAllPhotos().get(0)}"/>
+                            <p class="photo-validation"
+                               th:unless="${restaurant.getAllPhotos().get(0) != 'No photos available'}">No Photo available :(</p>
+                        </div>
+
+                        <div class="info-container">
+                            <div class="listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
+                            <div class="listing-info" th:text="${restaurant.getVicinity()}"></div>
+                        </div>
+
+                    </div>
+                </a>
+
             </th:block>
-        </div><br><br><br><br><br>
-    </th:block>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--
+    <div th:if="${restaurants}" align="left">
+
+        <table class="table" width="100%" align="left">
+
+            <thead>
+                <tr><td></td></tr>Results:
+            </thead>
+
+            <tbody>
+                <th:block th:each="restaurant : ${restaurants}">
+                    <tr>
+                        <td> <a th:href="@{/search/restaurant(placeId=${restaurant.value.get('place_id: ')})}" >
+                                <img th:src="${restaurant.value.get('photos: ').get(0)}" width="40%" height="40%"/>
+                        </a> </td>
+
+                        <td th:text="${restaurant.value.get('name: ')}" style="font-size: 30px;">
+                            <a th:href="@{/search/restaurant(placeId=${restaurant.value.get('place_id: ')})}"></a>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+
 -->
+
+<!--    <div th:if="${restaurants}" id="results">-->
+
+<!--        <th:block th:each="map : ${restaurants}">-->
+<!--            <div>-->
+<!--                <span th:text="${map.key}"></span>-->
+<!--                <p></p>-->
+<!--                <th:block th:each="field : ${map.value}">-->
+<!--                    <span th:text="${field.key}"></span>-->
+<!--                    <img th:if="${field.key == 'photos: '}" th:src="${field.value.get(0)}"/>-->
+<!--                    <span th:unless="${field.key == 'photos: '}" th:text="${field.value}"></span>-->
+<!--                    <p></p>-->
+<!--                </th:block>-->
+<!--            </div><br><br><br><br><br>-->
+<!--        </th:block>-->
+
+<!--    </div>-->
+
+
 </body>
 </html>
