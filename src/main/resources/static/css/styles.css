@@ -6,6 +6,7 @@ body {
 .navbar1 {
     width: 100%;
     position: fixed;
+    top: 0px;
     z-index: 3;
     display: flex;
     vertical-align: center;
@@ -57,4 +58,9 @@ body {
 
 .logo:hover {
     animation: glowing 1s infinite;
+}
+
+.search-icon {
+    color: #ff6347;
+    opacity: 0.75;
 }

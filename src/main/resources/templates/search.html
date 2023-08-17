@@ -6,20 +6,21 @@
     <div class="page-content">
         <div th:replace="fragments :: navbar"></div>
 
-        <h1>hi</h1>
 
         <div id="place-search">
 
-            <form action="/search" method="POST">
+            <form action="/search" method="POST"
+                  style="display: inline-block;">
 
-        <!--            <label for="searchInput">Search: </label>-->
                 <div class="search-container">
                     <input type="text" name="searchInput" id="searchInput"/>
-                    <span class="search-icon"></span>
+
+                    <buttton class="search-icon" type="submit">
+                        <i class="fa fa-search w3-xxxlarge"></i>
+                    </buttton>
+
                 </div>
 
-
-                <input type="submit" value="submit"/>
                 <p th:if="${validation}" th:text="${validation}"></p>
                 <p class="filters">
                     <span class="radioSpace">
@@ -43,16 +44,37 @@
             </form>
 
         </div>
+
+
+        <div class="results-container">
+
+            <div th:if="${restaurants}" class="results">
+
+                <th:block th:each="restaurant : ${restaurants}">
+                    <a th:href="@{/restaurant(place_id=${restaurant.getPlace_id()})}"
+                       style="display: inline-block">
+                        <div class="restaurant-listing">
+
+                            <div class="img-container">
+                                <img class="listing-image" th:src="${restaurant.getAllPhotos().get(0)}"/>
+                            </div>
+
+                            <div class="info-container">
+                                <div class="listing-info" th:text="${restaurant.getName()}"></div>
+                                <div class="listing-info" th:text="${restaurant.getVicinity()}"></div>
+                            </div>
+
+                        </div>
+                    </a>
+
+                </th:block>
+
+            </div>
+
+        </div>
+
     </div>
 
-<!--    <div class="container" id="results" >-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-sm-6">restaurant stuff</div>-->
-<!--            <div class="col-sm-6">more restaurant stuff</div>-->
-<!--        </div>-->
-
-<!--    </div>-->
 
 <!--
     <div th:if="${restaurants}" align="left">
