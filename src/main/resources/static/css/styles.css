@@ -40,6 +40,16 @@ body {
   font-size: 25px;
 }
 
+.logo {
+    margin-right: auto;
+    margin-left: 0px;
+}
+
+.logo a {
+    font-size: 35px;
+    pointer-events: none;
+}
+
 .navbar-links li a:hover {
   color: #ff6347;
 }

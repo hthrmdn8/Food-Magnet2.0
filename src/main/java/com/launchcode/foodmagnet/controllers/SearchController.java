@@ -28,6 +28,7 @@ public class SearchController {
             fieldMap.put(restaurant.getName(), restaurant.getAllFields());
         }
 
+        model.addAttribute("title", "Search Restaurants");
         //model.addAttribute("restaurants", RestaurantData.getRestaurantsNearby("St. Louis"));
         return "search";
     }
@@ -47,6 +48,7 @@ public class SearchController {
 
         }
 
+        model.addAttribute("location", searchInput);
         return "search";
     }
 

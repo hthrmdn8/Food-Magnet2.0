@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head"></head>
-<link rel="stylesheet" th:href="@{css/search.css}"/>
+<link rel="stylesheet" href="css/search.css"/>
 <body>
-    <div class="page-content">
-        <div th:replace="fragments :: navbar"></div>
+<div class="page-content">
+    <div th:replace="fragments :: navbar"></div>
 
 
-        <div id="place-search">
+    <div id="place-search">
 
-            <form action="/search" method="POST"
-                  style="display: inline-block;">
+        <form action="/search" method="POST"
+              style="display: inline-block;">
 
-                <div class="search-container">
-                    <input type="text" name="searchInput" id="searchInput"/>
+            <div class="search-container">
+                <input type="text" name="searchInput" id="searchInput"/>
 
-                    <buttton class="search-icon" type="submit">
-                        <i class="fa fa-search w3-xxxlarge"></i>
-                    </buttton>
-
-                </div>
-
-                <p th:if="${validation}" th:text="${validation}"></p>
-
-            </form>
-
-        </div>
-
-
-        <div class="results-container">
-
-            <div th:if="${restaurants}" class="results">
-
-                <th:block th:each="restaurant : ${restaurants}">
-                    <a th:href="@{/restaurant(place_id=${restaurant.getPlace_id()})}"
-                       style="display: inline-block">
-                        <div class="restaurant-listing">
-
-                            <div class="img-container">
-                                <img class="listing-image" th:src="${restaurant.getAllPhotos().get(0)}"/>
-                            </div>
-
-                            <div class="info-container">
-                                <div class="listing-info" th:text="${restaurant.getName()}"></div>
-                                <div class="listing-info" th:text="${restaurant.getVicinity()}"></div>
-                            </div>
-
-                        </div>
-                    </a>
-
-                </th:block>
+                <button class="search-icon" type="submit">
+                    <i class="fa fa-search w3-xxxlarge"></i>
+                </button>
 
             </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="results-container">
+        <div class="validation-header" th:if="${validation}" >
+            <div class="validation-banner">Location not found.</div>
+        </div>
+        <div class="results-header" th:if="${restaurants}">
+            <div class="results-banner">
+                <span th:text="${cuisine}">&nbsp;</span> Restaurants in&nbsp;<span th:text="${location}"></span>!
+            </div>
+            <div class="underline"></div>
+        </div>
+
+        <div th:if="${restaurants}" class="results">
+
+            <th:block th:each="restaurant : ${restaurants}">
+                <a th:href="@{/restaurant(place_id=${restaurant.getPlace_id()})}"
+                   style="display: inline-block">
+                    <div class="restaurant-listing">
+
+                        <div class="img-container">
+                            <img class="listing-image"
+                                 th:if="${restaurant.getAllPhotos().get(0) != 'No photos available'}"
+                                 th:src="${restaurant.getAllPhotos().get(0)}"/>
+                            <p class="photo-validation"
+                               th:unless="${restaurant.getAllPhotos().get(0) != 'No photos available'}">No Photo available :(</p>
+                        </div>
+
+                        <div class="info-container">
+                            <div class="listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
+                            <div class="listing-info" th:text="${restaurant.getVicinity()}"></div>
+                        </div>
+
+                    </div>
+                </a>
+
+            </th:block>
+
+            0
 
         </div>
 
     </div>
+
+</div>
 
 
 <!--
@@ -85,22 +98,22 @@
 
 -->
 
-    <!--    <div th:if="${restaurants}" id="results">-->
+<!--    <div th:if="${restaurants}" id="results">-->
 
-    <!--        <th:block th:each="map : ${restaurants}">-->
-    <!--            <div>-->
-    <!--                <span th:text="${map.key}"></span>-->
-    <!--                <p></p>-->
-    <!--                <th:block th:each="field : ${map.value}">-->
-    <!--                    <span th:text="${field.key}"></span>-->
-    <!--                    <img th:if="${field.key == 'photos: '}" th:src="${field.value.get(0)}"/>-->
-    <!--                    <span th:unless="${field.key == 'photos: '}" th:text="${field.value}"></span>-->
-    <!--                    <p></p>-->
-    <!--                </th:block>-->
-    <!--            </div><br><br><br><br><br>-->
-    <!--        </th:block>-->
+<!--        <th:block th:each="map : ${restaurants}">-->
+<!--            <div>-->
+<!--                <span th:text="${map.key}"></span>-->
+<!--                <p></p>-->
+<!--                <th:block th:each="field : ${map.value}">-->
+<!--                    <span th:text="${field.key}"></span>-->
+<!--                    <img th:if="${field.key == 'photos: '}" th:src="${field.value.get(0)}"/>-->
+<!--                    <span th:unless="${field.key == 'photos: '}" th:text="${field.value}"></span>-->
+<!--                    <p></p>-->
+<!--                </th:block>-->
+<!--            </div><br><br><br><br><br>-->
+<!--        </th:block>-->
 
-    <!--    </div>-->
+<!--    </div>-->
 
 
 </body>
