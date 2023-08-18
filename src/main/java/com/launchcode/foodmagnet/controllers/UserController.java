@@ -1,5 +1,6 @@
 package com.launchcode.foodmagnet.controllers;
 
+import com.launchcode.foodmagnet.models.Favorite;
 import com.launchcode.foodmagnet.models.Review;
 import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.models.dto.UserDto;
@@ -7,6 +8,7 @@ import com.launchcode.foodmagnet.models.service.CustomUserDetails;
 import com.launchcode.foodmagnet.models.service.CustomUserDetailsService;
 import com.launchcode.foodmagnet.models.service.UserService;
 import com.launchcode.foodmagnet.models.service.UserServiceImpl;
+import com.launchcode.foodmagnet.repositories.FavoriteRepository;
 import com.launchcode.foodmagnet.repositories.ReviewRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class UserController {
     @Autowired
     private UserServiceImpl userServiceImpl;
     private ReviewRepository reviewRepository;
+    @Autowired
+    private FavoriteRepository favoriteRepository;
 
     @Autowired
     private UserService userService;
@@ -44,17 +48,17 @@ public class UserController {
     }
     @GetMapping("/profile")
     public String home(Model model, Principal principal) {
+
         String loggedInUsername = principal.getName();
+        User user = userService.findByUsername(loggedInUsername);
         UserDetails userDetails = userDetailsService.loadUserByUsername(loggedInUsername);
         model.addAttribute("userDetails" , userDetails);
         String location = userServiceImpl.findByUsername(loggedInUsername).getLocation();
-        // Retrieve the reviews associated with the logged-in user
         List<Review> userReviews = reviewRepository.findByCreatedByUser(loggedInUsername);
-
-//        // Add the user's reviews to the model
-       model.addAttribute("userReviews", userReviews);
-       model.addAttribute("test", location);
-       //model.addAttribute("placeId", placeId);
+        List<Favorite> favorites = favoriteRepository.findByUser(user);
+        model.addAttribute("userReviews", userReviews);
+        model.addAttribute("test", location);
+        model.addAttribute("favorites", favorites);
         return "profile";
     }
 
@@ -62,25 +66,18 @@ public class UserController {
     public String setLocation(Principal principal,Model model) {
         String loggedInUsername = principal.getName();
         UserDetails customUserDetailsService = userDetailsService.loadUserByUsername(loggedInUsername);
-        //model.addAttribute("userDetails" , userDetails);
-
-        //customUserDetailsService.set
-
         return "profile";
     }
 
     @GetMapping("/login")
     public String login(Model model, UserDto userDto) {
         model.addAttribute("user", userDto);
-
-
         return "login";
     }
 
 
     @GetMapping("/register")
     public String register(Model model, UserDto userDto) {
-
         model.addAttribute("user", userDto);
         return "register";
     }

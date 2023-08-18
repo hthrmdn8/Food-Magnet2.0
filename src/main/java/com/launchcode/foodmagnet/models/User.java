@@ -21,17 +21,21 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
 
+    @OneToMany(mappedBy = "user")
+    private List<Favorite> favorites;
+
     private String location;
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String fullname, List<Review> reviews, String location) {
+    public User(Long id, String username, String password, String fullname, List<Review> reviews, List<Favorite> favorites, String location) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
         this.reviews = reviews;
+        this.favorites = favorites;
         this.location = location;
     }
 
@@ -88,5 +92,13 @@ public class User {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public List<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Favorite> favorites) {
+        this.favorites = favorites;
     }
 }

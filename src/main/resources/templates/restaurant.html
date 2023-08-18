@@ -3,6 +3,7 @@
 <head th:replace="fragments :: head">
 </head>
 <link rel="stylesheet" th:href="@{css/home.css}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <body>
 
 
@@ -52,6 +53,13 @@
 <!--</div>-->
 
     <div><a th:href="@{/reviews/add(placeId=${placeId})}">Add Review</a></div>
+<!--    <div><a th:href="@{/favorites/add(placeId=${placeId})}">Add Favorite</a></div>-->
+    <div>
+        <a th:href="@{/favorites/add(placeId=${placeId})}" title="Add to Favorites">
+            <i class="fas fa-heart"></i>
+        </a>
+    </div>
+
     <h2>Reviews</h2>
     <div  th:each="review : ${reviews}">
         <div class="container p-3 my-3 bg-secondary text-white">
@@ -63,12 +71,10 @@
             <div style="padding-left:1000px;">
                 <span  th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
             </div>
-
         </div>
-
-
     </div>
 </div>
+
 </body>
 
 

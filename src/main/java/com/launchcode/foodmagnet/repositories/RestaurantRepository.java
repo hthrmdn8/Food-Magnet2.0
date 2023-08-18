@@ -13,5 +13,5 @@ public interface RestaurantRepository extends JpaRepository<RestaurantEntity,Str
 
     RestaurantEntity findByPlaceId(String place_id);
 
-    // boolean findByPlaceId();
+
 }

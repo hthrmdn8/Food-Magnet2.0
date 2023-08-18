@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" th:href="@{css/home.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            background: url('/css/img/backgroung.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
+
+
 
         .dashboard {
             background-color: rgba(0, 0, 0, 0.6);
@@ -46,37 +45,30 @@
         font-family: 'Font2', Honest Script; /* Use the actual font name */
     }
 .custom-button {
-            background-color: #ff6347; /* Change to your desired color */
+            background-color:#ff6347; /* Change to your desired color */
             color: white; /* Adjust text color for contrast */
-            /* Add other styling as needed */
+
         }
-        /* Add any other necessary styles here */
+
     </style>
 </head>
 <body>
-<div class="dashboard" >
-    <h1 class="dashboard__title"style="color: #ff6347;">Welcome to FoodMagnet!</h1>
-    <div class="dashboard__user">
-        <h2 th:text="${userDetails.location}" class="dashboard__user-name"style="color: #ff6347;">User's Name</h2>
+
+
+    <div class="dashboard" >
+        <h1 class="dashboard__title"style="color: #ff6347;">Welcome to FoodMagnet!</h1>
+        <div class="dashboard__user">
+            <h2 th:text="${userDetails.fullname}" class="dashboard__user-name"style="color: #ff6347;">User's Name</h2>
+        </div>
     </div>
-</div>
 
-<span sec:authorize="isAuthenticated"><Button class="custom-button"><a th:href="@{/logout}" >Logout</a></Button></span>
+    <span sec:authorize="isAuthenticated"><Button class="custom-button"><a th:href="@{/logout}" >Logout</a></Button></span>
 
-<div class="my-3"><Button class="custom-button"><a th:href="@{/}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>
+    <div class="my-3"><Button class="custom-button"><a th:href="@{/}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>
 
-<div th:text="${test}"></div>
-
-<!--<div class="dashboard bg-info text-white p-5 text-center">-->
-<!--    <h1 class="dashboard__title">Welcome to FoodMagnet!</h1>-->
-<!--    <div class="dashboard__user">-->
-<!--        <h2 th:text="${userDetails.fullname}" class="dashboard__user-name">User's Name</h2>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="btn btn-danger">Logout</a></span>-->
-
-<!--<div class="my-3"><a th:href="@{/reviews/add(placeId=${place_id})}" class="btn btn-primary">Add Review</a></div>-->
+<a class=" heart-button" th:href="@{/}" title="Please click here to select a restaurant to add to favorites">
+    <i class="fas fa-heart"></i>
+</a>
 
 <div th:if="${#lists.size(userReviews) > 0}">
     <h2>User's Reviews:</h2>
@@ -97,6 +89,13 @@
         </li>
     </ul>
 </div>
+<h2>Your Favorite Restaurants</h2>
+
+<ul>
+    <li th:each="favorite : ${favorites}">
+    <span th:text="${favorite.favouriteRestaurant}"></span>
+    </li>
+</ul>
 
 </body>
 </html>

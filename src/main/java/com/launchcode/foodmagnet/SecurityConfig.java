@@ -24,6 +24,9 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+
+
     @SuppressWarnings("removal")
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception {
@@ -31,7 +34,7 @@ public class SecurityConfig {
         http.csrf().disable().authorizeHttpRequests()
 
                 .requestMatchers("/reviews/add").authenticated()
-
+                .requestMatchers("/favorites/add").authenticated()
                 .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/login")

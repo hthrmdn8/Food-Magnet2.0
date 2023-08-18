@@ -27,17 +27,14 @@
         </div>
 
         <p>Current Date: <span th:text="${currentDate}"></span></p>
-
-
         <h1 th:text="${name}"></h1>
-<!--        <input type="hidden" th:field="*{place_id}" th:value="${restaurant.place_id}" />-->
         <input type="hidden" name="placeId" th:value="${placeId}" />
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Add Review</button>
         </div>
     </form>
-<!--    <div th:text="${test}"></div>-->
+
 </div>
 
 </body>

@@ -1,3 +1,5 @@
+
+
 .page-content{
     position: static;
     width: 100%;
@@ -121,4 +123,9 @@
 
 a {
     text-decoration: none;
+}
+.heart-button {
+    color: red; /* Change the color as needed */
+    font-size: 24px; /* Change the font size as needed */
+    /* Add any other styling you want */
 }
