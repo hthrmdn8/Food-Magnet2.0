@@ -1,20 +1,26 @@
 body {
-    background-color: #29292F;
+    background-color: #0B0B0C;
+    opacity: 1;
+    background-image:  linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377);
+    background-size: 30px 53px;
+    background-position: 0 0, 0 0, 15px 26px, 15px 26px, 0 0, 15px 26px;
 }
 
 .page-content {
-    position: static;
+    position: absolute;
     width: 100%;
     margin: auto;
 }
 
 #place-search {
-    margin-top: 80px;
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
 }
 
 .search-container {
   position: relative;
-  display: inline-block;
+  display: flex;
 }
 
 #searchInput {
@@ -31,4 +37,164 @@ body {
   border-color: #ff6347;
 }
 
+.search-icon {
+    display: inline-block;
+    margin-left: 10px;
 
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.filters-container {
+    height: 375px;
+    width: 350px;
+    margin: -50px 20px -50px 20px;
+
+    font-size: 30px;
+    font-family: "Anton", var(--bs-font-sans-serif);
+    z-index: 2;
+}
+
+ /* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 35px;
+
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.filter{
+    display: block;
+}
+
+.results-container {
+    width: 100%;
+    padding: 0 100px;
+}
+
+
+
+.results-header {
+    width: 1400px;
+    margin: auto;
+}
+
+.results-banner {
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: white;
+    font-family: "Anton",var(--bs-font-sans-serif);
+    text-shadow: 0 0 10px black;
+}
+
+.results-banner span {
+    color: #ff6347;
+}
+
+.validation-header {
+    width: 1400px;
+    margin: auto;
+}
+
+.validation-banner {
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: white;
+    font-family: "Anton",var(--bs-font-sans-serif);
+    text-shadow: 0 0 10px black;
+}
+
+.underline {
+    width: 100%;
+    height: 10px;
+    margin: 25px auto 45px;
+    background: white;
+    box-shadow: 0 0 10px black;
+}
+
+.results {
+    width: 1400px;
+    margin: auto;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.restaurant-listing {
+    height: 410px;
+    width: 450px;
+    margin: 10px 8px 10px;
+
+    display: block;
+    background-color: #29292F;
+    box-shadow: 0 0 10px black;
+}
+
+
+.img-container {
+    width: auto;
+    height: 300px;
+
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.listing-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.photo-validation {
+    font-family: arial;
+    color: white;
+    font-size: 40px;
+}
+
+
+.listing-info {
+    display: block;
+    font-size: 20px;
+    color: white;
+}
+
+.info-container {
+    padding-left: 10px;
+}
+
+a {
+    text-decoration: none;
+}

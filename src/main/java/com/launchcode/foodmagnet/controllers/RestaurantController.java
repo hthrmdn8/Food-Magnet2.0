@@ -1,5 +1,6 @@
 package com.launchcode.foodmagnet.controllers;
 
+
 import com.launchcode.foodmagnet.models.Favorite;
 import com.launchcode.foodmagnet.models.RestaurantEntity;
 import com.launchcode.foodmagnet.models.Review;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import java.util.Optional;
 
 @Controller
@@ -41,10 +43,15 @@ public class RestaurantController {
 
         Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
         model.addAttribute("restaurant", restaurant);
-        RestaurantEntity restaurantEntity=  restaurantRepository.findByPlaceId(placeId);
+      
+        RestaurantEntity restaurantEntity =  restaurantRepository.findByPlaceId(placeId);
         List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
         model.addAttribute("reviews", reviews);
         model.addAttribute("placeId", placeId);
+      
+        Restaurant restaurant = RestaurantData.getRestaurantDetails(place_id);
+        model.addAttribute("title", restaurant.getName());
+      
         return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
 
     }
@@ -83,6 +90,7 @@ public class RestaurantController {
         }
 
         return "redirect:/profile";
+
     }
 
 }

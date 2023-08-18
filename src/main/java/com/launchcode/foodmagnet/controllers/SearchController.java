@@ -2,6 +2,7 @@ package com.launchcode.foodmagnet.controllers;
 
 import com.launchcode.foodmagnet.models.RestaurantEntity;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
+import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import com.launchcode.foodmagnet.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,31 +33,33 @@ public class SearchController {
             fieldMap.put(restaurant.getName(), restaurant.getAllFields());
         }
 
-
+        model.addAttribute("title", "Search Restaurants");
+        //model.addAttribute("restaurants", RestaurantData.getRestaurantsNearby("St. Louis"));
+        model.addAttribute("restaurants", RestaurantData.getSpecificRestaurantsNearby("Los Angeles", "Chinese"));
         return "search";
     }
 
     @PostMapping
     public String processSearchInput(@RequestParam String searchInput, Model model) {
 
-        HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
         ArrayList<Restaurant> restaurants = RestaurantData.getRestaurantsNearby(searchInput);
 
 
         if (restaurants != null) {
-            for (Restaurant restaurant : restaurants) {
-                fieldMap.put(restaurant.getName(), restaurant.getAllFields());
+            model.addAttribute("restaurants", restaurants);
 
-            }
-            model.addAttribute("restaurants", fieldMap);
 
         } else {
             model.addAttribute("validation", "Please enter a valid city name.");
 
         }
 
-        RestaurantEntity test = restaurantRepository.findByPlaceId("ChIJcQ0R1rBqkFQR8kvZfk8COTE");
-        model.addAttribute("test", test.toString());
+
+//         RestaurantEntity test = restaurantRepository.findByPlaceId("ChIJcQ0R1rBqkFQR8kvZfk8COTE");
+//         model.addAttribute("test", test.toString());
+
+        model.addAttribute("location", searchInput);
+
         return "search";
     }
 

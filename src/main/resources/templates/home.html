@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head">
 </head>
-<link rel="stylesheet" th:href="@{css/home.css}"/>
+<link rel="stylesheet" href="css/home.css"/>
 <body>
 
 <div class="page-content">
@@ -10,9 +10,31 @@
     <div th:replace="fragments :: navbar"></div>
 
     <div class="carousel">
-        <div class="welcome">Time To
-            <div id="eat">EAT</div> !
+        <div class="welcome">
+            <div class="welcome-text">Time To <a th:href="@{/search}"><div id="eat">EAT</div></a> !</div>
+
+            <div class="search-bar">
+                <div id="place-search">
+                    <form action="/search" method="POST"
+                          style="display: inline-block;">
+
+                        <div class="search-container">
+                            <input type="text" name="searchInput" id="searchInput"/>
+
+                            <!--                            <a th:href="@{/search}">-->
+                            <button class="search-icon" type="submit">
+                                <i class="fa fa-search w3-xxxlarge"></i>
+                            </button>
+                            <!--                            </a>-->
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
         </div>
+
         <div class="carousel-container">
             <div class="carousel-cropper">
                 <div class="carousel-wrapper" id="carousel">
@@ -21,56 +43,66 @@
                             <img class="carousel-image" th:src="${img}" alt="Image 1">
                         </div>
                     </th:block>
+
                 </div>
             </div>
         </div>
 
-        <script>
-      const carousel = document.getElementById('carousel');
-      let currentIndex = 0;
+    <script>
+        const carousel = document.getElementById('carousel');
+        let currentIndex = 0;
 
-      function slideCarousel() {
+        function slideCarousel() {
         currentIndex++;
         if (currentIndex >= carousel.children.length) {
           currentIndex = 0;
         }
-        const itemWidth = carousel.children[0].offsetWidth;
-        const translateValue = -currentIndex * itemWidth;
+        const itemWidth = carousel.children[0].offsetWidth + 0;
+        const spacing = 20;
+        const translateValue = -currentIndex * (itemWidth + spacing);
         carousel.style.transform = `translateX(${translateValue}px)`;
-      }
+        }
 
-      setInterval(slideCarousel, 5000);
-      </script>
+        setInterval(slideCarousel, 5000);
+    </script>
 
     </div>
 
     <div class="featured-container">
-        <div class="featured">
-            <th:block th:each="restaurant : ${restaurants}">
+        <div class="separator"></div>
 
-                <a th:href="@{/restaurant(placeId=${restaurant.value.get('place_id: ')})}" style="display: block;">
-                    <span class="restaurant-listing">
-                        <div class="img-container">
-                            <img class="listing-image" th:src="${restaurant.value.get('photos: ').get(0)}" width="40%" height="40%"/>
-                        </div>
+        <div class="featured-header">
+            <div class="featured-banner">Featured Restaurants Near You!</div>
+            <div class="underline"></div>
 
-                        <div class="info-container">
-                            <h1 class="listing-info" th:text="${restaurant.value.get('name: ')}"></h1>
-                            <h1 class="listing-info" th:text="${restaurant.value.get('vicinity: ')}"></h1>
-                            <h1 class="listing-info" th:text="${restaurant.value.get('rating: ')} + ' stars'"></h1>
-                            <h1 class="listing-info" th:text="${restaurant.value.get('types: ')}"></h1>
-                            <h1 class="listing-info" th:text="${restaurant.value.get('price_level: ')}"></h1>
-                            <h1 class="listing-info" th:text="${restaurant.value.get('opening-hours: ')}"></h1>
-                        </div>
+            <div class="featured-login" th:unless="${featuredRestaurants}">
+                please <a th:href="@{/login}" style="color: #ff6347;">login</a> to view featured restaurants.
+            </div>
 
-                    </span>
-                </a>
-            </th:block>
+            <div class="featured" th:if="${featuredRestaurants}">
+                <th:block th:each="restaurant : ${featuredRestaurants}">
+
+                    <a th:href="@{/restaurant(place_id=${restaurant.value.get('place_id: ')})}" style="display: block;">
+                        <span class="restaurant-listing">
+                            <div class="featured-img-container">
+                                <img class="listing-image" th:src="${restaurant.value.get('photos: ').get(0)}" width="40%" height="40%"/>
+                            </div>
+
+                            <div class="info-container">
+                                <h1 class="listing-info" th:text="${restaurant.value.get('name: ')}"></h1>
+                                <h1 class="listing-info" th:text="${restaurant.value.get('vicinity: ')}"></h1>
+                                <h1 class="listing-info" th:text="${restaurant.value.get('rating: ')} + ' stars'"></h1>
+                                <h1 class="listing-info" th:text="${restaurant.value.get('types: ')}"></h1>
+                                <h1 class="listing-info" th:text="${restaurant.value.get('price_level: ')}"></h1>
+                                <h1 class="listing-info" th:text="${restaurant.value.get('opening-hours: ')}"></h1>
+                            </div>
+                        </span>
+                    </a>
+
+                </th:block>
+            </div>
         </div>
     </div>
 </div>
-
-<h1>Welcome!</h1>
-
 </body>
 </html>

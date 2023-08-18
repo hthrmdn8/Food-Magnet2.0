@@ -6,6 +6,7 @@ body {
 .navbar1 {
     width: 100%;
     position: fixed;
+    top: 0px;
     z-index: 3;
     display: flex;
     vertical-align: center;
@@ -39,22 +40,30 @@ body {
   font-size: 25px;
 }
 
-.navbar-links li a:hover {
+.logo {
+    margin-right: auto;
+    margin-left: 0px;
+    font-size: 35px;
+}
+
+.navlink a:hover {
   color: #ff6347;
 }
 
 @keyframes glowing {
-  0% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
   }
   50% {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-  }
-  100% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
   }
 }
 
 .logo:hover {
-    animation: glowing 1s infinite;
+    animation: glowing 5s infinite;
+}
+
+.search-icon {
+    color: #ff6347;
+    opacity: 0.75;
 }
