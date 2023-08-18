@@ -2,9 +2,6 @@ package com.launchcode.foodmagnet.models.restaurant;
 
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,10 +30,10 @@ public class Restaurant {
     private String reference;
     private String scope;
 
-    //Search filter fields
-    private String serves_breakfast;
-    private String serves_lunch;
-    private String serves_dinner;
+//    //Search filter fields
+//    private String serves_breakfast;
+//    private String serves_lunch;
+//    private String serves_dinner;
 
     public Restaurant() {}
 
@@ -62,9 +59,9 @@ public class Restaurant {
         allFields.put("plus_code: ", plus_code);
         allFields.put("reference: ", reference);
         allFields.put("scope: ", scope);
-        allFields.put("serves_breakfast: ", serves_breakfast);
-        allFields.put("serves_lunch: ", serves_lunch);
-        allFields.put("serves_dinner: ", serves_dinner);
+//        allFields.put("serves_breakfast: ", serves_breakfast);
+//        allFields.put("serves_lunch: ", serves_lunch);
+//        allFields.put("serves_dinner: ", serves_dinner);
 
         return allFields;
     }
@@ -137,8 +134,8 @@ public class Restaurant {
         return place_id;
     }
 
-    public void setPlace_id(String place_id) {
-        this.place_id = place_id;
+    public void setPlace_id(String placeId) {
+        this.place_id = placeId;
     }
 
     public ArrayList<Photo> getPhotos() {
@@ -234,31 +231,30 @@ public class Restaurant {
     }
 
     //Getters and setters for search fields
-
-
-    public String getServes_breakfast() {
-        return serves_breakfast;
-    }
-
-    public void setServes_breakfast(String serves_breakfast) {
-        this.serves_breakfast = serves_breakfast;
-    }
-
-    public String getServes_lunch() {
-        return serves_lunch;
-    }
-
-    public void setServes_lunch(String serves_lunch) {
-        this.serves_lunch = serves_lunch;
-    }
-
-    public String getServes_dinner() {
-        return serves_dinner;
-    }
-
-    public void setServes_dinner(String serves_dinner) {
-        this.serves_dinner = serves_dinner;
-    }
+//
+//    public String getServes_breakfast() {
+//        return serves_breakfast;
+//    }
+//
+//    public void setServes_breakfast(String serves_breakfast) {
+//        this.serves_breakfast = serves_breakfast;
+//    }
+//
+//    public String getServes_lunch() {
+//        return serves_lunch;
+//    }
+//
+//    public void setServes_lunch(String serves_lunch) {
+//        this.serves_lunch = serves_lunch;
+//    }
+//
+//    public String getServes_dinner() {
+//        return serves_dinner;
+//    }
+//
+//    public void setServes_dinner(String serves_dinner) {
+//        this.serves_dinner = serves_dinner;
+//    }
 
     @Override
     public String toString() {

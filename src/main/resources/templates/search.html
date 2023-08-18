@@ -80,7 +80,7 @@
         <div th:if="${restaurants}" class="results">
 
             <th:block th:each="restaurant : ${restaurants}">
-                <a th:href="@{/restaurant(place_id=${restaurant.getPlace_id()})}"
+                <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}"
                    style="display: inline-block">
                     <div class="restaurant-listing">
 

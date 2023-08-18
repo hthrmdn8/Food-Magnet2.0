@@ -19,7 +19,7 @@ public class ApiRequests {
     private static String apiKey = "AIzaSyAZ10B93TjaoEypVHLNZAPw1StgacgEpN0";
 
     //builds Place Details request with place_id argument and returns a HttpResponse<String>
-    public static HttpResponse<String> placeDetailsRequest(String place_id) throws URISyntaxException, IOException, InterruptedException {
+    public static HttpResponse<String> placeDetailsRequest(String placeId) throws URISyntaxException, IOException, InterruptedException {
 
         //final String demoId = "ChIJ-SF4shmz2IcROVewwNljeZQ";
 
@@ -27,7 +27,7 @@ public class ApiRequests {
                 .setScheme("https")
                 .setHost("maps.googleapis.com")
                 .setPath("maps/api/place/details/json")
-                .addParameter("place_id", place_id)
+                .addParameter("place_id", placeId)
                 .addParameter("fields", "name,photos")
                 .addParameter("key", apiKey)
                 .build();
@@ -60,7 +60,6 @@ public class ApiRequests {
                 .addParameter("location", location)
                 .addParameter("radius", "500")
                 .addParameter("type", "restaurant")
-                .addParameter("fields", "name,place_id")
                 .addParameter("key", apiKey)
                 .build();
 
@@ -90,7 +89,6 @@ public class ApiRequests {
                 .addParameter("location", location)
                 .addParameter("radius", "2000")
                 .addParameter("type", "restaurant")
-                .addParameter("fields", "name,place_id")
                 .addParameter("key", apiKey)
                 .build();
 

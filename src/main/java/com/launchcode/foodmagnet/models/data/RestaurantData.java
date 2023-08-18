@@ -17,11 +17,11 @@ import java.util.Objects;
 public class RestaurantData {
 
     //Takes in place_id argument, returns usable restaurant pojo with photos and information about the restaurant
-    public static Restaurant getRestaurantDetails(String place_id)  {
+    public static Restaurant getRestaurantDetails(String placeId)  {
 
         HttpResponse<String> response = null;
         try {
-            response = ApiRequests.placeDetailsRequest(place_id);
+            response = ApiRequests.placeDetailsRequest(placeId);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException(e);
         }

@@ -38,6 +38,7 @@ public class RestaurantController {
     @Autowired
     private ReviewRepository reviewRepository;
     private RestaurantEntity restaurantEntity;
+
     @GetMapping("/restaurant")
     public String showRestaurantDetails(@RequestParam("placeId") String placeId, Model model) {
 
@@ -48,8 +49,6 @@ public class RestaurantController {
         List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
         model.addAttribute("reviews", reviews);
         model.addAttribute("placeId", placeId);
-      
-        Restaurant restaurant = RestaurantData.getRestaurantDetails(place_id);
         model.addAttribute("title", restaurant.getName());
       
         return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
