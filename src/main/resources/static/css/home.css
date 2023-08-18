@@ -1,3 +1,4 @@
+
 body {
     background-color: #0B0B0C;
     opacity: 1;
@@ -208,4 +209,9 @@ body {
 
 a {
     text-decoration: none;
+}
+.heart-button {
+    color: red; /* Change the color as needed */
+    font-size: 24px; /* Change the font size as needed */
+    /* Add any other styling you want */
 }

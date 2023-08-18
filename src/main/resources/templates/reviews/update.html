@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Review</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Update Review</h2>
+    <form th:object="${updateReview}"
+          th:action="@{/reviews/{updateReviewId}/update(updateReviewId=${updateReview.updateReviewId})}"
+          method="post">
+        <input type="hidden" th:field="*{updateReviewId}" />
+
+        <div class="form-group">
+            <label th:for="rating">Rating:</label>
+            <input type="number" th:field="*{rating}" class="form-control" min="1" max="5" />
+        </div>
+
+        <div class="form-group">
+            <label  th:for="comments">Comments:</label>
+            <textarea th:field="*{comments}" class="form-control"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Review</button>
+    </form>
+
+</div>
+</body>
+</html>

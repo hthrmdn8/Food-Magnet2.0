@@ -41,6 +41,11 @@
         </div>
     </div>
 
+
+<!--     <div th:text="${test}"></div> -->
+
+<!--    <div class="container" id="results" >-->
+
     <script>
         var coll = document.getElementsByClassName("collapsible");
         var i;
@@ -102,52 +107,6 @@
     </div>
 
 </div>
-
-
-<!--
-    <div th:if="${restaurants}" align="left">
-
-        <table class="table" width="100%" align="left">
-
-            <thead>
-                <tr><td></td></tr>Results:
-            </thead>
-
-            <tbody>
-                <th:block th:each="restaurant : ${restaurants}">
-                    <tr>
-                        <td> <a th:href="@{/search/restaurant(placeId=${restaurant.value.get('place_id: ')})}" >
-                                <img th:src="${restaurant.value.get('photos: ').get(0)}" width="40%" height="40%"/>
-                        </a> </td>
-
-                        <td th:text="${restaurant.value.get('name: ')}" style="font-size: 30px;">
-                            <a th:href="@{/search/restaurant(placeId=${restaurant.value.get('place_id: ')})}"></a>
-                        </td>
-                    </tr>
-                </th:block>
-            </tbody>
-        </table>
-    </div>
-
--->
-
-<!--    <div th:if="${restaurants}" id="results">-->
-
-<!--        <th:block th:each="map : ${restaurants}">-->
-<!--            <div>-->
-<!--                <span th:text="${map.key}"></span>-->
-<!--                <p></p>-->
-<!--                <th:block th:each="field : ${map.value}">-->
-<!--                    <span th:text="${field.key}"></span>-->
-<!--                    <img th:if="${field.key == 'photos: '}" th:src="${field.value.get(0)}"/>-->
-<!--                    <span th:unless="${field.key == 'photos: '}" th:text="${field.value}"></span>-->
-<!--                    <p></p>-->
-<!--                </th:block>-->
-<!--            </div><br><br><br><br><br>-->
-<!--        </th:block>-->
-
-<!--    </div>-->
-
 
 </body>
 </html>

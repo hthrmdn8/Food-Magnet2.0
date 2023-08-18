@@ -44,6 +44,7 @@ public class Restaurant {
     public HashMap<String, Object> getAllFields() {
         HashMap<String, Object> allFields = new HashMap<>();
 
+
         allFields.put("name: ", name);
         allFields.put("place_id: ", place_id);
         allFields.put("business_status: ", business_status);

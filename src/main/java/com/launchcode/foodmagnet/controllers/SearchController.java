@@ -1,8 +1,11 @@
 package com.launchcode.foodmagnet.controllers;
 
+import com.launchcode.foodmagnet.models.RestaurantEntity;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
+import com.launchcode.foodmagnet.repositories.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +21,8 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("search")
 public class SearchController {
-
+@Autowired
+    RestaurantRepository restaurantRepository;
     @GetMapping
     public String displaySearchPage(Model model) throws URISyntaxException, IOException, InterruptedException {
 
@@ -50,7 +54,12 @@ public class SearchController {
 
         }
 
+
+//         RestaurantEntity test = restaurantRepository.findByPlaceId("ChIJcQ0R1rBqkFQR8kvZfk8COTE");
+//         model.addAttribute("test", test.toString());
+
         model.addAttribute("location", searchInput);
+
         return "search";
     }
 

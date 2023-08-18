@@ -1,11 +1,17 @@
 package com.launchcode.foodmagnet.controllers;
 
+
+import com.launchcode.foodmagnet.models.RestaurantEntity;
 import com.launchcode.foodmagnet.models.data.CarouselData;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
+import com.launchcode.foodmagnet.repositories.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +22,7 @@ import java.util.Optional;
 @RequestMapping("")
 public class HomeController {
 
+
     @GetMapping
     public String redirectToHome() {
 
@@ -24,15 +31,6 @@ public class HomeController {
 
     @GetMapping("home")
     public String index(Model model, @RequestParam("userLocation") Optional<String> userLocation) {
-
-        //loads photo array with restaurants from seattle
-        //ArrayList<Restaurant> restaurantArrayList = RestaurantData.getRestaurantsNearby("Brooklyn");
-        //Restaurant restaurant = RestaurantData.getRestaurantDetails(restaurantArrayList.get(2).getPlace_id());
-
-
-//        for (Restaurant restauranta : restaurantArrayList) {
-//            photos.add(restauranta.getAllPhotos().get(0));
-//        }
 
 
         if (userLocation.isPresent()) {
@@ -51,4 +49,3 @@ public class HomeController {
 
         return "home";
     }
-}
