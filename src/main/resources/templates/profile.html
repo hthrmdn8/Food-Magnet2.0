@@ -163,6 +163,15 @@
 .heart-button:hover {
     transform: scale(1.1); /* Scale the button on hover */
 }
+.favorite-restaurant-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Add a smooth color transition on hover */
+}
+
+.favorite-restaurant-link:hover {
+    color: #ff6347; /* Change color on hover */
+}
 
     </style>
 </head>
@@ -192,7 +201,9 @@
     <div class="favorite-restaurant-grid">
         <div th:each="favorite : ${favorites}" class="favorite-restaurant">
 
-            <span th:text="${favorite.favouriteRestaurant}"></span>
+            <a th:href="@{/restaurant(place_id=${favorite.placeId})}" class="favorite-restaurant-link">
+                <span th:text="${favorite.favouriteRestaurant}"></span>
+            </a>
         </div>
     </div>
 </div>
