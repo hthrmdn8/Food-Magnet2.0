@@ -16,7 +16,7 @@ public class ApiRequests {
 
     private static HttpClient client = HttpClient.newHttpClient();
 
-    private static String apiKey = "AIzaSyAZ10B93TjaoEypVHLNZAPw1StgacgEpN0";
+    private static String apiKey = "AIzaSyANidBPMmKkwYJU2bZvK0RMqmrMAfyxjwE";
 
     //builds Place Details request with place_id argument and returns a HttpResponse<String>
     public static HttpResponse<String> placeDetailsRequest(String place_id) throws URISyntaxException, IOException, InterruptedException {

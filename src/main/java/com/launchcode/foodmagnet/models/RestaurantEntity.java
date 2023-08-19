@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class RestaurantEntity {
     @Id
-    @Column(name = "place_id")
+    //@Column(name = "place_id")
     private String placeId;
     private String name;
 

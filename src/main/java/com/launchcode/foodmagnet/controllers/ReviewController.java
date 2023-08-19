@@ -76,7 +76,7 @@ public class ReviewController {
                 reviewRepository.save(review);
                 model.addAttribute(" restaurantEntity", restaurantEntity);
 
-                return "redirect:/restaurant?placeId=" + placeId;
+                return "redirect:/restaurant?place_id=" + placeId;
 
     }
 

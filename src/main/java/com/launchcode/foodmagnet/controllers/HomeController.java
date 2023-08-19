@@ -48,4 +48,4 @@ public class HomeController {
         model.addAttribute("photos", CarouselData.getCarouselPhotos());
 
         return "home";
-    }
+    }}

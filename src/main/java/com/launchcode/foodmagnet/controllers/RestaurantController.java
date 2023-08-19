@@ -39,7 +39,7 @@ public class RestaurantController {
     private ReviewRepository reviewRepository;
     private RestaurantEntity restaurantEntity;
     @GetMapping("/restaurant")
-    public String showRestaurantDetails(@RequestParam("placeId") String placeId, Model model) {
+    public String showRestaurantDetails(@RequestParam("place_id") String placeId, Model model) {
 
         Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
         model.addAttribute("restaurant", restaurant);
@@ -49,7 +49,7 @@ public class RestaurantController {
         model.addAttribute("reviews", reviews);
         model.addAttribute("placeId", placeId);
       
-        Restaurant restaurant = RestaurantData.getRestaurantDetails(place_id);
+
         model.addAttribute("title", restaurant.getName());
       
         return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
