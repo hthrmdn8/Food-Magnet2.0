@@ -14,15 +14,13 @@
 
 
         .dashboard {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.5);
+            border-color:  #ff6347;
             padding: 5rem;
             text-align: center;
             color: white;
         }
 
-        .dashboard__title {
-            font-size: 2.5rem;
-        }
 
         .dashboard__user-name {
             font-size: 2rem;
@@ -33,9 +31,12 @@
             background-color: #007bff;
             border-color: #007bff;
         }
+
+}
         .dashboard__title {
         font-size: 2.5rem;
-        font-family: 'Font1', Money Penny; /* Use the actual font name */
+        font-family: 'Font1', Money Penny;
+
     }
 
     /* Font styles for username */
@@ -49,19 +50,119 @@
             color: white; /* Adjust text color for contrast */
 
         }
+        .dashboard__video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+.favorite-restaurants {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    padding: 10px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    font-family:Marck Script;
+}
+.favorite-restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width as needed */
+    gap: 20px; /* Adjust gap between items */
+    margin-top: 20px;
+}
+
+.favorite-restaurant {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+
+.user-reviews-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ff6347;
+}
+
+.user-reviews-list {
+    list-style: none;
+    padding: 0;
+}
+
+.user-review-item {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+    font-family: 'YourCustomFont', sans-serif; /* Add your custom font here */
+}
+
+.restaurant-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.ratings {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.comments {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #ff6347;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+}
+
+.delete-review-button,
+.update-review-button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.delete-review-button:hover,
+.update-review-button:hover {
+    background-color: #ff4524; /* Darker shade for hover effect */
+}
 
     </style>
 </head>
 <body>
 
 
-    <div class="dashboard" >
-        <h1 class="dashboard__title"style="color: #ff6347;">Welcome to FoodMagnet!</h1>
-        <div class="dashboard__user">
-            <h2 th:text="${userDetails.fullname}" class="dashboard__user-name"style="color: #ff6347;">User's Name</h2>
-        </div>
+<div class="dashboard">
+    <video class="dashboard__video" autoplay loop muted>
+        <source src="/video.mp4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <h1 class="dashboard__title" style="color:#ff6347;">Welcome to FoodMagnet!</h1>
+    <div class="dashboard__user">
+        <h2 th:text="${userDetails.fullname}" class="dashboard__user-name" style="color: #ff6347;">User's Name</h2>
     </div>
-
+</div>
     <span sec:authorize="isAuthenticated"><Button class="custom-button"><a th:href="@{/logout}" >Logout</a></Button></span>
 
     <div class="my-3"><Button class="custom-button"><a th:href="@{/}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>
@@ -70,32 +171,33 @@
     <i class="fas fa-heart"></i>
 </a>
 
-<div th:if="${#lists.size(userReviews) > 0}">
-    <h2>User's Reviews:</h2>
-    <ul class="list-unstyled">
-        <li th:each="review : ${userReviews}" class="container p-3 my-3 bg-secondary text-white position-relative">
-            <p th:text="${review.restaurantEntity.name}"></p>
-            <p th:text="${review.ratings}"></p>
-            <p th:text="${review.comments}"></p>
-            <span class="position-absolute top-0 end-0 p-2" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
-            <div class="d-flex justify-content-end">
+<div class="favorite-restaurants">
+    <h2 th:text="${userDetails.fullname} + '\'s Favorite Restaurants'" style="color: white;"></h2>
+    <div class="favorite-restaurant-grid">
+        <div th:each="favorite : ${favorites}" class="favorite-restaurant">
 
+            <span th:text="${favorite.favouriteRestaurant}"></span>
+        </div>
+    </div>
+</div>
+
+<div th:if="${#lists.size(userReviews) > 0}">
+    <h2 class="user-reviews-heading">User's Reviews:</h2>
+    <ul class="list-unstyled user-reviews-list">
+        <li th:each="review : ${userReviews}" class="user-review-item container p-3 my-3 bg-secondary text-white position-relative">
+            <p class="restaurant-name" th:text="${review.restaurantEntity.name}"></p>
+            <p class="ratings" th:text="${review.ratings}"></p>
+            <p class="comments" th:text="${review.comments}"></p>
+            <span class="review-date position-absolute top-0 end-0 p-2" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
+            <div class="d-flex justify-content-end">
                 <form th:action="@{/reviews/{reviewId}/delete(reviewId=${review.reviewId})}" method="post">
                     <input type="hidden" name="_method" value="delete" />
-                    <button type="submit" class="custom-button">Delete Review</button>
+                    <button type="submit" class="delete-review-button">Delete Review</button>
                 </form>
-                <Button class="custom-button"><a th:href="@{/reviews/{reviewId}/update(reviewId=${review.reviewId})}">Update Review</a></Button>
+                <Button class="update-review-button"><a th:href="@{/reviews/{reviewId}/update(reviewId=${review.reviewId})}">Update Review</a></Button>
             </div>
         </li>
     </ul>
 </div>
-<h2>Your Favorite Restaurants</h2>
-
-<ul>
-    <li th:each="favorite : ${favorites}">
-    <span th:text="${favorite.favouriteRestaurant}"></span>
-    </li>
-</ul>
-
 </body>
 </html>
