@@ -28,24 +28,31 @@ import java.util.Optional;
 
 @Controller
 public class UserController {
+
     @Autowired
     private CustomUserDetailsService userDetailsService;
+
     @Autowired
     private UserServiceImpl userServiceImpl;
-    private ReviewRepository reviewRepository;
+
     @Autowired
     private FavoriteRepository favoriteRepository;
 
     @Autowired
     private UserService userService;
+
+    private ReviewRepository reviewRepository;
+
     public UserController(UserService userService) {
 
         this.userService = userService;
     }
+
     @Autowired
     public UserController(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
+
     @GetMapping("/profile")
     public String home(Model model, Principal principal) {
 

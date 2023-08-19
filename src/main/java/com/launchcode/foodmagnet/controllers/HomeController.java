@@ -3,11 +3,13 @@ package com.launchcode.foodmagnet.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.launchcode.foodmagnet.models.RestaurantEntity;
+import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.models.data.CarouselData;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.data.jsonData.JsonMapper;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
+import com.launchcode.foodmagnet.models.service.UserService;
 import com.launchcode.foodmagnet.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -28,6 +31,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping("")
 public class HomeController {
+
+    @Autowired
+    UserService userService;
 
 
     @GetMapping
@@ -37,38 +43,18 @@ public class HomeController {
     }
 
     @GetMapping("home")
-    public String index(Model model, @RequestParam("userLocation") Optional<String> userLocation) throws IOException, URISyntaxException, InterruptedException {
+    public String index(Model model, Principal principal) {
 
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
 
-        if (userLocation.isPresent()) {
-            HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
-
-            for (Restaurant restaurant : RestaurantData.getRestaurantsNearby(userLocation.get())) {
-                fieldMap.put(restaurant.getName(), restaurant.getAllFields());
-
-            }
-            model.addAttribute("featuredRestaurants", fieldMap);
+            ArrayList<Restaurant> restaurants = RestaurantData.getRestaurantsNearby(user.getLocation());
+            model.addAttribute("featuredRestaurants", restaurants);
 
         }
 
         model.addAttribute("title", "Food Magnet");
         model.addAttribute("photos", CarouselData.getCarouselPhotos());
-
-        //ArrayList<Restaurant> testRestaurantList = RestaurantData.getRestaurantsNearby("St. Louis");
-        //Restaurant testRestaurant = RestaurantData.getRestaurantDetails(testRestaurantList.get(0).getPlaceId());
-        HttpResponse<String> response = null;
-        try {
-            response = ApiRequests.placeNearbySearchRequest("st. louis");
-        } catch (IOException | InterruptedException | URISyntaxException e) {
-            throw new RuntimeException (e);
-        } if (response == null) return null;
-
-        JsonNode node = JsonMapper.parse(response.body());
-        JsonNode results = node.get("results");
-
-        Restaurant restaurant = JsonMapper.fromJson(results.get(0), Restaurant.class);
-
-        model.addAttribute("test", restaurant);
 
         return "home";
     }

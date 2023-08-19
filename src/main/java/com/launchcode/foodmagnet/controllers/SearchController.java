@@ -24,18 +24,12 @@ public class SearchController {
 @Autowired
     RestaurantRepository restaurantRepository;
     @GetMapping
-    public String displaySearchPage(Model model) throws URISyntaxException, IOException, InterruptedException {
+    public String displaySearchPage(Model model)  {
 
-        //fieldMap used to correlate the name of a restaurant with all of that restaurants fields.
-        HashMap<String, HashMap<String, Object>> fieldMap = new HashMap<>();
-
-        for (Restaurant restaurant : RestaurantData.getRestaurantsNearby("Los Angeles")) {
-            fieldMap.put(restaurant.getName(), restaurant.getAllFields());
-        }
 
         model.addAttribute("title", "Search Restaurants");
-        //model.addAttribute("restaurants", RestaurantData.getRestaurantsNearby("St. Louis"));
-        model.addAttribute("restaurants", RestaurantData.getSpecificRestaurantsNearby("Los Angeles", "Chinese"));
+
+        //model.addAttribute("restaurants", RestaurantData.getSpecificRestaurantsNearby("Los Angeles", "Chinese"));
         return "search";
     }
 
