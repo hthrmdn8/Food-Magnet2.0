@@ -4,8 +4,10 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Login</title>
+
     <link rel="stylesheet" href="/css/loginStyle.css">
 </head>
+
 <body>
 
 <div class="container">
@@ -26,7 +28,7 @@
             </div>
         </div>
 
-        <h2>Login</h2>
+        <h2 class ="h2">Login</h2>
         <form
                 method="post"
                 role="form"
@@ -36,15 +38,15 @@
         >
 
             <div class="form-group">
-                <label for="username">Username</label>
-                <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your username" required>
+                <label class = "labels" for="username">Username</label>
+                <input class = "labels" th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label class = "labels" for="password">Password</label>
+                <input class = "labels" th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
 
-            <button type="submit">Login</button>
+            <button id ="buttonSubmit" type="submit">Login</button>
         </form>
         <span> Register here: <a th:href="@{/register}">Register</a></span>
     </div>

@@ -46,6 +46,7 @@ public class UserController {
     public UserController(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
+
     @GetMapping("/profile")
     public String home(Model model, Principal principal) {
 
