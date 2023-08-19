@@ -48,6 +48,8 @@
 .custom-button {
             background-color:#ff6347; /* Change to your desired color */
             color: white; /* Adjust text color for contrast */
+             border-radius: 5px;
+    cursor: pointer;
 
         }
         .dashboard__video {
@@ -141,11 +143,25 @@
     border-radius: 5px;
     margin-top: 1rem;
     cursor: pointer;
+    margin-top: 1rem;
+    margin-right: 0.5rem; /* Add a margin to create a gap between buttons */
+    cursor: pointer;
+}
+.update-review-button {
+    color: black !important; /* Forcefully set the text color to white */
 }
 
 .delete-review-button:hover,
 .update-review-button:hover {
     background-color: #ff4524; /* Darker shade for hover effect */
+}
+.heart-button {
+    font-size: 35px; /* Adjust the font size as needed */
+    transition: transform 0.3s; /* Add smooth transition effect */
+}
+
+.heart-button:hover {
+    transform: scale(1.1); /* Scale the button on hover */
 }
 
     </style>
