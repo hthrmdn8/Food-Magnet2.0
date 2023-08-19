@@ -1,0 +1,69 @@
+    .heart-button {
+    font-size: 35px; /* Adjust the font size as needed */
+    transition: transform 0.3s; /* Add smooth transition effect */
+}
+
+.heart-button:hover {
+    transform: scale(1.1); /* Scale the button on hover */
+}
+.custom-button {
+            background-color:#ff6347; /* Change to your desired color */
+            color: white; /* Adjust text color for contrast */
+             border-radius: 5px;
+    cursor: pointer;
+
+        }
+        .dashboard__video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+.user-reviews-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ff6347;
+}
+
+.user-reviews-list {
+    list-style: none;
+    padding: 0;
+}
+
+.user-review-item {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+    font-family: 'YourCustomFont', sans-serif; /* Add your custom font here */
+}
+
+.restaurant-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.ratings {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.comments {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #ff6347;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+}
