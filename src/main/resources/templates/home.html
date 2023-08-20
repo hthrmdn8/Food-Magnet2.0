@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head">
 </head>
+
 <link rel="stylesheet" href="css/home.css"/>
+
 <body>
 
 <div class="page-content">
@@ -76,7 +78,7 @@
             <div class="underline"></div>
 
             <div class="featured-login" th:unless="${featuredRestaurants}">
-                please <a th:href="@{/login}" style="color: #ff6347;">login</a> to view featured restaurants.
+                Please <a th:href="@{/login}" style="color: #ff6347;">login</a> to view featured restaurants.
             </div>
 
             <div class="featured" th:if="${featuredRestaurants}">

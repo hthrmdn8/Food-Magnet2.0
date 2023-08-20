@@ -1,19 +1,72 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head">
+</head>
+
+<link rel="stylesheet" href="css/restaurant.css"/>
+
 <body>
 
 <div th:replace="fragments :: navbar"></div>
 
-<h1>Welcome to a restaurant page!</h1>
+<div class="page-content">
+
+    <div class="header">
+        <p th:text="${restaurant.name}"></p>
+    </div>
+
+    <div class="underline"></div>
+
+    <div class="description">
+        <p>
+            This is a description of the restaurant. Here, you can see an
+            information such as when the restaurant was built, the
+            surrounding businesses and things to do in the neighborhood,
+            and other cool facts!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.
+        </p>
+    </div>
+    <div class="map">
+
+        <iframe
+                width="700"
+                height="550"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=Space+Needle,Seattle+WA">
+        </iframe>
+
+    </div>
+
+    <div class="container" style="width: 1400px">
+        <div class="cropper" th:each="photo : ${restaurant.getAllPhotos}">
+            <img th:src="${photo}" alt="Restaurant Photo">
+        </div>
+    </div>
+
+</div>
+
 </body>
-<iframe
-        width="600"
-        height="450"
-        style="border:0"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=Space+Needle,Seattle+WA">
-</iframe>
+
 </html>
