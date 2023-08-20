@@ -33,7 +33,20 @@
 
 <div class="my-3"><Button class="custom-button"><a a th:href="@{/reviews/add(placeId=${placeId})}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>
 
-<a class=" heart-button" th:href="@{/favorites/add(placeId=${placeId})}" title="Please click here to select a restaurant to add to favorites">
+<a class=" heart-button" th:href="@{/favorites/add(placeId=${placeId})}" >
+
+
+<!--    <form method="post" action="/favorites/add"  th:object="${placeId}" style="max-width: 600px;">-->
+
+<!--        <div class="form-group">-->
+<!--            <button class = " heart-button" type="submit" >Add Favorite</button>-->
+<!--        </div>-->
+<!--        <input type="hidden" name="placeId" th:value="${placeId}" />-->
+<!--    </form>-->
+
+
+
+
     <i class="fas fa-heart"></i>
 </a>
 

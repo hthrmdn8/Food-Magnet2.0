@@ -30,9 +30,17 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-user-circle" style="font-size: 24px;"></i> <!-- Human profile icon -->
+                    <i class="fa fa-user-circle" style="font-size: 24px;"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+
+<!--                    <li th:if="${authentication.principal}">-->
+<!--                        <a class="dropdown-item" style="color: #ff6347;" th:href="@{/profile :: profile}">Profile</a>-->
+<!--                    </li>-->
+<!--                    <li th:unless="${authentication.principal}">-->
+<!--                        <span class="dropdown-item" style="color: #ff6347;">Please log in to view your profile</span>-->
+<!--                    </li>-->
+
 
                     <li><a class="dropdown-item" style="color: #ff6347;" th:href="@{/login}">Login</a></li>
                     <li><a class="dropdown-item" style="color: #ff6347;" th:href="@{/register}">Register</a></li>

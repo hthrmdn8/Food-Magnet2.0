@@ -210,13 +210,9 @@
 </div>
 
 <div th:if="${#lists.size(userReviews) > 0}">
-    <h2 class="user-reviews-heading">User's Reviews:</h2>
-    <ul class="list-unstyled user-reviews-list">
-        <li th:each="review : ${userReviews}" class="user-review-item container p-3 my-3 bg-secondary text-white position-relative">
-            <p class="restaurant-name">
-                Restaurant: <span th:text="${review.restaurantEntity.name}"></span>
-            </p>
-            <p class="ratings">
+
+
+                <p class="ratings">
                 Rating: <span th:text="${review.ratings}"></span>
             </p>
             <p class="comments">
