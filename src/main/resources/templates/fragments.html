@@ -24,31 +24,47 @@
                 <a th:href="@{/home}" style="font-size: 35px;">Magnet</a>
             </li>
 
-            <li class="navlink"><a th:href="@{/city}">Cities</a></li>
 
-            <li class="navlink"><a th:href="@{/search}">Search</a></li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-user-circle" style="font-size: 24px;"></i>
+                <a class="nav-link dropdown-toggle" href="#" id="cityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Cities
+                </a>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
 
-<!--                    <li th:if="${authentication.principal}">-->
-<!--                        <a class="dropdown-item" style="color: #ff6347;" th:href="@{/profile :: profile}">Profile</a>-->
-<!--                    </li>-->
-<!--                    <li th:unless="${authentication.principal}">-->
-<!--                        <span class="dropdown-item" style="color: #ff6347;">Please log in to view your profile</span>-->
-<!--                    </li>-->
+                    <li class="dropdown navlink">
+                        <form id="cityForm" action="/search" method="POST">
+                            <input type="hidden" name="searchInput" id="cityInput">
+                        </form>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('St.Louis')">St.Louis</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('New York')">New York</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('Miami')">Miami</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('Lose Angeles')">Lose Angeles</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('San Francisco')">San Francisco</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('Washington D.C')">Washington D.C</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('Philadelphia')">Philadelphia</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('Las Vegas')">Las Vegas</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('New Orleans')">New Orleans</a></li>
+                    <li><a class="dropdown-item" style="color: #ff6347;"href="javascript:void(0);" onclick="selectCity('Boston')">Boston</a></li>
 
 
-                    <li><a class="dropdown-item" style="color: #ff6347;" th:href="@{/login}">Login</a></li>
-                    <li><a class="dropdown-item" style="color: #ff6347;" th:href="@{/register}">Register</a></li>
-                    <li><a class="dropdown-item" style="color: #ff6347;" th:href="@{/logout}">Logout</a></li>
-<!--                    <li><a class="dropdown-item" style="color: #ff6347;" th:href="@{/Profile}">Profile</a></li>-->
+                    </li>
+
+                    <script>
+                        function selectCity(city) {
+                            document.getElementById("cityInput").value = city;
+                            document.getElementById("cityForm").submit();
+                        }
+                    </script>
+
 
                 </ul>
             </li>
+
+            <li class="navlink"><a th:href="@{/search}">Search</a></li>
+
+            <li class="navlink"><a th:href="@{/login}">Account</a></li>
         </ul>
     </div>
 </nav>
