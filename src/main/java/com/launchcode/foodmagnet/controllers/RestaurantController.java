@@ -66,8 +66,8 @@ public class RestaurantController {
             model.addAttribute("favorites", favorites);
         }
         model.addAttribute("placeId", placeId);
-        return "favorites";
-//        return "profile";
+        return "favoritess";
+       //return "profile";
     }
 
     @PostMapping("/favorites/add")
