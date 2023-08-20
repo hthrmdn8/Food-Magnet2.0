@@ -7,6 +7,7 @@ import com.launchcode.foodmagnet.models.dto.UserDto;
 public interface UserService {
     User findByUsername(String username);
 
-    User save (UserDto userDto);
+    User save(User user);
 
+    User createUser(UserDto userDto);
 }

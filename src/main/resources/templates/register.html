@@ -18,27 +18,24 @@
         </div>
 
         <h2>Registration</h2>
-        <form
-                method="post"
+        <form method="post"
                 role="form"
                 th:action="@{/register}"
-                th:object="${user}"
+                th:object="${user}">
 
-
-        >
             <div class="form-group">
-                <label for="fullname">Fullname</label>
+                <label for="fullname">Full Name</label>
                 <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your fullname" required>
             </div>
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Email</label>
                 <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your username" required>
                 <span th:if="${userexist}" style="color: red;">Username is Taken</span>
                 <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></div>
             </div>
             <div class="form-group">
                 <label for="location">Location</label>
-                <input th:field="*{location}" type="password" id="location" name="location" placeholder="Enter your Location" required>
+                <input th:field="*{location}" type="text" id="location" name="location" placeholder="Enter your Location" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

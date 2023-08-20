@@ -1,5 +1,6 @@
 package com.launchcode.foodmagnet.models.restaurant;
 
+import com.google.maps.model.PlaceEditorialSummary;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ public class Restaurant {
     private String place_id;
     private String business_status;
     private Hours opening_hours;
+    private String website;
+    private String formatted_phone_number;
+    private PlaceEditorialSummary editorial_summary;
 
     private int price_level;
     private int rating;
@@ -30,10 +34,10 @@ public class Restaurant {
     private String reference;
     private String scope;
 
-//    //Search filter fields
-//    private String serves_breakfast;
-//    private String serves_lunch;
-//    private String serves_dinner;
+    //Search filter fields
+    private String serves_breakfast;
+    private String serves_lunch;
+    private String serves_dinner;
 
     public Restaurant() {}
 
@@ -59,11 +63,36 @@ public class Restaurant {
         allFields.put("plus_code: ", plus_code);
         allFields.put("reference: ", reference);
         allFields.put("scope: ", scope);
-//        allFields.put("serves_breakfast: ", serves_breakfast);
-//        allFields.put("serves_lunch: ", serves_lunch);
-//        allFields.put("serves_dinner: ", serves_dinner);
+        allFields.put("serves_breakfast: ", serves_breakfast);
+        allFields.put("serves_lunch: ", serves_lunch);
+        allFields.put("serves_dinner: ", serves_dinner);
 
         return allFields;
+    }
+
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getFormatted_phone_number() {
+        return formatted_phone_number;
+    }
+
+    public void setFormatted_phone_number(String formatted_phone_number) {
+        this.formatted_phone_number = formatted_phone_number;
+    }
+
+    public PlaceEditorialSummary getEditorial_summary() {
+        return editorial_summary;
+    }
+
+    public void setEditorial_summary(PlaceEditorialSummary editorial_summary) {
+        this.editorial_summary = editorial_summary;
     }
 
     public int getPrice_level() {
@@ -231,30 +260,30 @@ public class Restaurant {
     }
 
     //Getters and setters for search fields
-//
-//    public String getServes_breakfast() {
-//        return serves_breakfast;
-//    }
-//
-//    public void setServes_breakfast(String serves_breakfast) {
-//        this.serves_breakfast = serves_breakfast;
-//    }
-//
-//    public String getServes_lunch() {
-//        return serves_lunch;
-//    }
-//
-//    public void setServes_lunch(String serves_lunch) {
-//        this.serves_lunch = serves_lunch;
-//    }
-//
-//    public String getServes_dinner() {
-//        return serves_dinner;
-//    }
-//
-//    public void setServes_dinner(String serves_dinner) {
-//        this.serves_dinner = serves_dinner;
-//    }
+
+    public String getServes_breakfast() {
+        return serves_breakfast;
+    }
+
+    public void setServes_breakfast(String serves_breakfast) {
+        this.serves_breakfast = serves_breakfast;
+    }
+
+    public String getServes_lunch() {
+        return serves_lunch;
+    }
+
+    public void setServes_lunch(String serves_lunch) {
+        this.serves_lunch = serves_lunch;
+    }
+
+    public String getServes_dinner() {
+        return serves_dinner;
+    }
+
+    public void setServes_dinner(String serves_dinner) {
+        this.serves_dinner = serves_dinner;
+    }
 
     @Override
     public String toString() {
@@ -276,6 +305,9 @@ public class Restaurant {
                 ", plus_code=" + plus_code +
                 ", reference='" + reference + '\'' +
                 ", scope='" + scope + '\'' +
+                ", serves_breakfast='" + serves_breakfast + '\'' +
+                ", serves_lunch='" + serves_lunch + '\'' +
+                ", serves_dinner='" + serves_dinner + '\'' +
                 '}';
     }
 }
