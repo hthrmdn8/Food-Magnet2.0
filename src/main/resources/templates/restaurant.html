@@ -31,18 +31,52 @@
 
 
 
-<div class="my-3"><Button class="custom-button"><a a th:href="@{/reviews/add(placeId=${placeId})}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>
+<!--<div class="my-3"><Button class="custom-button"><a a th:href="@{/reviews/add(placeId=${placeId})}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>-->
 
+<a href="javascript:void(0);" id="showReviewFormLink">Add Review</a>
+
+<div id="reviewFormContainer" style="display: none;">
+        <form method="post" action="/reviews/add" th:object="${review}" style="max-width: 600px;">
+            <div class="form-group">
+                <label th:for="comments">Add Comment</label>
+                <input th:field="${review.comments}" class="form-control" />
+                <span th:errors="${review.comments}" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label th:for="ratings">Add Rating</label>
+                <select th:field="${review.ratings}" class="form-control">
+                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}">
+                    </option>
+                </select>
+            </div>
+
+            <p>Current Date: <span th:text="${currentDate}"></span></p>
+            <input type="hidden" name="placeId" th:value="${placeId}" />
+            <div class="form-group">
+                <button type="submit" class="custom-button">Add Review</button>
+            </div>
+
+        </form>
+    </div>
 <!--<a class=" heart-button" th:href="@{/favorites/add(placeId=${placeId})}" >-->
+<script>
+    document.getElementById("showReviewFormLink").addEventListener("click", function() {
+        var reviewFormContainer = document.getElementById("reviewFormContainer");
+        if (reviewFormContainer.style.display === "none") {
+            reviewFormContainer.style.display = "block";
+        } else {
+            reviewFormContainer.style.display = "none";
+        }
+    });
+</script>
 
-
-    <form method="post" action="/favorites/add"  th:object="${placeId}" style="max-width: 600px;">
-
-        <div class="form-group">
-            <button class = " heart-button" type="submit" >Add Favorite</button>
-        </div>
-        <input type="hidden" name="placeId" th:value="${placeId}" />
-    </form>
+<form method="post" action="/favorites/add" th:object="${placeId}" style="max-width: 600px;">
+    <div class="form-group">
+        <button type="submit" class="heart-button"><i class="fas fa-heart"></i> Add Favorite</button>
+    </div>
+    <input type="hidden" name="placeId" th:value="${placeId}" />
+</form>
 
 
 

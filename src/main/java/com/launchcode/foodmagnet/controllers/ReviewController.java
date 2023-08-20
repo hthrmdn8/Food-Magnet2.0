@@ -52,12 +52,12 @@ public class ReviewController {
         LocalDate currentDate = LocalDate.now();
         model.addAttribute("currentDate", currentDate);
         model.addAttribute("placeId", placeId);
-        return "reviews/add";
-
+        //return "reviews/add";
+        return "restaurant";
         }
 
     @PostMapping("/reviews/add")
-    public String addReview(Review review, Principal principal, @RequestParam("placeId") String placeId,Model model) {
+    public String addReview( @ModelAttribute("review") Review review, Principal principal, @RequestParam("placeId") String placeId,Model model) {
 
             if (principal != null) {
                 String username = principal.getName();

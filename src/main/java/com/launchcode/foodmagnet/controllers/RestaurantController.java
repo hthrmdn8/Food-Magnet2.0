@@ -47,9 +47,10 @@ public class RestaurantController {
         RestaurantEntity restaurantEntity =  restaurantRepository.findByPlaceId(placeId);
         List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
         model.addAttribute("reviews", reviews);
-        model.addAttribute("placeId", placeId);
-      
+        Review review = new Review();
+        model.addAttribute("review", review);
 
+        model.addAttribute("placeId", placeId);
         model.addAttribute("title", restaurant.getName());
       
         return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
