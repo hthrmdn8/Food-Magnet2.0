@@ -15,6 +15,12 @@
     <h1 >Restaurant Details</h1>
 
     <h1 th:text="${restaurant.name}"></h1>
+    <div th:if="${hasReviews}">
+        <p>Average Rating: <span th:text="${averageRating}"></span></p>
+    </div>
+    <div th:unless="${hasReviews}">
+        <p>No reviews available yet.</p>
+    </div>
 
 
         <iframe
@@ -27,11 +33,6 @@
                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=Space+Needle,Seattle+WA">
         </iframe>
 </div>
-
-
-
-
-<!--<div class="my-3"><Button class="custom-button"><a a th:href="@{/reviews/add(placeId=${placeId})}" title="Please click here to select a restaurant to add a review" >Add Review</a></Button></div>-->
 
 <a href="javascript:void(0);" id="showReviewFormLink">Add Review</a>
 
@@ -59,7 +60,7 @@
 
         </form>
     </div>
-<!--<a class=" heart-button" th:href="@{/favorites/add(placeId=${placeId})}" >-->
+
 <script>
     document.getElementById("showReviewFormLink").addEventListener("click", function() {
         var reviewFormContainer = document.getElementById("reviewFormContainer");

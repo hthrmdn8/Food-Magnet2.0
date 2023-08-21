@@ -16,6 +16,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -33,8 +35,7 @@ public class UserServiceImpl implements UserService {
     public User save(UserDto userDto) {
         User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getFullname(), userDto.getLocation());
         return userRepository.save(user);
+
     }
-
-
 
 }

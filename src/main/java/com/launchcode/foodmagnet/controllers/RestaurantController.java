@@ -46,16 +46,37 @@ public class RestaurantController {
       
         RestaurantEntity restaurantEntity =  restaurantRepository.findByPlaceId(placeId);
         List<Review> reviews = reviewRepository.findByRestaurantEntity(restaurantEntity);
+
+        double averageRating = calculateAverageRating(reviews);
+        model.addAttribute("averageRating", averageRating);
+
+
         model.addAttribute("reviews", reviews);
+
+        boolean hasReviews = !reviews.isEmpty();
+        model.addAttribute("hasReviews", hasReviews);
+
         Review review = new Review();
         model.addAttribute("review", review);
-
         model.addAttribute("placeId", placeId);
         model.addAttribute("title", restaurant.getName());
       
-        return "restaurant"; // Create a new Thymeleaf template named "restaurant_details.html"
+        return "restaurant";
 
     }
+
+    private double calculateAverageRating(List<Review> reviews) {
+        if (reviews.isEmpty()) {
+            return 0.0;
+        }
+
+        double sum = 0.0;
+        for (Review review : reviews) {
+            sum += review.getRatings();
+        }
+        return sum / reviews.size();
+    }
+
 
     @GetMapping("/favorites/add")
     public String showAddToFavoritesPage( Principal principal,@RequestParam String placeId,Model model) {
@@ -67,8 +88,8 @@ public class RestaurantController {
             model.addAttribute("favorites", favorites);
         }
         model.addAttribute("placeId", placeId);
-        return "favoritess";
-       //return "profile";
+        return "favorites";
+
     }
 
     @PostMapping("/favorites/add")

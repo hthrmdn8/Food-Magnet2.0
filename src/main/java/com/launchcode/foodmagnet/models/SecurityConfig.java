@@ -1,4 +1,4 @@
-package com.launchcode.foodmagnet;
+package com.launchcode.foodmagnet.models;
 
 import com.launchcode.foodmagnet.models.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Autowired
     CustomUserDetailsService customUserDetailsServices;
+
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 
 
     @SuppressWarnings("removal")
@@ -50,11 +48,9 @@ public class SecurityConfig {
         return http.build();
 
     }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsServices).passwordEncoder(passwordEncoder());
     }
 
 }
-

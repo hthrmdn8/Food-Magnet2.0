@@ -1,17 +1,17 @@
     .heart-button {
      background-color: transparent;
         border: none;
-        color: #ff6347; /* Change the color of the heart */
+        color: #ff6347;
         cursor: pointer;
         font-size: 24px;
         padding: 0;
 
 .heart-button:hover {
-    transform: scale(1.1); /* Scale the button on hover */
+    transform: scale(1.1);
 }
 .custom-button {
-            background-color:#ff6347; /* Change to your desired color */
-            color: white; /* Adjust text color for contrast */
+            background-color:#ff6347;
+            color: white;
              border-radius: 5px;
     cursor: pointer;
 
@@ -43,7 +43,7 @@
     padding: 1.5rem;
     margin: 1rem 0;
     position: relative;
-    font-family: 'YourCustomFont', sans-serif; /* Add your custom font here */
+    font-family: 'YourCustomFont', sans-serif;
 }
 
 .restaurant-name {

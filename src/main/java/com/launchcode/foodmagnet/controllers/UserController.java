@@ -87,7 +87,7 @@ public class UserController {
     public String registerSave(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "redirect:/register";
         }
 
         User user = userService.findByUsername(userDto.getUsername());
@@ -96,7 +96,7 @@ public class UserController {
             return "register";
 
         }
-        userService.save(userDto);
+       model.addAttribute(userService.save(userDto));
         return "redirect:/register?success";
     }
 
