@@ -68,7 +68,7 @@
               </a>
               <div class="info-container">
                 <div class="listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
-                <form action="/account/delete" method="POST">
+                <form action="/account/favorite/delete" method="POST">
                   <input type="hidden" th:value="${restaurant.getPlace_id()}" name="place_id"/>
                   <button class="remove-favorite">
                     <i class="fa fa-trash w3 xxx-large"></i>
@@ -110,13 +110,72 @@
         <div class="review-column">
           <th:block th:each="review : ${user.getReviews()}">
             <div class="review">
-              <div>Rating:  <p style="display: inline;" th:text="${review.getRatings()}"></p>/5</div> <br>
-              <div>Comments:<br><p th:text="${review.getComments()}">No comments.</p>
-                                <p th:unless="${review.getComments() != ''}">No comments.</p>
+              <div class="edit-delete">
+
+                  <button class="edit-review"><i class="fa fa-edit"></i>
+                  </button>
+
+                <form action="account/review/delete" method="POST">
+                  <button class="delete-review"><i class="fa fa-trash"></i>
+                  </button>
+                </form>
               </div>
+
+              <div class="edit-review-content" style="display: none;">
+
+                <form action="account/review/edit" method="POST" th:object="${reviewObject}">
+                  <label>
+                    Rating: <input type="text" name="ratings" th:field="*{ratings}" th:value="${review.getRatings()}"/>/5
+                  </label>
+                  <br>
+
+                  <label>
+                    Comments:
+                    <br>
+
+                    <textarea name="comments" th:field="*{comments}" th:value="${review.getComments()}"></textarea>
+                  </label>
+
+                  <input type="hidden" th:value="${review.getReviewId()}" name="reviewId"/>
+                  <button type="submit" class="btn btn-success">Save Changes</button>
+                </form>
+
+              </div>
+
+              <div class="display-review-content">
+                <div>
+                  Rating:
+                  <p style="display: inline;" th:text="${review.getRatings()}"></p>/5
+                </div>
+                <br>
+
+                <div>
+                  Comments:
+                  <br>
+
+                  <p th:text="${review.getComments()}">No comments.</p>
+                  <p th:unless="${review.getComments() != ''}">No comments.</p>
+                </div>
+              </div>
+
+
             </div>
           </th:block>
         </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              const editButtons = document.querySelectorAll(".edit-review");
+              editButtons.forEach(button => {
+                  button.addEventListener("click", function () {
+                      const review = button.closest(".review");
+                      review.querySelector(".edit-review-content").style.display = "block";
+                      review.querySelector(".display-review-content").style.display = "none";
+                  });
+              });
+          });
+        </script>
+
       </div>
 
       <script>

@@ -8,7 +8,7 @@ import com.launchcode.foodmagnet.models.dto.UserDto;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import com.launchcode.foodmagnet.models.service.FavoriteService;
 import com.launchcode.foodmagnet.models.service.UserService;
-import com.launchcode.foodmagnet.repositories.UserRepository;
+import com.launchcode.foodmagnet.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +29,11 @@ public class AccountController {
     @Autowired
     FavoriteService favoriteService;
 
+    @Autowired
+    ReviewRepository reviewRepository;
+
     @GetMapping
-    public String renderAccountPage(Model model, Principal principal, UserDto userDto) {
+    public String renderAccountPage(Model model, Principal principal, UserDto userDto, Review reviewObject) {
 
         if (principal != null) {
             //adds currently logged-in user to the model
@@ -52,11 +55,14 @@ public class AccountController {
             }
             model.addAttribute("reviewedRestaurants", reviewedRestaurants);
 
+
             userDto.setFullname(user.getFullname());
             userDto.setLocation(user.getLocation());
             userDto.setUsername(user.getUsername());
 
             model.addAttribute("userDto", userDto);
+
+            model.addAttribute("reviewObject", reviewObject);
 
         }
 
@@ -84,7 +90,7 @@ public class AccountController {
 
     }
 
-    @PostMapping(value = "delete")
+    @PostMapping(value = "/favorite/delete")
     public String handleFavoriteRestaurantDeletion(@RequestParam(value = "place_id") String placeId, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
@@ -94,6 +100,32 @@ public class AccountController {
         if (favoriteToDelete != null) {
             favoriteService.deleteFavorite(favoriteToDelete);
         }
+
+        return "redirect:/account";
+    }
+
+    @PostMapping(value = "/review/edit")
+    public String handleRestaurantReviewUpdate(@RequestParam(value = "reviewId") Integer reviewId,
+                                               @ModelAttribute(value = "reviewObject") Review updateReview,
+                                               Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+
+        Review review = reviewRepository.getById(reviewId);
+
+        if (review != null) {
+            review.setComments(updateReview.getComments());
+            review.setRatings(updateReview.getRatings());
+
+            reviewRepository.save(review);
+        }
+
+
+        return "redirect:/account";
+    }
+
+    @PostMapping(value = "/review/delete")
+    public String handleRestaurantReviewDeletion(Principal principal) {
 
         return "redirect:/account";
     }
