@@ -76,7 +76,7 @@ public class ApiRequests {
     }
 
     //sends a nearby search request with a keyword parameter intended to specify cuisine
-    public static HttpResponse<String> placeKeywordRequest(String address, String keyword) throws URISyntaxException, IOException, InterruptedException {
+    public static HttpResponse<String> placeKeywordRequest(String address, String keyword, String filter) throws URISyntaxException, IOException, InterruptedException {
 
         Location coordinates = RestaurantData.getCoordinates(address); if (coordinates == null) return null;
         final String location = coordinates.getLatString() + "," + coordinates.getLngString();
@@ -86,6 +86,7 @@ public class ApiRequests {
                 .setHost("maps.googleapis.com")
                 .setPath("maps/api/place/nearbysearch/json")
                 .addParameter("keyword", keyword)
+                .addParameter("name", filter)
                 .addParameter("location", location)
                 .addParameter("radius", "2000")
                 .addParameter("type", "restaurant")

@@ -15,6 +15,8 @@
             <div class="search-container">
                 <input type="text" name="searchInput" id="searchInput" placeholder="Search by location"/>
 
+                <input type="hidden" name="selectedFilter" id="selectedFilter" value="Remove Filter">
+                <input type="hidden" name="searchType" id="searchType" value="Location">
                 <button class="search-icon" type="submit">
                     <i class="fa fa-search w3-xxxlarge"></i>
                 </button>
@@ -25,27 +27,84 @@
 
     </div>
 
-    <div class="filters-container">
+    <div th:unless="${user}" class="filters-container" style="color: white; font-size: 25px; padding: 20px">
+        Please <a href="/login" style="color: #ff6347; text-decoration: none;">login</a> to use filters
+    </div>
+
+    <div th:if="${user}" class="filters-container">
         <button type="button" class="collapsible">Search Filters!</button>
         <div class="content">
             <ul class="filter-list">
-                <li class="filter" id="search-type">Search by:
-                    <span class="search-cuisine">Cuisine</span>
+                <li class="type-filter" id="search-type">Search by:
                     <span class="search-location">Location</span>
+                    <span class="search-cuisine">Cuisine</span>
                 </li>
                 <li class="filter">Serves Breakfast</li>
                 <li class="filter">Serves Lunch</li>
                 <li class="filter">Serves Dinner</li>
                 <li class="filter">Wheelchair Accessible</li>
+                <li class="filter">Remove Filter</li>
             </ul>
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchTypeElement = document.getElementById("search-type");
+            const selectedFilterElement = document.getElementById("selectedFilter");
+            const searchTypeElementSpans = searchTypeElement.querySelectorAll("span");
 
-<!--     <div th:text="${test}"></div> -->
+            searchTypeElement.addEventListener("click", function() {
+                let displayedSpan = null;
+                searchTypeElementSpans.forEach(span => {
+                    if (window.getComputedStyle(span).display == "none") {
+                        displayedSpan = span;
+                    }
+                });
 
-<!--    <div class="container" id="results" >-->
+                if (displayedSpan) {
+                    document.getElementById("searchType").value = displayedSpan.textContent.trim();
+                }
+            });
 
+            const filters = document.querySelectorAll(".filter");
+
+            filters.forEach(filter => {
+                filter.addEventListener("click", function() {
+                    if (!this.classList.contains("type-filter")) {
+                        filters.forEach(otherFilter => {
+                            if (!otherFilter.classList.contains("type-filter")) {
+                                otherFilter.classList.remove("selected");
+                            }
+                        });
+                        this.classList.toggle("selected");
+                        selectedFilterElement.value = this.textContent.trim();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const searchTypeFilter = document.getElementById("search-type");
+          const searchCuisine = document.querySelector(".search-cuisine");
+          const searchLocation = document.querySelector(".search-location");
+
+          let displayCuisine = true;
+
+          searchTypeFilter.addEventListener("click", function() {
+            if (displayCuisine) {
+              searchCuisine.style.display = "inline";
+              searchLocation.style.display = "none";
+            } else {
+              searchCuisine.style.display = "none";
+              searchLocation.style.display = "inline";
+            }
+            displayCuisine = !displayCuisine;
+          });
+        });
+    </script>
     <script>
         var coll = document.getElementsByClassName("collapsible");
         var i;
@@ -61,9 +120,8 @@
             }
           });
         }
-    </script>
 
-    <div th:text="${test}" style="color: white;"></div>
+    </script>
 
 
     <div class="results-container">
@@ -72,7 +130,7 @@
         </div>
         <div class="results-header" th:if="${restaurants}">
             <div class="results-banner">
-                <span th:text="${cuisine}">&nbsp;</span> Restaurants in&nbsp;<span th:text="${location}"></span>!
+                <span th:text="${cuisine}"></span>&nbsp;Restaurants in&nbsp;<span th:text="${location}"></span>!
             </div>
             <div class="underline"></div>
         </div>

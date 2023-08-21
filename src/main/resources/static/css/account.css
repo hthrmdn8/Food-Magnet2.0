@@ -151,7 +151,7 @@
 
 .info {
 	padding: 30px;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.7);
 }
 
 .favorite-restaurant {
@@ -161,7 +161,7 @@
     position: relative;
 
     display: block;
-    background-color: #29292F;
+    background-color: #1e1e26;
     box-shadow: 0 0 10px black;
 }
 

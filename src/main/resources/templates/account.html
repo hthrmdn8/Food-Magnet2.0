@@ -116,6 +116,7 @@
                   </button>
 
                 <form action="account/review/delete" method="POST">
+                  <input type="hidden" name="reviewId" th:value="${review.getReviewId()}"/>
                   <button class="delete-review"><i class="fa fa-trash"></i>
                   </button>
                 </form>
@@ -197,7 +198,7 @@
 
   </div>
 
-</div>
+  </div></div>
 
 </body>
 </html>

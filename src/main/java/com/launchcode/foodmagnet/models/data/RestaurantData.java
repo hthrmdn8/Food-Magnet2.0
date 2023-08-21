@@ -56,11 +56,11 @@ public class RestaurantData {
         return restaurantList;
     }
 
-    public static ArrayList<Restaurant> getSpecificRestaurantsNearby(String address, String cuisine) {
+    public static ArrayList<Restaurant> getSpecificRestaurantsNearby(String address, String cuisine, String filter) {
 
         HttpResponse<String> response = null;
         try {
-            response = ApiRequests.placeKeywordRequest(address, cuisine);
+            response = ApiRequests.placeKeywordRequest(address, cuisine, filter);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException (e);
         } if (response == null) return null;

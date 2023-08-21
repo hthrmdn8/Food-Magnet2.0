@@ -111,7 +111,7 @@ public class AccountController {
 
         User user = userService.findByUsername(principal.getName());
 
-        Review review = reviewRepository.getById(reviewId);
+        Review review = reviewRepository.getReferenceById(reviewId);
 
         if (review != null) {
             review.setComments(updateReview.getComments());
@@ -125,7 +125,13 @@ public class AccountController {
     }
 
     @PostMapping(value = "/review/delete")
-    public String handleRestaurantReviewDeletion(Principal principal) {
+    public String handleRestaurantReviewDeletion(@RequestParam(value = "reviewId") Integer reviewId) {
+
+        Review review = reviewRepository.getReferenceById(reviewId);
+
+        if (review != null) {
+            reviewRepository.delete(review);
+        }
 
         return "redirect:/account";
     }
