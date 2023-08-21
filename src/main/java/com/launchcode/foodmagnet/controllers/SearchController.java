@@ -48,8 +48,8 @@ public class SearchController {
 
     @PostMapping
     public String processSearchInput(@RequestParam String searchInput,
-                                     @RequestParam(value = "searchType") String searchType,
-                                     @RequestParam(value = "selectedFilter") String selectedFilter,
+                                     @RequestParam(value = "searchType", required = false) String searchType,
+                                     @RequestParam(value = "selectedFilter", required = false) String selectedFilter,
                                      Model model, Principal principal) {
 
         if (principal != null) {
@@ -57,7 +57,8 @@ public class SearchController {
             model.addAttribute("user", user);
         }
 
-        if ("Remove Filter".equals(selectedFilter)) selectedFilter = "";
+        if (selectedFilter == null || selectedFilter.equals("Remove Filter")) selectedFilter = "";
+        if (searchType == null) searchType = "Location";
 
 
         if (searchType.equals("Location")) {
