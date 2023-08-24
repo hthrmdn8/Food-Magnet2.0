@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head"></head>
 <link rel="stylesheet" href="css/account.css">
+<script src="js/account.js"></script>
 <body>
 
 <div class="page-content">
@@ -52,6 +53,8 @@
         </form>
       </div>
 
+
+
       <div class="favorites-content content">
 
         <th:block th:each="restaurant : ${favoriteRestaurants}">
@@ -78,9 +81,9 @@
             </div>
 
         </th:block>
-
-
       </div>
+
+
 
       <div class="reviews-content content">
 
@@ -124,9 +127,9 @@
 
               <div class="edit-review-content" style="display: none;">
 
-                <form action="account/review/edit" method="POST" th:object="${reviewObject}">
+                <form action="account/review/edit" method="POST" th:object="${reviewObj}">
                   <label>
-                    Rating: <input type="text" name="ratings" th:field="*{ratings}" th:value="${review.getRatings()}"/>/5
+                    Rating: <input type="text" name="ratings" th:value="${review.getRatings()}"/>/5
                   </label>
                   <br>
 
@@ -134,7 +137,7 @@
                     Comments:
                     <br>
 
-                    <textarea name="comments" th:field="*{comments}" th:value="${review.getComments()}"></textarea>
+                    <textarea style="max-height: 250px;" name="comments" th:text="${review.getComments()}" ></textarea>
                   </label>
 
                   <input type="hidden" th:value="${review.getReviewId()}" name="reviewId"/>
@@ -163,42 +166,10 @@
             </div>
           </th:block>
         </div>
-
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-              const editButtons = document.querySelectorAll(".edit-review");
-              editButtons.forEach(button => {
-                  button.addEventListener("click", function () {
-                      const review = button.closest(".review");
-                      review.querySelector(".edit-review-content").style.display = "block";
-                      review.querySelector(".display-review-content").style.display = "none";
-                  });
-              });
-          });
-        </script>
-
       </div>
-
-      <script>
-        const showButtons = document.querySelectorAll('.show-content');
-        const contentDivs = document.querySelectorAll('.content');
-
-        showButtons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                contentDivs.forEach((div, divIndex) => {
-                    if (index === divIndex) {
-                        div.style.display = 'flex';
-                    } else {
-                        div.style.display = 'none';
-                    }
-                });
-            });
-        });
-      </script>
-
   </div>
-
-  </div></div>
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,143 @@
+body {
+    background-color: #0B0B0C;
+    opacity: 1;
+    background-image:  linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377);
+    background-size: 30px 53px;
+    background-position: 0 0, 0 0, 15px 26px, 15px 26px, 0 0, 15px 26px;
+}
+
+.underline {
+    width: 100%;
+    height: 10px;
+    margin: 25px auto 45px;
+    background: white;
+    box-shadow: 0 0 10px black;
+    z-index: 1;
+    position: relative;
+    top: -200px;
+}
+
+.restaurant-header {
+    width: 100%;
+    height: 100px;
+    margin: -130px auto 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: white;
+    font-family: "Anton",var(--bs-font-sans-serif);
+    text-shadow: 0 0 10px black;
+    z-index: 1;
+    position: relative;
+    top: -50px;
+}
+
+.photos {
+    height: 300px;
+    display: flex;
+    /*flex-wrap: wrap;*/
+    gap: 10px;
+    overflow: hidden;
+    z-index: 0;
+    position: relative;
+}
+
+.photo {
+    flex: 0 0 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+    position: relative;
+    overflow: hidden;
+    margin-left: -10px;
+}
+
+.photo-cropper {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+}
+
+.photo-cropper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#map {
+    border: 0;
+    position: relative;
+    right: -1000px;
+    top: 0px;
+    border: 2px solid black;
+    box-shadow: 0 0 10px black;
+}
+p {
+    color: white;
+}
+
+.place-description {
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    width: 700px;
+    left: 175px;
+}
+
+.place-website {
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    width: 700px;
+    left: 175px;
+    top: 750px;
+}
+
+.place-phone_number {
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    width: 700px;
+    left: 175px;
+    top: 675px;
+}
+
+.place-hours {
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    width: 700px;
+    left: 175px;
+    top: 825px;
+}
+
+.day-hours {
+    position: relative;
+}
+
+.options-container {
+    margin-top: 200px;
+}
+
+.website-link {
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.website-link:hover {
+    color:  #ff6347;
+}
+
+.no-user {
+    font-family: "Anton";
+    color: white;
+    font-size: 30px;
+}
+
+.clickable {
+    color: #ff6347;
+}

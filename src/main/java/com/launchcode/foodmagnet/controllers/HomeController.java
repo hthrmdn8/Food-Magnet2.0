@@ -48,7 +48,7 @@ public class HomeController {
         if (principal != null) {
             User user = userService.findByUsername(principal.getName());
 
-            ArrayList<Restaurant> restaurants = RestaurantData.getRestaurantsNearby(user.getLocation());
+            ArrayList<Restaurant> restaurants = RestaurantData.getSpecificRestaurantsNearby(user.getLocation(), "", "");
             model.addAttribute("featuredRestaurants", restaurants);
 
         }

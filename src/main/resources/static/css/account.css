@@ -143,6 +143,10 @@
     text-shadow: 0 0 3px black;
 }
 
+.edit-active i,
+    .delete-active i{
+    color: #ff6347
+}
 
 .details-content {
     display: block;

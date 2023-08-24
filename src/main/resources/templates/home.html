@@ -81,22 +81,24 @@
 
             <div class="featured" th:if="${featuredRestaurants}">
                 <th:block th:each="restaurant : ${featuredRestaurants}">
+                    <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}"
+                       style="display: inline-block">
+                        <div class="restaurant-listing">
 
-                    <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}" style="display: block;">
-                        <span class="restaurant-listing">
-                            <div class="featured-img-container">
-                                <img class="listing-image" th:src="${restaurant.getAllPhotos().get(0)}" width="40%" height="40%"/>
+                            <div class="img-container">
+                                <img class="listing-image"
+                                     th:if="${restaurant.getAllPhotos().get(0) != 'No photos available'}"
+                                     th:src="${restaurant.getAllPhotos().get(0)}"/>
+                                <p class="photo-validation"
+                                   th:unless="${restaurant.getAllPhotos().get(0) != 'No photos available'}">No Photo available :(</p>
                             </div>
 
                             <div class="info-container">
-                                <h1 class="listing-info" th:text="${restaurant.getName()}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.getVicinity()}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.getRating()} + ' stars'"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.getTypes()}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.getPrice_level()}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.getOpening_hours()}"></h1>
+                                <div class="listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
+                                <div class="listing-info" th:text="${restaurant.getVicinity()}"></div>
                             </div>
-                        </span>
+
+                        </div>
                     </a>
 
                 </th:block>

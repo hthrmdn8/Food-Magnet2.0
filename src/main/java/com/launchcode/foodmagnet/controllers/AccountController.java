@@ -55,6 +55,8 @@ public class AccountController {
             }
             model.addAttribute("reviewedRestaurants", reviewedRestaurants);
 
+            model.addAttribute("reviewObj", reviewObject);
+
 
             userDto.setFullname(user.getFullname());
             userDto.setLocation(user.getLocation());
@@ -62,7 +64,6 @@ public class AccountController {
 
             model.addAttribute("userDto", userDto);
 
-            model.addAttribute("reviewObject", reviewObject);
 
         }
 
@@ -106,7 +107,7 @@ public class AccountController {
 
     @PostMapping(value = "/review/edit")
     public String handleRestaurantReviewUpdate(@RequestParam(value = "reviewId") Integer reviewId,
-                                               @ModelAttribute(value = "reviewObject") Review updateReview,
+                                               @ModelAttribute(value = "reviewObj") Review updateReview,
                                                Principal principal) {
 
         User user = userService.findByUsername(principal.getName());

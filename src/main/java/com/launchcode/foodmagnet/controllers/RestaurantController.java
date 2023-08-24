@@ -12,11 +12,14 @@ import com.launchcode.foodmagnet.models.service.UserService;
 import com.launchcode.foodmagnet.repositories.FavoriteRepository;
 import com.launchcode.foodmagnet.repositories.RestaurantRepository;
 import com.launchcode.foodmagnet.repositories.ReviewRepository;
+import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class RestaurantController {
     private ReviewRepository reviewRepository;
     private RestaurantEntity restaurantEntity;
     @GetMapping("/restaurant")
-    public String showRestaurantDetails(@RequestParam("placeId") String placeId, Model model) {
+    public String showRestaurantDetails(@RequestParam("placeId") String placeId, Model model, Principal principal) throws URISyntaxException {
 
         Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
         model.addAttribute("restaurant", restaurant);
@@ -50,16 +53,31 @@ public class RestaurantController {
         double averageRating = calculateAverageRating(reviews);
         model.addAttribute("averageRating", averageRating);
 
-
-        model.addAttribute("reviews", reviews);
-
-        boolean hasReviews = !reviews.isEmpty();
-        model.addAttribute("hasReviews", hasReviews);
+        if (!reviews.isEmpty()) {
+            model.addAttribute("reviews", reviews);
+        }
 
         Review review = new Review();
         model.addAttribute("review", review);
         model.addAttribute("placeId", placeId);
+
+
+        URI build = new URIBuilder()
+                .setScheme("https")
+                .setHost("www.google.com")
+                .setPath("maps/embed/v1/place")
+                .addParameter("key", "AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU")
+                .addParameter("q", restaurant.getName())
+                .build();
+
         model.addAttribute("title", restaurant.getName());
+        model.addAttribute("src", build);
+
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
+            model.addAttribute("user", user);
+        }
+
 
         return "restaurant";
 

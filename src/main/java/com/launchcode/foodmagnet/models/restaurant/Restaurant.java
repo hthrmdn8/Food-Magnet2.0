@@ -1,6 +1,5 @@
 package com.launchcode.foodmagnet.models.restaurant;
 
-import com.google.maps.model.PlaceEditorialSummary;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class Restaurant {
     private String name;
     private String place_id;
     private String business_status;
-    private Hours opening_hours;
+    private PlaceOpeningHours opening_hours;
     private String website;
     private String formatted_phone_number;
     private PlaceEditorialSummary editorial_summary;
@@ -203,11 +202,11 @@ public class Restaurant {
         this.photos = photos;
     }
 
-    public Hours getOpening_hours() {
+    public PlaceOpeningHours getOpening_hours() {
         return opening_hours;
     }
 
-    public void setOpening_hours(Hours opening_hours) {
+    public void setOpening_hours(PlaceOpeningHours opening_hours) {
         this.opening_hours = opening_hours;
     }
 

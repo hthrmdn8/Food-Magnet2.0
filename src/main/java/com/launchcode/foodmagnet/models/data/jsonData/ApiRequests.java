@@ -28,7 +28,7 @@ public class ApiRequests {
                 .setHost("maps.googleapis.com")
                 .setPath("maps/api/place/details/json")
                 .addParameter("place_id", placeId)
-                .addParameter("fields", "name,photos,place_id,website,vicinity")
+                .addParameter("fields", "name,photos,place_id,website,vicinity,editorial_summary,opening_hours,formatted_phone_number")
                 .addParameter("key", apiKey)
                 .build();
 

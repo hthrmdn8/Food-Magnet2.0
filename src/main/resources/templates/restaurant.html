@@ -2,104 +2,136 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head">
 </head>
-<link rel="stylesheet" th:href="@{css/home.css}"/>
+<link rel="stylesheet" href="css/restaurant.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <body>
 
 
 
 <div th:replace="fragments :: navbar"></div>
-<div style="padding-top:100px;">
-    <h1>Welcome to a restaurant page!</h1>
+
+<div class="photos">
+    <div class="photo" th:each="photo : ${restaurant.getAllPhotos}">
+        <div class="photo-cropper"><img th:src="${photo}"/></div>
+    </div>
+</div>
+
+<div class="page-content" style="margin-top:200px;">
 
 
+    <div class="restaurant-header" th:text="${restaurant.getName()}"></div>
+    <div class="underline"></div>
 
-
-    <h1 >Restaurant Details</h1>
-<!--    <div class="restaurant-details" >-->
-<!--        '-->
-
-        <h1 th:text="${restaurant.name}"></h1>
-
-
-        <iframe
-                width="600"
-                height="450"
-                style="border:0"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA27YdMxL2D735pVL7JTgpb3dxkJ6RgDWU&q=Space+Needle,Seattle+WA">
-        </iframe>
-
-
-    <a href="javascript:void(0);" id="showReviewFormLink">Add Review</a>
-
-    <div id="reviewFormContainer" style="display: none;">
-        <form method="post" action="/reviews/add" th:object="${review}" style="max-width: 600px;">
-            <div class="form-group">
-                <label th:for="comments">Add Comment</label>
-                <input th:field="${review.comments}" class="form-control" />
-                <span th:errors="${review.comments}" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label th:for="ratings">Add Rating</label>
-                <select th:field="${review.ratings}" class="form-control">
-                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}">
-                    </option>
-                </select>
-            </div>
-
-            <p>Current Date: <span th:text="${currentDate}"></span></p>
-            <input type="hidden" name="placeId" th:value="${placeId}" />
-            <div class="form-group">
-                <button type="submit" class="custom-button">Add Review</button>
-            </div>
-
-        </form>
+    <div class="place-description" th:text="${restaurant.getEditorial_summary().getOverview()}"></div>
+    <div class="place-website">Website:&nbsp;<a target="_blank" th:href="${restaurant.getWebsite()}"><p class="website-link" th:text="${restaurant.getName()}"></p></a></div>
+    <div class="place-phone_number" th:text="${restaurant.getFormatted_phone_number()}"></div>
+    <div class="place-hours">
+        <div class="day-hours"
+             th:each="weekday : ${restaurant.getOpening_hours().getWeekday_text}"
+             th:text="${weekday}"></div>
     </div>
 
-    <script>
-    document.getElementById("showReviewFormLink").addEventListener("click", function() {
-        var reviewFormContainer = document.getElementById("reviewFormContainer");
-        if (reviewFormContainer.style.display === "none") {
-            reviewFormContainer.style.display = "block";
-        } else {
-            reviewFormContainer.style.display = "none";
-        }
-    });
-</script>
 
-    <form method="post" action="/favorites/add" th:object="${placeId}" style="max-width: 600px;">
-        <div class="form-group">
-            <button type="submit" class="heart-button"><i class="fas fa-heart"></i> Add Favorite</button>
+
+
+    <iframe id="map"
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            th:src="${src}">
+    </iframe>
+
+    <div class="options-container">
+
+        <div class="no-user" th:unless="${user}">Please <a style="text-decoration: none;" href="/login"><span class="clickable">login</span></a> to leave a review</div>
+        <div class="user-options" th:if="${user}">
+
+            <a style="display: inline-block;margin-left: 20px;"
+               href="javascript:void(0);"
+               class="btn btn-secondary"
+               id="showReviewFormLink">Add Review</a>
+
+            <div id="reviewFormContainer" style="display: none;">
+                <form method="post" action="/reviews/add" th:object="${review}" style="max-width: 600px;margin: 60px 20px 0px 20px;color: white;">
+                    <div class="form-group">
+                        <label th:for="comments">Add Comment</label>
+                        <input th:field="${review.comments}" class="form-control" />
+                        <span th:errors="${review.comments}" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:for="ratings">Add Rating</label>
+                        <select th:field="${review.ratings}" class="form-control">
+                            <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <p>Current Date: <span th:text="${currentDate}"></span></p>
+                    <input type="hidden" name="placeId" th:value="${placeId}" />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Add Review</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <script>
+                document.getElementById("showReviewFormLink").addEventListener("click", function() {
+                    var reviewFormContainer = document.getElementById("reviewFormContainer");
+                    if (reviewFormContainer.style.display === "none") {
+                        reviewFormContainer.style.display = "block";
+                    } else {
+                        reviewFormContainer.style.display = "none";
+                    }
+                });
+            </script>
+
+            <form style="width: 130px;
+                margin: 20px;
+                display:inline-block;"
+                  method="post" action="/favorites/add"
+                  th:object="${placeId}">
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary"><i class="fas fa-heart"></i> Add Favorite</button>
+                </div>
+                <input type="hidden" name="placeId" th:value="${placeId}" />
+            </form>
+
         </div>
-        <input type="hidden" name="placeId" th:value="${placeId}" />
-    </form>
+
+        <h2 style="font-family: 'Anton';
+                color: white;
+                margin: 20px;" class="user-reviews-heading">Restaurant Reviews:</h2>
+        <span style="font-family: 'Anton';
+                font-size: 2rem;
+                color: white;
+                margin: 20px;" th:unless="${reviews}">This restaurant has no reviews</span>
+        <ul th:if="${reviews}" class="list-unstyled user-reviews-list">
+            <li th:each="review : ${reviews}" class="user-review-item container p-3 my-3 bg-secondary text-white position-relative">
+                <p class="restaurant-name">
+                    User:<span th:text="${review.user.fullname}"></span>
+                </p>
+                <p class="ratings">
+                    Rating: <span th:text="${review.ratings}"></span>
+                </p>
+                <p class="comments">
+                    Comments: <span th:text="${review.comments}"></span>
+                </p>
+                <span class="review-date position-absolute top-0 end-0 p-2" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
+
+            </li>
+        </ul>
 
 
+    </div>
 
 
-    <i class="fas fa-heart"></i>
-    </a>
-
-    <h2 class="user-reviews-heading">User's Reviews:</h2>
-    <ul class="list-unstyled user-reviews-list">
-        <li th:each="review : ${reviews}" class="user-review-item container p-3 my-3 bg-secondary text-white position-relative">
-            <p class="restaurant-name">
-                User:<span th:text="${review.user.fullname}"></span>
-            </p>
-            <p class="ratings">
-                Rating: <span th:text="${review.ratings}"></span>
-            </p>
-            <p class="comments">
-                Comments: <span th:text="${review.comments}"></span>
-            </p>
-            <span class="review-date position-absolute top-0 end-0 p-2" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></span>
-
-        </li>
-    </ul>
+</div>
 
 
 </body>
