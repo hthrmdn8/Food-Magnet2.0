@@ -5,6 +5,7 @@ import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.data.jsonData.JsonMapper;
 import com.launchcode.foodmagnet.models.restaurant.Location;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
+import com.launchcode.foodmagnet.models.restaurant.RestaurantPackage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -15,6 +16,29 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class RestaurantData {
+
+    public static RestaurantPackage getNextPageResults(String nextPageToken) {
+
+        HttpResponse<String> response = null;
+        try {
+            response = ApiRequests.nextPageRequest(nextPageToken);
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException (e);
+        } if (response == null) return null;
+
+        JsonNode node = JsonMapper.parse(response.body());
+        JsonNode results = node.get("results");
+
+        ArrayList<Restaurant> restaurantList = new ArrayList<>();
+
+        for (JsonNode result : results) {
+            Restaurant restaurant = JsonMapper.fromJson(result, Restaurant.class);
+            restaurantList.add(restaurant);
+        }
+
+        String newNextPageToken = (node.get("next_page_token") != null ? node.get("next_page_token").asText() : null);
+        return new RestaurantPackage(restaurantList, newNextPageToken);
+    }
 
     //Takes in place_id argument, returns usable restaurant pojo with photos and information about the restaurant
     public static Restaurant getRestaurantDetails(String placeId)  {
@@ -56,7 +80,7 @@ public class RestaurantData {
         return restaurantList;
     }
 
-    public static ArrayList<Restaurant> getSpecificRestaurantsNearby(String address, String cuisine, String filter) {
+    public static RestaurantPackage getSpecificRestaurantsNearby(String address, String cuisine, String filter) {
 
         HttpResponse<String> response = null;
         try {
@@ -69,13 +93,13 @@ public class RestaurantData {
         JsonNode results = node.get("results");
 
         ArrayList<Restaurant> restaurantList = new ArrayList<>();
-
         for (JsonNode result : results) {
             Restaurant restaurant = JsonMapper.fromJson(result, Restaurant.class);
             restaurantList.add(restaurant);
         }
 
-        return restaurantList;
+        String nextPageToken = (node.get("next_page_token") != null ? node.get("next_page_token").asText() : null);
+        return new RestaurantPackage(restaurantList, nextPageToken);
     }
 
     //parses response from placePhotoRequest into url linking a jpeg image

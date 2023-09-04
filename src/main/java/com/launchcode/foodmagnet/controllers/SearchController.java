@@ -5,6 +5,7 @@ import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
+import com.launchcode.foodmagnet.models.restaurant.RestaurantPackage;
 import com.launchcode.foodmagnet.models.service.UserService;
 import com.launchcode.foodmagnet.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,10 @@ public class SearchController {
 
 
         if (searchType.equals("Location")) {
-            ArrayList<Restaurant> locationResults = RestaurantData.getSpecificRestaurantsNearby(searchInput, "", selectedFilter);
+            RestaurantPackage locationResults = RestaurantData.getSpecificRestaurantsNearby(searchInput, "", selectedFilter);
 
             if (locationResults != null) {
-                model.addAttribute("restaurants", locationResults);
+                model.addAttribute("restaurants", locationResults.getPageOfRestaurants());
                 model.addAttribute("location", searchInput);
 
             } else {
@@ -76,10 +77,10 @@ public class SearchController {
         } else if (searchType.equals("Cuisine")) {
             User user = userService.findByUsername(principal.getName());
 
-            ArrayList<Restaurant> cuisineResults = RestaurantData.getSpecificRestaurantsNearby(user.getLocation(), searchInput, selectedFilter);
+            RestaurantPackage cuisineResults = RestaurantData.getSpecificRestaurantsNearby(user.getLocation(), searchInput, selectedFilter);
 
             if (cuisineResults != null) {
-                model.addAttribute("restaurants", cuisineResults);
+                model.addAttribute("restaurants", cuisineResults.getPageOfRestaurants());
                 model.addAttribute("location", user.getLocation());
                 model.addAttribute("cuisine", searchInput);
 

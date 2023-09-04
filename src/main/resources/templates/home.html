@@ -80,7 +80,7 @@
             </div>
 
             <div class="featured" th:if="${featuredRestaurants}">
-                <th:block th:each="restaurant : ${featuredRestaurants}">
+                <th:block th:each="restaurant : ${featuredRestaurants.getPageOfRestaurants()}">
                     <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}"
                        style="display: inline-block">
                         <div class="restaurant-listing">
@@ -102,6 +102,13 @@
                     </a>
 
                 </th:block>
+
+                <div class="nextPage">
+                    <form action="home/next" method="POST">
+                        <button type="submit">Load More Results</button>
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
