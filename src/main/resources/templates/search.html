@@ -13,10 +13,11 @@
               style="display: inline-block;">
 
             <div class="search-container">
-                <input type="text" name="searchInput" id="searchInput" placeholder="Search by location"/>
+                <input type="text" name="searchInput" id="searchInput" placeholder="Search..."/>
 
                 <input type="hidden" name="selectedFilter" id="selectedFilter" value="Remove Filter">
                 <input type="hidden" name="searchType" id="searchType" value="Location">
+                <input th:if="${location}" type="hidden" name="location" th:value="${location}"/>
                 <button class="search-icon" type="submit">
                     <i class="fa fa-search w3-xxxlarge"></i>
                 </button>
@@ -37,6 +38,8 @@
             <ul class="filter-list">
                 <li class="type-filter" id="search-type">Search by:
                     <span class="search-location">Location</span>
+
+                    <span class="search-cuisine" th:text="${location}"></span>
                     <span class="search-cuisine">Cuisine</span>
                 </li>
                 <li class="filter">Serves Breakfast</li>
@@ -88,19 +91,21 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
           const searchTypeFilter = document.getElementById("search-type");
-          const searchCuisine = document.querySelector(".search-cuisine");
+          const searchCuisines = document.querySelectorAll(".search-cuisine");
           const searchLocation = document.querySelector(".search-location");
 
           let displayCuisine = true;
 
           searchTypeFilter.addEventListener("click", function() {
-            if (displayCuisine) {
-              searchCuisine.style.display = "inline";
-              searchLocation.style.display = "none";
-            } else {
-              searchCuisine.style.display = "none";
-              searchLocation.style.display = "inline";
-            }
+            searchCuisines.forEach(searchCuisine => {
+              if (displayCuisine) {
+                searchCuisine.style.display = "inline";
+                searchLocation.style.display = "none";
+              } else {
+                searchCuisine.style.display = "none";
+                searchLocation.style.display = "inline";
+              }
+            });
             displayCuisine = !displayCuisine;
           });
         });

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
-@SessionAttributes(value = "restaurants")
+@SessionAttributes(value = {"restaurants", "location", "cuisine"})
 @Controller
 @RequestMapping("search")
 public class SearchController {
@@ -43,6 +43,7 @@ public class SearchController {
     public String processSearchInput(@RequestParam String searchInput,
                                      @RequestParam(value = "searchType", required = false) String searchType,
                                      @RequestParam(value = "selectedFilter", required = false) String selectedFilter,
+                                     @RequestParam(value = "location", required = false) String location,
                                      Model model, Principal principal) {
 
         if (principal != null) {
@@ -53,8 +54,8 @@ public class SearchController {
         if (selectedFilter == null || selectedFilter.equals("Remove Filter")) selectedFilter = "";
         if (searchType == null) searchType = "Location";
 
-
         if (searchType.equals("Location")) {
+            model.addAttribute("cuisine", null);
             RestaurantPackage locationResults = RestaurantData.getSpecificRestaurantsNearby(searchInput, "", selectedFilter);
 
             if (locationResults != null) {
@@ -67,18 +68,33 @@ public class SearchController {
             }
 
         } else if (searchType.equals("Cuisine")) {
-            User user = userService.findByUsername(principal.getName());
 
-            RestaurantPackage cuisineResults = RestaurantData.getSpecificRestaurantsNearby(user.getLocation(), searchInput, selectedFilter);
+            if (location != null) {
+                RestaurantPackage cuisineResults = RestaurantData.getSpecificRestaurantsNearby(location, searchInput, selectedFilter);
 
-            if (cuisineResults != null) {
-                model.addAttribute("restaurants", cuisineResults);
-                model.addAttribute("location", user.getLocation());
-                model.addAttribute("cuisine", searchInput);
+                if (cuisineResults != null) {
+                    model.addAttribute("restaurants", cuisineResults);
+                    model.addAttribute("location", location);
+                    model.addAttribute("cuisine", searchInput);
+
+                } else {
+                    model.addAttribute("validation", "Please enter a valid city name.");
+
+                }
 
             } else {
-                model.addAttribute("validation", "Please enter a valid city name.");
+                User user = userService.findByUsername(principal.getName());
+                RestaurantPackage cuisineResults = RestaurantData.getSpecificRestaurantsNearby(user.getLocation(), searchInput, selectedFilter);
 
+                if (cuisineResults != null) {
+                    model.addAttribute("restaurants", cuisineResults);
+                    model.addAttribute("location", user.getLocation());
+                    model.addAttribute("cuisine", searchInput);
+
+                } else {
+                    model.addAttribute("validation", "Please enter a valid city name.");
+
+                }
             }
         }
 
