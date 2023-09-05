@@ -1,3 +1,4 @@
+
 body {
     background-color: #0B0B0C;
     opacity: 1;
@@ -16,6 +17,7 @@ body {
     margin-top: 150px;
     display: flex;
     justify-content: center;
+    padding: 0 300px;
 }
 
 .search-container {
@@ -47,53 +49,97 @@ body {
 }
 
 .filters-container {
-    height: 375px;
-    width: 350px;
-    margin: -50px 20px -50px 20px;
-
-    font-size: 30px;
-    font-family: "Anton", var(--bs-font-sans-serif);
-    z-index: 2;
+    margin: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(200, 200, 200, 0.2);
+    border-radius: 5px;
+    /*overflow: hidden;*/
+    position: relative;
+    width: 300px;
+    top: -125px;
 }
 
- /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: center;
-  outline: none;
-  font-size: 35px;
-
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 25px;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
-  background-color: #ccc;
+.collapsible.active {
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
-/* Style the collapsible content. Note: hidden by default */
 .content {
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
-.filter{
-    display: block;
+.filter-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter {
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+.type-filter {
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+
+.filter.selected {
+    color: #ff6347;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.filter:last-child {
+    border-bottom: none;
+}
+
+.filter:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.search-location {
+    display: visible;
+}
+
+.search-location,
+ .search-cuisine {
+    color: #ff6347;
+ }
+
+.search-cuisine {
+    display:none;
 }
 
 .results-container {
     width: 100%;
     padding: 0 100px;
 }
-
-
 
 .results-header {
     width: 1400px;
@@ -102,9 +148,13 @@ body {
 
 .results-banner {
     width: 100%;
-    height: 100px;
+    height: auto;
+    position: relative;
+    z-index: 5;
 
     display: flex;
+    margin: auto;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     font-size: 80px;
@@ -157,7 +207,7 @@ body {
     margin: 10px 8px 10px;
 
     display: block;
-    background-color: #29292F;
+    background-color: #1e1e26;
     box-shadow: 0 0 10px black;
 }
 
@@ -197,4 +247,27 @@ body {
 
 a {
     text-decoration: none;
+}
+
+.nextPage {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+.nextPage form {
+    width: 100%;
+    height: 100%;
+}
+
+.nextPage form button {
+    background-color: #171717;
+    border: 4px solid #1b1b1b;
+    color: white;
+    width: 90%;
+    height: 100%;
+    font-size: 20px;
 }

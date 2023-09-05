@@ -16,7 +16,28 @@ public class ApiRequests {
 
     private static HttpClient client = HttpClient.newHttpClient();
 
-    private static String apiKey = "AIzaSyAZ10B93TjaoEypVHLNZAPw1StgacgEpN0";
+    private static String apiKey = "AIzaSyDQqnQMyNfZHquHYmnW-vyLap-trEafBBg";
+
+    public static HttpResponse<String> nextPageRequest(String nextPageToken) throws URISyntaxException, IOException, InterruptedException {
+
+        URI build = new URIBuilder()
+                .setScheme("https")
+                .setHost("maps.googleapis.com")
+                .setPath("maps/api/place/nearbysearch/json")
+                .addParameter("pagetoken", nextPageToken)
+                .addParameter("key", apiKey)
+                .build();
+
+        HttpRequest nextPageRequest = HttpRequest.newBuilder()
+                .GET()
+                .header("accept", "application/json")
+                .uri(build)
+                .build();
+
+        HttpResponse<String> response = client.send(nextPageRequest, HttpResponse.BodyHandlers.ofString());
+
+        return response;
+    }
 
     //builds Place Details request with place_id argument and returns a HttpResponse<String>
     public static HttpResponse<String> placeDetailsRequest(String placeId) throws URISyntaxException, IOException, InterruptedException {
@@ -28,7 +49,7 @@ public class ApiRequests {
                 .setHost("maps.googleapis.com")
                 .setPath("maps/api/place/details/json")
                 .addParameter("place_id", placeId)
-                .addParameter("fields", "name,photos")
+                .addParameter("fields", "name,photos,place_id,website,vicinity,editorial_summary,opening_hours,formatted_phone_number")
                 .addParameter("key", apiKey)
                 .build();
 
@@ -76,7 +97,7 @@ public class ApiRequests {
     }
 
     //sends a nearby search request with a keyword parameter intended to specify cuisine
-    public static HttpResponse<String> placeKeywordRequest(String address, String keyword) throws URISyntaxException, IOException, InterruptedException {
+    public static HttpResponse<String> placeKeywordRequest(String address, String keyword, String filter) throws URISyntaxException, IOException, InterruptedException {
 
         Location coordinates = RestaurantData.getCoordinates(address); if (coordinates == null) return null;
         final String location = coordinates.getLatString() + "," + coordinates.getLngString();
@@ -86,9 +107,11 @@ public class ApiRequests {
                 .setHost("maps.googleapis.com")
                 .setPath("maps/api/place/nearbysearch/json")
                 .addParameter("keyword", keyword)
+                .addParameter("name", filter)
                 .addParameter("location", location)
                 .addParameter("radius", "2000")
                 .addParameter("type", "restaurant")
+//                .addParameter("minprice", "2")
                 .addParameter("key", apiKey)
                 .build();
 

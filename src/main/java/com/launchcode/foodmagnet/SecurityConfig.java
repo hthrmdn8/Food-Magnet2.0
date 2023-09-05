@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/profile", true).permitAll()
+                .defaultSuccessUrl("/account", true).permitAll()
                 .and()
                 .logout()
                 .invalidateHttpSession(true)

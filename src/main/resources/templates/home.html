@@ -80,26 +80,47 @@
             </div>
 
             <div class="featured" th:if="${featuredRestaurants}">
-                <th:block th:each="restaurant : ${featuredRestaurants}">
+                <th:block th:each="restaurant : ${featuredRestaurants.getPageOfRestaurants()}">
+                    <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}"
+                       style="display: inline-block">
+                        <div class="restaurant-listing">
 
-                    <a th:href="@{/restaurant(placeId=${restaurant.value.get('place_id: ')})}" style="display: block;">
-                        <span class="restaurant-listing">
-                            <div class="featured-img-container">
-                                <img class="listing-image" th:src="${restaurant.value.get('photos: ').get(0)}" width="40%" height="40%"/>
+                            <div class="img-container">
+                                <img class="listing-image"
+                                     th:if="${restaurant.getAllPhotos().get(0) != 'No photos available'}"
+                                     th:src="${restaurant.getAllPhotos().get(0)}"/>
+                                <p class="photo-validation"
+                                   th:unless="${restaurant.getAllPhotos().get(0) != 'No photos available'}">No Photo available :(</p>
                             </div>
 
                             <div class="info-container">
-                                <h1 class="listing-info" th:text="${restaurant.value.get('name: ')}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.value.get('vicinity: ')}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.value.get('rating: ')} + ' stars'"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.value.get('types: ')}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.value.get('price_level: ')}"></h1>
-                                <h1 class="listing-info" th:text="${restaurant.value.get('opening-hours: ')}"></h1>
+                                <div class="listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
+                                <div class="listing-info" th:text="${restaurant.getVicinity()}"></div>
                             </div>
-                        </span>
+
+                        </div>
                     </a>
 
                 </th:block>
+
+                <div class="nextPage">
+                    <form id="myForm" action="home/next" method="POST">
+                        <button type="submit">Load More Results</button>
+                    </form>
+
+                </div>
+                <script>
+                    const savedScrollPosition = localStorage.getItem('scrollPosition');
+
+                    if (savedScrollPosition) {
+                        window.scrollTo(0, savedScrollPosition);
+                        localStorage.removeItem('scrollPosition');
+                    }
+
+                    document.getElementById('myForm').addEventListener('submit', function() {
+                        localStorage.setItem('scrollPosition', window.scrollY || window.pageYOffset);
+                    });
+                </script>
             </div>
         </div>
     </div>

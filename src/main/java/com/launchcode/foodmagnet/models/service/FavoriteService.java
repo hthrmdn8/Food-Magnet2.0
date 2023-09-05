@@ -24,6 +24,13 @@ public class FavoriteService {
         favoriteRepository.save(favorite);
     }
 
+    public void deleteFavorite(Favorite favorite) {
+        favoriteRepository.delete(favorite);
+    }
+
+    public Favorite findFavoriteByPlaceIdAndUser(String placeId, User user) {
+        return favoriteRepository.findByPlaceIdAndUser(placeId, user);
+    }
 
     public List<Favorite> getFavoritesByUser(User user) {
         return favoriteRepository.findByUser(user);

@@ -13,28 +13,28 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
 
-
-
     public UserServiceImpl(UserRepository userRepository) {
-
         this.userRepository = userRepository;
     }
 
     @Override
     public User findByUsername(String username) {
-
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User save(UserDto userDto) {
-        User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getFullname(), userDto.getLocation());
+    public User save(User user) {
         return userRepository.save(user);
     }
 
-
+    @Override
+    public User createUser(UserDto userDto) {
+        User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getFullname(), userDto.getLocation());
+        return userRepository.save(user);
+    }
 
 }

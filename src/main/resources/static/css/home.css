@@ -1,12 +1,4 @@
 
-body {
-    background-color: #0B0B0C;
-    opacity: 1;
-    background-image:  linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(30deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(150deg, #121213 12%, transparent 12.5%, transparent 87%, #121213 87.5%, #121213), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377), linear-gradient(60deg, #12121377 25%, transparent 25.5%, transparent 75%, #12121377 75%, #12121377);
-    background-size: 30px 53px;
-    background-position: 0 0, 0 0, 15px 26px, 15px 26px, 0 0, 15px 26px;
-}
-
 .page-content{
     position: absolute;
     width: 100%;
@@ -125,7 +117,7 @@ body {
 }
 
 .featured-header {
-    width: 1350px;
+    width: 1400px;
     margin: auto;
     text-align: center;
 }
@@ -166,52 +158,79 @@ body {
 }
 
 .featured {
-    width: 1350px;
+    width: 1400px;
     margin: auto;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .restaurant-listing {
-    height: 300px;
-    margin: 20px auto;
-    display: flex;
+    height: 410px;
+    width: 450px;
+    margin: 10px 8px 10px;
 
-    background-color: #29292F;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    display: block;
+    background-color: #1e1e26;
+    box-shadow: 0 0 10px black;
 }
 
-.featured-img-container {
-    width: 500px;
+
+.img-container {
+    width: auto;
     height: 300px;
 
     display: flex;
-    object-fit: cover;
-    justify-content: left;
+    justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
 }
 
 .listing-image {
-    height: 280px;
-    width: auto;
-    margin: 10px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
+.photo-validation {
+    font-family: arial;
+    color: white;
+    font-size: 40px;
+}
+
+
 .listing-info {
     display: block;
-    font-size: 30px;
+    font-size: 20px;
     color: white;
 }
 
 .info-container {
-    margin-left: 10px;
+    padding-left: 10px;
 }
 
 a {
     text-decoration: none;
 }
-.heart-button {
-    color: red; /* Change the color as needed */
-    font-size: 24px; /* Change the font size as needed */
-    /* Add any other styling you want */
+
+.nextPage {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+}
+
+.nextPage form {
+    width: 100%;
+    height: 100%;
+}
+
+.nextPage form button {
+    background-color: #171717;
+    border: 4px solid #1b1b1b;
+    color: white;
+    width: 90%;
+    height: 100%;
+    font-size: 20px;
 }

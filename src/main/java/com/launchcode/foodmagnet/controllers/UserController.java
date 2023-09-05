@@ -4,7 +4,6 @@ import com.launchcode.foodmagnet.models.Favorite;
 import com.launchcode.foodmagnet.models.Review;
 import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.models.dto.UserDto;
-import com.launchcode.foodmagnet.models.service.CustomUserDetails;
 import com.launchcode.foodmagnet.models.service.CustomUserDetailsService;
 import com.launchcode.foodmagnet.models.service.UserService;
 import com.launchcode.foodmagnet.models.service.UserServiceImpl;
@@ -13,39 +12,43 @@ import com.launchcode.foodmagnet.repositories.ReviewRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class UserController {
+
     @Autowired
     private CustomUserDetailsService userDetailsService;
+
     @Autowired
     private UserServiceImpl userServiceImpl;
-    private ReviewRepository reviewRepository;
+
     @Autowired
     private FavoriteRepository favoriteRepository;
 
     @Autowired
     private UserService userService;
+
+    private ReviewRepository reviewRepository;
+
     public UserController(UserService userService) {
 
         this.userService = userService;
     }
+
     @Autowired
     public UserController(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
+
     @GetMapping("/profile")
     public String home(Model model, Principal principal) {
 
@@ -95,7 +98,7 @@ public class UserController {
             return "register";
 
         }
-        userService.save(userDto);
+        userService.createUser(userDto);
         return "redirect:/register?success";
     }
 
