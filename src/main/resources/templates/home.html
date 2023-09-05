@@ -104,11 +104,23 @@
                 </th:block>
 
                 <div class="nextPage">
-                    <form action="home/next" method="POST">
+                    <form id="myForm" action="home/next" method="POST">
                         <button type="submit">Load More Results</button>
                     </form>
 
                 </div>
+                <script>
+                    const savedScrollPosition = localStorage.getItem('scrollPosition');
+
+                    if (savedScrollPosition) {
+                        window.scrollTo(0, savedScrollPosition);
+                        localStorage.removeItem('scrollPosition');
+                    }
+
+                    document.getElementById('myForm').addEventListener('submit', function() {
+                        localStorage.setItem('scrollPosition', window.scrollY || window.pageYOffset);
+                    });
+                </script>
             </div>
         </div>
     </div>

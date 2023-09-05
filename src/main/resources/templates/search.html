@@ -123,7 +123,6 @@
 
     </script>
 
-
     <div class="results-container">
         <div class="validation-header" th:if="${validation}" >
             <div class="validation-banner">Location not found.</div>
@@ -137,7 +136,7 @@
 
         <div th:if="${restaurants}" class="results">
 
-            <th:block th:each="restaurant : ${restaurants}">
+            <th:block th:each="restaurant : ${restaurants.getPageOfRestaurants()}">
                 <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}"
                    style="display: inline-block">
                     <div class="restaurant-listing">
@@ -159,6 +158,27 @@
                 </a>
 
             </th:block>
+
+            <div class="nextPage">
+                <form id="myForm" action="/search/next" method="POST">
+                    <input type="hidden" name="location" th:value="${location}"/>
+                    <input type="hidden" name="cuisine" th:value="${cuisine}"/>
+                    <button type="submit">Load More Results</button>
+                </form>
+
+            </div>
+            <script>
+                const savedScrollPosition = localStorage.getItem('scrollPosition');
+
+                if (savedScrollPosition) {
+                    window.scrollTo(0, savedScrollPosition);
+                    localStorage.removeItem('scrollPosition');
+                }
+
+                document.getElementById('myForm').addEventListener('submit', function() {
+                    localStorage.setItem('scrollPosition', window.scrollY || window.pageYOffset);
+                });
+            </script>
 
         </div>
 

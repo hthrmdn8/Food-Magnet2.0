@@ -46,7 +46,7 @@ public class HomeController {
     }
 
     @PostMapping("home/next")
-    public String loadMoreFeaturedRestaurants(@ModelAttribute("featuredRestaurants") RestaurantPackage restaurantPkg, Model model, Principal principal) {
+    public String loadMoreFeaturedRestaurants(@ModelAttribute("featuredRestaurants") RestaurantPackage restaurantPkg, Model model) {
 
         if (restaurantPkg.getNextPageToken() != null) {
             RestaurantPackage newRestaurantPkg = RestaurantData.getNextPageResults(restaurantPkg.getNextPageToken());

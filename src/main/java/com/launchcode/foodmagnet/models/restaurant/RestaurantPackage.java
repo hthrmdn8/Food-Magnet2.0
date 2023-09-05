@@ -23,7 +23,6 @@ public class RestaurantPackage {
         newPageOfRestaurants.addAll(restaurants);
         newPageOfRestaurants.addAll(this.pageOfRestaurants);
 
-        System.out.println(this.getPageOfRestaurants());
         this.pageOfRestaurants = newPageOfRestaurants;
     }
 

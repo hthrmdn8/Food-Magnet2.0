@@ -111,6 +111,7 @@ public class ApiRequests {
                 .addParameter("location", location)
                 .addParameter("radius", "2000")
                 .addParameter("type", "restaurant")
+//                .addParameter("minprice", "2")
                 .addParameter("key", apiKey)
                 .build();
 

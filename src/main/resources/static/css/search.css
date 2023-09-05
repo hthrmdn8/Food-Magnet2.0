@@ -248,3 +248,26 @@ body {
 a {
     text-decoration: none;
 }
+
+.nextPage {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+.nextPage form {
+    width: 100%;
+    height: 100%;
+}
+
+.nextPage form button {
+    background-color: #171717;
+    border: 4px solid #1b1b1b;
+    color: white;
+    width: 90%;
+    height: 100%;
+    font-size: 20px;
+}
