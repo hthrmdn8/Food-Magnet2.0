@@ -1,4 +1,4 @@
-package com.launchcode.foodmagnet.models.data.jsonData;
+package com.launchcode.foodmagnet.models.data.apiData;
 
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.restaurant.Location;
@@ -10,13 +10,12 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Optional;
 
 public class ApiRequests {
 
     private static HttpClient client = HttpClient.newHttpClient();
 
-    private static String apiKey = "AIzaSyDQqnQMyNfZHquHYmnW-vyLap-trEafBBg";
+    private static String apiKey = ApiKey.getApiKey();
 
     public static HttpResponse<String> nextPageRequest(String nextPageToken) throws URISyntaxException, IOException, InterruptedException {
 
