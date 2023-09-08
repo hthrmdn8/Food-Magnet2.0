@@ -2,8 +2,8 @@ package com.launchcode.foodmagnet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
-import com.launchcode.foodmagnet.models.data.jsonData.ApiRequests;
-import com.launchcode.foodmagnet.models.data.jsonData.JsonMapper;
+import com.launchcode.foodmagnet.models.data.apiData.ApiRequests;
+import com.launchcode.foodmagnet.models.data.apiData.JsonMapper;
 import com.launchcode.foodmagnet.models.restaurant.Location;
 import com.launchcode.foodmagnet.models.restaurant.Restaurant;
 import org.junit.jupiter.api.Test;
