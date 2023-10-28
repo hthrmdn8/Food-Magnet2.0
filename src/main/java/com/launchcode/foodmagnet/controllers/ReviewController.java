@@ -44,7 +44,7 @@ public class ReviewController {
     private CustomUserDetails customUserDetails;
 
     @GetMapping("/reviews/add")
-        public String displayReviewForm( Model model,@RequestParam("placeId") String placeId){
+        public String displayReviewForm( Model model,@RequestParam("placeId") String placeId) {
 
         model.addAttribute("review",new Review());
         Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
@@ -67,7 +67,7 @@ public class ReviewController {
                 review.setUser(user);
             }
                 Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
-                RestaurantEntity restaurantEntity =new RestaurantEntity(placeId, restaurant.getName());
+                RestaurantEntity restaurantEntity = new RestaurantEntity(placeId, restaurant.getName());
 
                 if(restaurantRepository.findByPlaceId(placeId) == null) {
                         restaurantRepository.save(restaurantEntity);

@@ -1,6 +1,9 @@
 package com.launchcode.foodmagnet.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import org.hibernate.annotations.Comments;
 import org.springframework.lang.NonNull;
 
 @Entity
@@ -9,6 +12,8 @@ public class Review {
     @GeneratedValue
     private int reviewId;
     @NonNull
+    @Min(0)
+    @Max(5)
     private int ratings;
     private String comments;
 

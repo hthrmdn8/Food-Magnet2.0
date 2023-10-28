@@ -128,8 +128,15 @@
               <div class="edit-review-content" style="display: none;">
 
                 <form action="account/review/edit" method="POST" th:object="${reviewObj}">
+                  <p th:if="${errors}" th:text="${errors}"></p>
                   <label>
-                    Rating: <input type="text" name="ratings" th:value="${review.getRatings()}"/>/5
+                    Rating: <select name="cars" id="cars">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>/5
                   </label>
                   <br>
 
@@ -161,7 +168,6 @@
                   <p th:unless="${review.getComments() != ''}">No comments.</p>
                 </div>
               </div>
-
 
             </div>
           </th:block>

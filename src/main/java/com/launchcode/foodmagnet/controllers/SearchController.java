@@ -64,7 +64,6 @@ public class SearchController {
 
             } else {
                 model.addAttribute("validation", "Please enter a valid city name.");
-
             }
 
         } else if (searchType.equals("Cuisine")) {

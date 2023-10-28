@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -83,8 +84,6 @@ public class AccountController {
         user.setLocation(userDto.getLocation());
         user.setUsername(userDto.getUsername());
 
-
-
         userService.save(user);
 
         return "redirect:/account";
@@ -107,11 +106,15 @@ public class AccountController {
 
     @PostMapping(value = "/review/edit")
     public String handleRestaurantReviewUpdate(@RequestParam(value = "reviewId") Integer reviewId,
-                                               @ModelAttribute(value = "reviewObj") Review updateReview,
-                                               Principal principal) {
+                                               @ModelAttribute(value = "reviewObj") @Valid Review updateReview,
+                                               Principal principal, Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("errors", "Rating must be an integer value.");
+            return "redirect:/account";
+        }
 
         User user = userService.findByUsername(principal.getName());
-
         Review review = reviewRepository.getReferenceById(reviewId);
 
         if (review != null) {
