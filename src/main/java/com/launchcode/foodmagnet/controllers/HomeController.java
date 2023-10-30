@@ -5,7 +5,7 @@ import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.models.data.CarouselData;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.restaurant.RestaurantPackage;
-import com.launchcode.foodmagnet.models.service.UserService;
+import com.launchcode.foodmagnet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

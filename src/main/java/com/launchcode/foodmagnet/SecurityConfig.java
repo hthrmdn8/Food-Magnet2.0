@@ -1,6 +1,6 @@
 package com.launchcode.foodmagnet;
 
-import com.launchcode.foodmagnet.models.service.CustomUserDetailsService;
+import com.launchcode.foodmagnet.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

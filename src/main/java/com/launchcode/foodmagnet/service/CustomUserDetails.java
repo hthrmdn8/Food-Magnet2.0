@@ -1,4 +1,4 @@
-package com.launchcode.foodmagnet.models.service;
+package com.launchcode.foodmagnet.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
