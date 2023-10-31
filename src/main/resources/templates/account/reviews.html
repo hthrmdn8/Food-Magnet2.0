@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<link rel="stylesheet" href="/css/account.css">
+<script src="/js/account.js"></script>
+<body>
+
+<div class="page-content">
+
+    <div th:replace="fragments :: navbar"></div>
+
+    <div class="account-container" th:if="${user}">
+
+        <div class="header">My Account</span></div>
+
+        <div class="view-options">
+            <ul>
+                <a href="/account"><li class="show-content">My Details</li></a>
+                <a href="/account/favorites"><li class="show-content">My Favorites</li></a>
+                <a href="/account/reviews"><li class="show-content">My Reviews</li></a>
+            </ul>
+        </div>
+
+        <div class="reviews-content content">
+
+            <div class="restaurant-column">
+                <th:block th:each="restaurant : ${reviewedRestaurants}">
+
+                    <a th:href="@{/restaurant(placeId=${restaurant.getPlace_id()})}">
+                        <div class="review-restaurant">
+
+              <span class="review-info-container">
+                <div class="review-listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
+              </span>
+                            <span class="review-img-container">
+                <img class="review-restaurant-image"
+                     th:if="${restaurant.getAllPhotos().get(0) != 'No photos available'}"
+                     th:src="${restaurant.getAllPhotos().get(0)}"/>
+                <p class="review-photo-validation"
+                   th:unless="${restaurant.getAllPhotos().get(0) != 'No photos available'}">No Photo available :(</p>
+              </span>
+
+                        </div>
+                    </a>
+
+                </th:block>
+            </div>
+
+            <div class="review-column">
+                <th:block th:each="review : ${user.getReviews()}">
+                    <div class="review">
+                        <div class="edit-delete">
+
+                            <button class="edit-review"><i class="fa fa-edit"></i>
+                            </button>
+
+                            <form action="/account/reviews/delete" method="POST">
+                                <input type="hidden" name="reviewId" th:value="${review.getReviewId()}"/>
+                                <button class="delete-review"><i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="edit-review-content" style="display: none;">
+
+                            <form action="/account/reviews/edit" method="POST" th:object="${reviewObj}">
+                                <p th:if="${errors}" th:text="${errors}"></p>
+                                <label>
+                                    Rating: <select name="ratings">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>/5
+                                </label>
+                                <br>
+
+                                <label>
+                                    Comments:
+                                    <br>
+
+                                    <textarea style="max-height: 250px;" name="comments" th:text="${review.getComments()}" ></textarea>
+                                </label>
+
+                                <input type="hidden" th:value="${review.getReviewId()}" name="reviewId"/>
+                                <button type="submit" class="btn btn-success">Save Changes</button>
+                            </form>
+
+                        </div>
+
+                        <div class="display-review-content">
+                            <div>
+                                Rating:
+                                <p style="display: inline;" th:text="${review.getRatings()}"></p>/5
+                            </div>
+                            <br>
+
+                            <div>
+                                Comments:
+                                <br>
+
+                                <p th:text="${review.getComments()}">No comments.</p>
+                                <p th:unless="${review.getComments() != ''}">No comments.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

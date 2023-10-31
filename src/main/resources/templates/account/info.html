@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<link rel="stylesheet" href="css/account.css">
+<script src="js/account.js"></script>
+<body>
+
+<div class="page-content">
+
+  <div th:replace="fragments :: navbar"></div>
+
+  <div class="no-user" th:unless="${user}">
+
+    <div>Please <a href="/login"><span class="clickable">login</span></a> to view your account</div>
+
+    <div>or <a href="/register"><span class="clickable">register</span></a> to create a new account</div>
+
+  </div>
+
+  <div class="account-container" th:if="${user}">
+
+    <div class="header">My Account</span></div>
+
+    <div class="view-options">
+      <ul>
+        <a href="/account"><li class="show-content">My Details</li></a>
+        <a href="/account/favorites"><li class="show-content">My Favorites</li></a>
+        <a href="/account/reviews"><li class="show-content">My Reviews</li></a>
+      </ul>
+    </div>
+
+    <div class="account-content">
+
+      <div class="details-content content">
+        <form action="/account" method="POST" th:object="${userDto}" style="width: 100%;">
+
+          <div class="full-name info">
+            <label for="fullName">Account Name: </label>
+            <input th:field="*{fullname}" th:value="${user.fullname}" name="fullName" id="fullName" type="text"/>
+          </div>
+          <div class="email info">
+            <label for="email">Email Address: </label>
+            <input th:field="*{username}" th:value="${user.username}" name="email" id="email" type="text"/>
+            <span th:if="${userexist}" style="color: red;">Username is Taken</span>
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></div>
+          </div>
+          <div class="location info">
+            <label for="location">Account Location: </label>
+            <input th:field="*{location}" th:value="${user.location}" name="location" id="location" type="text"/>
+          </div>
+          <input class="btn btn-success" style="margin: 10px;" type="submit" value="save changes"/>
+
+        </form>
+      </div>
+
+      </div>
+  </div>
+  </div>
+</div>
+
+</body>
+</html>

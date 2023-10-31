@@ -1,4 +1,4 @@
-package com.launchcode.foodmagnet.models.service;
+package com.launchcode.foodmagnet.service;
 
 
 import com.launchcode.foodmagnet.models.User;

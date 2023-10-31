@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     //swap between info, favorites, and reviews
-    const showButtons = document.querySelectorAll('.show-content');
-    const contentDivs = document.querySelectorAll('.content');
-
-    showButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-            contentDivs.forEach((div, divIndex) => {
-                if (index === divIndex) {
-                    div.style.display = 'flex';
-                } else {
-                    div.style.display = 'none';
-                }
-            });
-        });
-    });
+//    const showButtons = document.querySelectorAll('.show-content');
+//    const contentDivs = document.querySelectorAll('.content');
+//
+//    showButtons.forEach((button, index) => {
+//        button.addEventListener('click', () => {
+//            contentDivs.forEach((div, divIndex) => {
+//                if (index === divIndex) {
+//                    div.style.display = 'flex';
+//                } else {
+//                    div.style.display = 'none';
+//                }
+//            });
+//        });
+//    });
 
     //open & close edit review form
     const editButtons = document.querySelectorAll(".edit-review");

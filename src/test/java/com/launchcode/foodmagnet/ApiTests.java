@@ -34,6 +34,7 @@ class ApiTests {
 
         JsonNode node = JsonMapper.parse(response.body());
         String status = node.get("status").asText();
+        System.out.println(node.get("results"));
 
         assertEquals("status: " + status, "OK", status);
     }
@@ -61,6 +62,7 @@ class ApiTests {
 
         JsonNode node = JsonMapper.parse(response.body());
         String status = node.get("status").asText();
+        System.out.println(node.get("results"));
 
         assertEquals("status: " + status, "OK", status);
     }
@@ -87,7 +89,7 @@ class ApiTests {
     void getPhotoSuccessfullyReturnsPhotoUrl() throws IOException, URISyntaxException, InterruptedException {
         String photoURL = RestaurantData.getPhoto("Aaw_FcIGfI9V8MCQ-nfshJomgBM51BPK6jK86LUfLh7t761SEVV3Rq9XklL-kZYFsfW-maaM8ScuTNWPmMbglwwk2vUPysEWer9NUo3P3HIvxZnqH-BSwp64P9jRedzAzhT5VRIQVsi8bdnKr64BKpa1QI6uX0Pk9QagyJa1DoR1QooXt0n3");
 
-        assertEquals("returned URL" + photoURL, "https://lh3.googleusercontent.com/places/ANJU3DtMFM7-Ak7cvH4T-NfeVIDX600T6bozCHY67SHwnDTqR_Od6Idy2VBQDe4uqHrlupTMg4zDFwtvTQYNAuBnmgdc17ci25nE630=s1600-w1600", photoURL);
+        assertEquals("returned URL" + photoURL, "https://lh3.googleusercontent.com/places/ANXAkqErKViTTymrIZuICNsNlqq9faMDRLsjQw5LGFjj60kDziY-piJstEXQoob-2DagLUpTLFyiQZWWwvXPnkBlMohNRL0bwr29R6s=s1600-w1600", photoURL);
     }
 
     // Geocoder tests //

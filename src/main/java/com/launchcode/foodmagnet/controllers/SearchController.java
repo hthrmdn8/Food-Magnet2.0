@@ -3,7 +3,7 @@ package com.launchcode.foodmagnet.controllers;
 import com.launchcode.foodmagnet.models.User;
 import com.launchcode.foodmagnet.models.data.RestaurantData;
 import com.launchcode.foodmagnet.models.restaurant.RestaurantPackage;
-import com.launchcode.foodmagnet.models.service.UserService;
+import com.launchcode.foodmagnet.service.UserService;
 import com.launchcode.foodmagnet.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +64,6 @@ public class SearchController {
 
             } else {
                 model.addAttribute("validation", "Please enter a valid city name.");
-
             }
 
         } else if (searchType.equals("Cuisine")) {
