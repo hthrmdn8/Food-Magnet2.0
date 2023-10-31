@@ -18,9 +18,10 @@
 }
 
 .account-container {
-    margin: 175px auto 0px;
+    margin: 175px 90px 0px;
     width: 90%;
     height: 1000px;
+    display: inline-block;
 }
 
 .header {
@@ -34,7 +35,6 @@
 
 .view-options {
     width: 20%;
-    height: 90%;
     display: inline-block;
     vertical-align: top;
 }
@@ -63,12 +63,12 @@
 
 .content {
     height: 100%;
-    width: 100%;
+    width: 79%;
     padding 20px;
     color: white;
     font-size: 30px;
     font-family: "Anton",var(--bs-font-sans-serif);
-    display: none;
+    display: inline-flex;
     /*background-color: rgba(0,0,0, 0.90);*/
 }
 
@@ -76,6 +76,7 @@
     flex-wrap: wrap;
     justify-content: center;
     /*padding: 15px 0px;*/
+    display: inline-block;
 }
 
 .restaurant-column {
@@ -164,7 +165,7 @@
     margin: 20px 20px;
     position: relative;
 
-    display: block;
+    display: inline-block;
     background-color: #1e1e26;
     box-shadow: 0 0 10px black;
 }

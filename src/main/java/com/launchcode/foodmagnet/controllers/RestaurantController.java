@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -109,18 +110,22 @@ public class RestaurantController {
     public String addToFavorites(@RequestParam String placeId, Principal principal, Model model) {
 
         if (principal != null) {
-            String username = principal.getName();
-            User user = userService.findByUsername(username);
-            Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
-            RestaurantEntity newRestaurantEntity = new RestaurantEntity(placeId, restaurant.getName());
 
+            //adds restaurant to the database if it's not already present
             if(restaurantRepository.findByPlaceId(placeId) == null) {
-                restaurantRepository.save(newRestaurantEntity);
+                Restaurant restaurant = RestaurantData.getRestaurantDetails(placeId);
+                RestaurantEntity RestaurantEntity = new RestaurantEntity(placeId, restaurant.getName());
+                restaurantRepository.save(RestaurantEntity);
             }
 
+            //finds user and restaurant related to the favorite
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
             RestaurantEntity restaurantEntity = restaurantRepository.findByPlaceId(placeId);
+
+            //creates and saves a new favorite entity
             favoriteService.addToFavorites(restaurantEntity, user);
-            List<Favorite> favorites = favoriteService.findByUser(user);
+            ArrayList<Favorite> favorites = favoriteService.findByUser(user);
             model.addAttribute("favorites", favorites);
 
         }

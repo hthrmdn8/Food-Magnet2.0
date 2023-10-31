@@ -7,6 +7,7 @@ import com.launchcode.foodmagnet.repositories.FavoriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,21 +33,21 @@ public class FavoriteService {
         return favoriteRepository.findByPlaceIdAndUser(placeId, user);
     }
 
-    public List<Favorite> getFavoritesByUser(User user) {
+    public ArrayList<Favorite> getFavoritesByUser(User user) {
         return favoriteRepository.findByUser(user);
     }
 
-    public List<Favorite> getFavoritesByPlaceId(String placeId) {
+    public ArrayList<Favorite> getFavoritesByPlaceId(String placeId) {
 
         return favoriteRepository.findByPlaceId(placeId);
     }
 
-    public List<Favorite> findByUserId(Long id) {
+    public ArrayList<Favorite> findByUserId(Long id) {
 
         return favoriteRepository.findByUserId(id);
     }
 
-    public List<Favorite> findByUser(User user) {
+    public ArrayList<Favorite> findByUser(User user) {
         return favoriteRepository.findByUser(user);
     }
 }
