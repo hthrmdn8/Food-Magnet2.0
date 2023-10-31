@@ -45,7 +45,7 @@
                     </a>
                     <div class="info-container">
                         <div class="listing-info" style="font-size: 25px;" th:text="${restaurant.getName()}"></div>
-                        <form action="/account/favorite/delete" method="POST">
+                        <form action="/account/favorites/delete" method="POST">
                             <input type="hidden" th:value="${restaurant.getPlace_id()}" name="place_id"/>
                             <button class="remove-favorite">
                                 <i class="fa fa-trash w3 xxx-large"></i>

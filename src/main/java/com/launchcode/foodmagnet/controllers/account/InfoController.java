@@ -68,7 +68,7 @@ public class InfoController {
 
         userService.save(user);
 
-        return "redirect:/account/info";
+        return "redirect:/account";
 
     }
 

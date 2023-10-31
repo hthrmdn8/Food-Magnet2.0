@@ -56,7 +56,7 @@ public class ReviewsController {
 
         if (errors.hasErrors()) {
             model.addAttribute("errors", "Rating must be an integer value.");
-            return "redirect:/account/info";
+            return "account/reviews";
         }
 
         User user = userService.findByUsername(principal.getName());
@@ -70,7 +70,7 @@ public class ReviewsController {
         }
 
 
-        return "redirect:/account/info";
+        return "redirect:/account/reviews";
     }
 
     @PostMapping(value = "delete")
@@ -82,7 +82,7 @@ public class ReviewsController {
             reviewRepository.delete(review);
         }
 
-        return "redirect:/account/info";
+        return "redirect:/account/reviews";
     }
 
 }

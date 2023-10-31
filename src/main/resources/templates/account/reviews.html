@@ -54,7 +54,7 @@
                             <button class="edit-review"><i class="fa fa-edit"></i>
                             </button>
 
-                            <form action="account/review/delete" method="POST">
+                            <form action="/account/reviews/delete" method="POST">
                                 <input type="hidden" name="reviewId" th:value="${review.getReviewId()}"/>
                                 <button class="delete-review"><i class="fa fa-trash"></i>
                                 </button>
@@ -63,10 +63,10 @@
 
                         <div class="edit-review-content" style="display: none;">
 
-                            <form action="account/review/edit" method="POST" th:object="${reviewObj}">
+                            <form action="/account/reviews/edit" method="POST" th:object="${reviewObj}">
                                 <p th:if="${errors}" th:text="${errors}"></p>
                                 <label>
-                                    Rating: <select name="cars" id="cars">
+                                    Rating: <select name="ratings">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
